@@ -26,12 +26,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Column 1 - Brand */}
           <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-3">
-              <img
-                src="/images/Logo.png"
-                alt="Neo Ayushveda Logo"
-                className="h-14 w-auto object-contain"
-              />
+            <div className="flex items-center">
+              <div className="bg-white px-3.5 py-2 rounded-md shadow-sm border border-white/10">
+                <img
+                  src="/images/Logo.png"
+                  alt="Neo Ayushveda Logo"
+                  className="h-12 w-auto object-contain"
+                />
+              </div>
             </div>
             <p className="font-playfair italic text-cream/50 text-[18px] leading-relaxed">
               "Healing Traditions.<br />Modern Technology."

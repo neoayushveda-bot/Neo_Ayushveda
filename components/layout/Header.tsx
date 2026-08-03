@@ -82,13 +82,13 @@ export default function Header() {
         <div className="w-full max-w-[1280px] mx-auto px-6 md:px-12 flex justify-between items-center">
           {/* Logo */}
           <div 
-            className="flex items-center cursor-pointer" 
+            className="flex items-center cursor-pointer bg-white px-3 py-1.5 rounded-md shadow-sm border border-white/20 hover:scale-[1.02] transition-transform duration-200" 
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             <img 
               src="/images/Logo.png" 
               alt="Neo Logo" 
-              className="h-14 w-auto object-contain"
+              className="h-10 md:h-12 w-auto object-contain"
             />
           </div>
 
