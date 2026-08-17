@@ -30,7 +30,7 @@ export default function Footer() {
               <div className="bg-white px-3.5 py-2 rounded-md shadow-sm border border-white/10">
                 <img
                   src="/images/Logo.png"
-                  alt="Neo Ayushveda Logo"
+                  alt="Neo Life Sciences Logo"
                   className="h-12 w-auto object-contain"
                 />
               </div>
@@ -150,7 +150,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-cream/30">
           <div className="flex items-center gap-2 flex-wrap justify-center md:justify-start">
-            <span>© {new Date().getFullYear()} Neo Ayushveda Pvt Ltd. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} NEO LIFE SCIENCES PVT LTD. All rights reserved.</span>
             <span className="text-white/10 hidden md:inline">|</span>
             <span>
               Designed by&nbsp;

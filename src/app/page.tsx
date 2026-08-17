@@ -40,6 +40,23 @@ const GlobalReach = dynamic(() => import("../../components/sections/GlobalReach"
 });
 
 export default function Home() {
+  const [displayedProducts, setDisplayedProducts] = useState<any[]>(productsList);
+
+  // Dynamic Product Sourcing from Database API
+  useEffect(() => {
+    fetch("/api/products")
+      .then((res) => {
+        if (res.ok) return res.json();
+        return null;
+      })
+      .then((data) => {
+        if (data?.products && data.products.length > 0) {
+          setDisplayedProducts(data.products);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   // Reveal animations scroll hook
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -206,7 +223,7 @@ export default function Home() {
 
             {/* Body Description */}
             <p className="text-cream/65 text-[17px] leading-relaxed mt-6 mb-10 max-w-lg opacity-0 animate-fade-in-up animation-delay-200">
-              Neo Ayushveda Pvt Ltd is a specialist pharmaceutical trader and exporter, sourcing WHO-GMP certified generics, medical devices and herbal formulations from India's finest certified manufacturers — delivering them to regulated healthcare markets across every continent.
+              NEO LIFE SCIENCES PVT LTD is a specialist pharmaceutical trader and exporter, sourcing WHO-GMP certified generics, medical devices and herbal formulations from India's finest certified manufacturers — delivering them to regulated healthcare markets across every continent.
             </p>
 
             {/* Action Buttons */}
@@ -259,7 +276,7 @@ export default function Home() {
                 {/* Main Image */}
                 <Image
                   src="/images/hero_pharma_botanical.png"
-                  alt="Neo Ayushveda Premium Pharmaceutical Sourcing"
+                  alt="Neo Life Sciences Premium Pharmaceutical Sourcing"
                   fill
                   sizes="(max-width: 768px) 100vw, 420px"
                   className="object-cover transition-transform duration-[1000ms] group-hover:scale-105"
@@ -336,7 +353,7 @@ export default function Home() {
             </h2>
             <div className="space-y-6 text-ink-mid text-[17px] leading-relaxed">
               <p>
-                Neo Ayushveda is a specialist B2B pharmaceutical trading and global export partner based out of India's healthcare innovation hub, Hyderabad. Rather than operating raw manufacturing assets, we act as a streamlined sourcing catalyst for regulated international markets.
+                Neo Life Sciences is a specialist B2B pharmaceutical trading and global export partner based out of India's healthcare innovation hub, Hyderabad. Rather than operating raw manufacturing assets, we act as a streamlined sourcing catalyst for regulated international markets.
               </p>
               <p>
                 We collaborate strictly with certified manufacturing laboratories holding WHO-GMP, ISO 9001:2015, and ISO 13485 accreditations. Every therapeutic batch, device shipment, and standardized extract is fully traceable back to its origin.
@@ -446,14 +463,14 @@ export default function Home() {
                 Anil Kumar Eravathri
               </h3>
               <p className="text-[14px] font-medium text-gold/70 mt-2 font-jakarta tracking-wider uppercase">
-                Founder & Managing Director, Neo Ayushveda Pvt Ltd
+                Founder & Managing Director, NEO LIFE SCIENCES PVT LTD
               </p>
 
               <div className="w-12 h-px bg-gold/40 my-6" />
 
               <div className="space-y-6 text-cream/70 text-[16px] leading-relaxed max-w-2xl font-jakarta">
                 <p>
-                  Prior to founding Neo Ayushveda, Mr. Eravathri spent over a decade running a successful IT staffing enterprise in the United States, building deep organizational expertise in cross-border business development, corporate logistics, and international regulatory compliance.
+                  Prior to founding Neo Life Sciences, Mr. Eravathri spent over a decade running a successful IT staffing enterprise in the United States, building deep organizational expertise in cross-border business development, corporate logistics, and international regulatory compliance.
                 </p>
                 <p>
                   A prominent public figure, he is a former Member of the Legislative Assembly (MLA) of Andhra Pradesh and served as Government Whip. This background brings a unique combination of administrative policy insight, governance experience, and strong institutional relationships across India's industrial sectors.
@@ -501,7 +518,7 @@ export default function Home() {
 
           {/* Numbered Grid (Gap-px style border) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px bg-emerald/10 border border-emerald/10 shadow-xl">
-            {productsList.map((product, idx) => (
+            {displayedProducts.map((product, idx) => (
               <div
                 key={idx}
                 className="bg-cream p-8 hover:bg-white hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(10,26,18,0.06)] transition-all duration-300 group flex flex-col justify-between min-h-[320px] relative overflow-hidden reveal"
@@ -543,7 +560,7 @@ export default function Home() {
 
                 {/* Tag list */}
                 <div className="flex flex-wrap gap-1 mt-6 relative z-10">
-                  {product.tags.map((tag, tagIdx) => (
+                  {product.tags && Array.isArray(product.tags) && product.tags.map((tag: string, tagIdx: number) => (
                     <span
                       key={tagIdx}
                       className="text-[9px] tracking-[0.1em] uppercase bg-emerald/[0.06] text-emerald px-2 py-1 font-semibold border border-emerald/10 transition-all duration-300 group-hover:bg-emerald group-hover:text-gold group-hover:border-gold/25"
@@ -662,7 +679,7 @@ export default function Home() {
               OUR DIFFERENTIATORS
             </span>
             <h2 className="font-playfair text-[40px] md:text-[44px] font-normal leading-tight text-white">
-              Why Global Buyers Choose Neo Ayushveda
+              Why Global Buyers Choose Neo Life Sciences
             </h2>
           </div>
 

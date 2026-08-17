@@ -1,7 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X, ChevronDown, ArrowRight, Sparkles, Layers } from "lucide-react";
+import { PRODUCT_CATEGORIES } from "./productCategories";
 
 const NAV_ITEMS = [
   { label: "ABOUT", id: "about" },
@@ -13,9 +16,17 @@ const NAV_ITEMS = [
 ];
 
 export default function Header() {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+
+  // Mega dropdown state & timers
+  const [productsHovered, setProductsHovered] = useState(false);
+  const [productsMobileOpen, setProductsMobileOpen] = useState(false);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const productsButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,8 +52,45 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Keyboard navigation listener (Escape key to close mega menu)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && productsHovered) {
+        setProductsHovered(false);
+        productsButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [productsHovered]);
+
+  const handleMouseEnter = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    setProductsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    hoverTimeoutRef.current = setTimeout(() => {
+      setProductsHovered(false);
+    }, 200); // 200ms grace period bridge
+  };
+
   const scrollTo = (id: string) => {
     setMobileMenuOpen(false);
+    setProductsHovered(false);
+
+    if (!isHomePage) {
+      // Navigate to homepage with hash
+      window.location.href = `/#${id}`;
+      return;
+    }
+
     const element = document.getElementById(id);
     if (element) {
       const offset = 80; // Header height
@@ -79,43 +127,156 @@ export default function Header() {
             : "bg-transparent border-b border-transparent"
         }`}
       >
-        <div className="w-full max-w-[1280px] mx-auto px-6 md:px-12 flex justify-between items-center">
+        <div className="w-full max-w-[1280px] mx-auto px-6 md:px-12 flex justify-between items-center relative">
           {/* Logo */}
-          <div 
-            className="flex items-center cursor-pointer bg-white px-3 py-1.5 rounded-md shadow-sm border border-white/20 hover:scale-[1.02] transition-transform duration-200" 
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          <Link 
+            href="/"
+            className="flex items-center cursor-pointer bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm border border-white/20 hover:scale-[1.02] transition-transform duration-200"
           >
             <img 
               src="/images/Logo.png" 
-              alt="Neo Logo" 
+              alt="Neo Life Sciences Logo" 
               className="h-10 md:h-12 w-auto object-contain"
             />
-          </div>
+          </Link>
 
           {/* Desktop Nav Links */}
           <nav className="hidden lg:block">
             <ul className="flex items-center gap-8">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.id}>
-                  <button
-                    onClick={() => scrollTo(item.id)}
-                    className={`text-[11px] font-medium tracking-[0.15em] uppercase transition-all duration-300 relative py-1 ${
-                      scrolled
-                        ? activeSection === item.id
-                          ? "text-gold"
-                          : "text-cream/70 hover:text-cream"
-                        : activeSection === item.id
-                          ? "text-gold border-b border-gold"
-                          : "text-cream/70 lg:text-ink/70 hover:text-cream lg:hover:text-ink"
-                    }`}
-                  >
-                    {item.label}
-                    {scrolled && activeSection === item.id && (
-                      <span className="absolute bottom-0 left-0 w-full h-[1px] bg-gold" />
-                    )}
-                  </button>
-                </li>
-              ))}
+              {NAV_ITEMS.map((item) => {
+                const isProducts = item.id === "products";
+
+                if (isProducts) {
+                  return (
+                    <li
+                      key={item.id}
+                      className="relative py-6"
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      <button
+                        ref={productsButtonRef}
+                        onClick={() => scrollTo(item.id)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+                            e.preventDefault();
+                            setProductsHovered(!productsHovered);
+                          }
+                        }}
+                        aria-expanded={productsHovered}
+                        aria-haspopup="true"
+                        aria-controls="products-mega-menu"
+                        className={`text-[11px] font-medium tracking-[0.15em] uppercase transition-all duration-300 relative py-1 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold rounded-sm ${
+                          scrolled
+                            ? activeSection === item.id || productsHovered
+                              ? "text-gold"
+                              : "text-cream/70 hover:text-cream"
+                            : activeSection === item.id || productsHovered
+                              ? "text-gold border-b border-gold"
+                              : "text-cream/70 lg:text-ink/70 hover:text-cream lg:hover:text-ink"
+                        }`}
+                      >
+                        {item.label}
+                        <ChevronDown 
+                          className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                            productsHovered ? "rotate-180 text-gold" : ""
+                          }`} 
+                        />
+                        {scrolled && (activeSection === item.id || productsHovered) && (
+                          <span className="absolute bottom-0 left-0 w-full h-[1px] bg-gold" />
+                        )}
+                      </button>
+
+                      {/* Desktop Products Mega Dropdown Menu */}
+                      <div
+                        id="products-mega-menu"
+                        role="menu"
+                        aria-label="Products Categories Portfolio"
+                        className={`absolute top-[calc(100%-8px)] left-1/2 -translate-x-1/2 w-[520px] max-w-[calc(100vw-32px)] bg-[#0A1A12]/95 backdrop-blur-2xl border border-gold/25 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] rounded-xl overflow-hidden transition-all duration-300 transform origin-top z-50 ${
+                          productsHovered
+                            ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                            : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+                        }`}
+                      >
+                        {/* Mega Menu Top Header Bar */}
+                        <div className="flex items-center justify-between px-6 py-3.5 bg-[#122A1C]/90 border-b border-white/10">
+                          <div className="flex items-center gap-2">
+                            <Layers className="w-4 h-4 text-gold" />
+                            <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-cream/90">
+                              PHARMACEUTICAL PORTFOLIO & CATEGORIES
+                            </span>
+                          </div>
+                          <span className="text-[10px] font-medium tracking-wider text-gold px-2.5 py-0.5 rounded-full bg-gold/10 border border-gold/20">
+                            3 Core Divisions
+                          </span>
+                        </div>
+
+                        {/* 2-Column Grid Layout */}
+                        <div className="grid grid-cols-1 gap-3.5 p-5 bg-gradient-to-b from-[#0A1A12] to-[#07130D]">
+                          {PRODUCT_CATEGORIES.map((cat) => (
+                            <Link
+                              key={cat.href}
+                              href={cat.href}
+                              role="menuitem"
+                              tabIndex={productsHovered ? 0 : -1}
+                              onClick={() => setProductsHovered(false)}
+                              className="group flex items-start gap-3 p-3 rounded-lg border border-white/5 bg-white/[0.02] hover:bg-white/[0.06] hover:border-gold/35 transition-all duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
+                            >
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center justify-between gap-2 mb-1">
+                                  <h4 className="text-[13px] font-semibold text-cream group-hover:text-gold transition-colors leading-tight truncate">
+                                    {cat.name}
+                                  </h4>
+                                  {cat.badge && (
+                                    <span className="text-[9px] font-semibold uppercase px-1.5 py-0.5 rounded bg-gold/15 text-gold border border-gold/30 shrink-0">
+                                      {cat.badge}
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-[11px] text-cream/50 group-hover:text-cream/70 transition-colors line-clamp-2 leading-relaxed">
+                                  {cat.shortDesc}
+                                </p>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+
+                        {/* Mega Menu Footer Bar */}
+                        <div className="flex items-center justify-end px-6 py-3 bg-[#0A1A12] border-t border-white/10 text-[11px]">
+                          <button
+                            onClick={() => scrollTo("products")}
+                            className="text-gold hover:text-gold-light font-semibold tracking-wider uppercase text-[10px] flex items-center gap-1 transition-colors"
+                          >
+                            Explore Portfolio Section <ArrowRight className="w-3 h-3" />
+                          </button>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                }
+
+                return (
+                  <li key={item.id}>
+                    <button
+                      onClick={() => scrollTo(item.id)}
+                      className={`text-[11px] font-medium tracking-[0.15em] uppercase transition-all duration-300 relative py-1 ${
+                        scrolled
+                          ? activeSection === item.id
+                            ? "text-gold"
+                            : "text-cream/70 hover:text-cream"
+                          : activeSection === item.id
+                            ? "text-gold border-b border-gold"
+                            : "text-cream/70 lg:text-ink/70 hover:text-cream lg:hover:text-ink"
+                      }`}
+                    >
+                      {item.label}
+                      {scrolled && activeSection === item.id && (
+                        <span className="absolute bottom-0 left-0 w-full h-[1px] bg-gold" />
+                      )}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
@@ -150,21 +311,76 @@ export default function Header() {
           mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
         }`}
       >
-        <nav className="w-full max-w-sm">
-          <ul className="flex flex-col gap-6 text-center">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.id}>
-                <button
-                  onClick={() => scrollTo(item.id)}
-                  className={`text-[16px] font-medium tracking-[0.2em] uppercase text-cream/70 hover:text-gold transition-colors py-2 block w-full ${
-                    activeSection === item.id ? "text-gold font-semibold" : ""
-                  }`}
-                >
-                  {item.label}
-                </button>
-              </li>
-            ))}
-            <li className="mt-8">
+        <nav className="w-full max-w-sm max-h-[85vh] overflow-y-auto py-8">
+          <ul className="flex flex-col gap-5 text-center">
+            {NAV_ITEMS.map((item) => {
+              const isProducts = item.id === "products";
+
+              if (isProducts) {
+                return (
+                  <li key={item.id} className="w-full">
+                    <button
+                      onClick={() => setProductsMobileOpen(!productsMobileOpen)}
+                      aria-expanded={productsMobileOpen}
+                      className={`text-[16px] font-medium tracking-[0.2em] uppercase text-cream/70 hover:text-gold transition-colors py-2 flex items-center justify-center gap-2 w-full ${
+                        activeSection === item.id || productsMobileOpen ? "text-gold font-semibold" : ""
+                      }`}
+                    >
+                      {item.label}
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-300 ${
+                          productsMobileOpen ? "rotate-180 text-gold" : "text-cream/50"
+                        }`}
+                      />
+                    </button>
+
+                    {/* Mobile Accordion Dropdown */}
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ${
+                        productsMobileOpen ? "max-h-[600px] mt-2 opacity-100" : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      <div className="flex flex-col gap-2 p-3 border-l-2 border-gold/40 bg-black/20 rounded-r-lg text-left">
+                        {PRODUCT_CATEGORIES.map((cat) => (
+                          <Link
+                            key={cat.href}
+                            href={cat.href}
+                            onClick={() => {
+                              setMobileMenuOpen(false);
+                              setProductsMobileOpen(false);
+                            }}
+                            className="text-[13px] text-cream/80 hover:text-gold transition-colors py-2 px-2 text-left flex items-center justify-between border-b border-white/5 last:border-b-0 group"
+                          >
+                            <span className="font-medium leading-snug group-hover:text-gold">
+                              {cat.name}
+                            </span>
+                            {cat.badge && (
+                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-gold/15 text-gold border border-gold/30 shrink-0 ml-2">
+                                {cat.badge}
+                              </span>
+                            )}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </li>
+                );
+              }
+
+              return (
+                <li key={item.id}>
+                  <button
+                    onClick={() => scrollTo(item.id)}
+                    className={`text-[16px] font-medium tracking-[0.2em] uppercase text-cream/70 hover:text-gold transition-colors py-2 block w-full ${
+                      activeSection === item.id ? "text-gold font-semibold" : ""
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              );
+            })}
+            <li className="mt-6">
               <button
                 onClick={() => scrollTo("contact")}
                 className="w-full border border-gold/70 text-gold py-3 text-[13px] tracking-[0.2em] uppercase hover:bg-gold hover:text-emerald transition-colors font-semibold"

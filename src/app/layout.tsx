@@ -15,7 +15,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Neo Ayushveda Pvt Ltd | International Pharmaceutical Traders & Exporters — India",
+  title: "NEO LIFE SCIENCES PVT LTD | International Pharmaceutical Traders & Exporters — India",
   description:
     "B2B pharmaceutical trading and export company based in Hyderabad, India. WHO-GMP certified generics, medical devices, APIs, and Ayurvedic formulations to 50+ countries worldwide.",
   keywords: [
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
     "B2B pharma export",
   ],
   openGraph: {
-    title: "Neo Ayushveda Pvt Ltd",
+    title: "NEO LIFE SCIENCES PVT LTD",
     description: "International Pharmaceutical Traders & Exporters from India.",
     type: "website",
     locale: "en_IN",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon.png",
   },
 };
 
