@@ -249,12 +249,14 @@ export default function Home() {
 
             {/* Flyer Image */}
             <Image
-              src="/images/iphex_2026_flyer.jpg"
+              src="/images/iphex_2026_poster.jpg"
               alt="iPHEX 2026 Exhibition Invitation — Neo Life Sciences Pvt. Ltd. — Hall No. 3, Stall No. 3FC-07, 7th to 9th September 2026"
               width={420}
               height={630}
+              style={{ width: "100%", height: "auto" }}
               className="w-full h-auto rounded-lg"
               priority
+              unoptimized
             />
           </div>
         </div>
