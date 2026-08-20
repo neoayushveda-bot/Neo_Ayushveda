@@ -556,10 +556,10 @@ function EnquiryFormContent() {
                             key={idx}
                             type="button"
                             onClick={() => handleDocToggle(doc)}
-                            className={`px-3 py-1.5 text-[10px] tracking-wide uppercase font-semibold transition-all duration-200 border ${
+                            className={`px-3.5 py-1.5 text-[11px] tracking-wide uppercase font-semibold transition-all duration-200 border rounded-sm ${
                               isSelected
-                                ? "bg-emerald text-cream border-emerald"
-                                : "border-ink/15 text-ink/50 hover:border-gold hover:text-gold"
+                                ? "bg-blue-600 text-white border-blue-600 shadow-sm"
+                                : "border-slate-300 bg-white/70 text-slate-700 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50/50"
                             }`}
                           >
                             {doc}
@@ -582,7 +582,7 @@ function EnquiryFormContent() {
                       required
                       rows={5}
                       placeholder="Share exact dosage configurations, therapeutic volume demands, and compliance requirements..."
-                      className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full resize-y min-h-[120px]"
+                      className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none transition-all duration-200 w-full resize-y min-h-[120px]"
                       value={formData.message}
                       onChange={(e) =>
                         setFormData({ ...formData, message: e.target.value })
@@ -595,7 +595,7 @@ function EnquiryFormContent() {
                     <button
                       type="submit"
                       disabled={formSubmitting}
-                      className="bg-emerald text-gold px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-emerald-soft transition-colors w-full flex items-center justify-center gap-3 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-semibold transition-all duration-200 w-full flex items-center justify-center gap-3 shadow-[0_4px_18px_rgba(37,99,235,0.35)] hover:shadow-[0_6px_24px_rgba(37,99,235,0.45)] disabled:opacity-50 disabled:cursor-not-allowed rounded-sm hover:-translate-y-0.5"
                     >
                       {formSubmitting ? "TRANSMITTING..." : "SEND ENQUIRY"}{" "}
                       {!formSubmitting && <ArrowRight size={14} />}
@@ -614,7 +614,7 @@ function EnquiryFormContent() {
             <div className="text-center mt-10 reveal">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-gold hover:text-gold-light font-semibold text-[12px] tracking-[0.15em] uppercase transition-colors"
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold text-[12px] tracking-[0.15em] uppercase transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home

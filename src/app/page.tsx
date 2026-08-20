@@ -19,7 +19,8 @@ import {
   MessageCircle,
   ArrowRight,
   ChevronRight,
-  Compass
+  Compass,
+  X
 } from "lucide-react";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
@@ -75,6 +76,30 @@ export default function Home() {
 
     return () => observer.disconnect();
   }, []);
+
+  // iPHEX 2026 Popup State
+  const [showIphexPopup, setShowIphexPopup] = useState(false);
+
+  useEffect(() => {
+    // Only show once per session
+    if (typeof window !== "undefined" && !sessionStorage.getItem("iphex_popup_shown")) {
+      const timer = setTimeout(() => {
+        setShowIphexPopup(true);
+        sessionStorage.setItem("iphex_popup_shown", "true");
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  // Lock body scroll when popup is open
+  useEffect(() => {
+    if (showIphexPopup) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [showIphexPopup]);
 
   // Form State
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -198,6 +223,43 @@ export default function Home() {
     <>
       <Header />
 
+      {/* iPHEX 2026 Exhibition Popup Modal */}
+      {showIphexPopup && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6"
+          onClick={() => setShowIphexPopup(false)}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in-up" style={{ animationDuration: '0.3s' }} />
+
+          {/* Modal Content */}
+          <div
+            className="relative z-10 max-w-[420px] w-full max-h-[90vh] overflow-y-auto rounded-lg shadow-[0_25px_80px_rgba(0,0,0,0.4)] animate-fade-in-up"
+            style={{ animationDuration: '0.4s', animationDelay: '0.1s' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setShowIphexPopup(false)}
+              className="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center text-ink hover:bg-white hover:scale-110 transition-all duration-150 border border-black/10"
+              aria-label="Close popup"
+            >
+              <X size={18} strokeWidth={2.5} />
+            </button>
+
+            {/* Flyer Image */}
+            <Image
+              src="/images/iphex_2026_flyer.jpg"
+              alt="iPHEX 2026 Exhibition Invitation — Neo Life Sciences Pvt. Ltd. — Hall No. 3, Stall No. 3FC-07, 7th to 9th September 2026"
+              width={420}
+              height={630}
+              className="w-full h-auto rounded-lg"
+              priority
+            />
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
       <section id="hero" className="min-h-screen grid grid-cols-1 lg:grid-cols-2 pt-20">
 
@@ -216,45 +278,45 @@ export default function Home() {
             </div>
 
             {/* H1 Heading */}
-            <h1 className="font-playfair text-[48px] md:text-[64px] font-bold leading-[1.05] tracking-[-0.02em] text-white opacity-0 animate-fade-in-up animation-delay-100">
+            <h1 className="font-playfair text-[36px] sm:text-[48px] md:text-[64px] font-bold leading-[1.05] tracking-[-0.02em] text-white opacity-0 animate-fade-in-up animation-delay-100">
               Precision Pharma <br />
               <span className="text-gold font-normal italic">From India To The World.</span>
             </h1>
 
             {/* Body Description */}
-            <p className="text-cream/65 text-[17px] leading-relaxed mt-6 mb-10 max-w-lg opacity-0 animate-fade-in-up animation-delay-200">
+            <p className="text-cream/65 text-[15px] sm:text-[17px] leading-relaxed mt-6 mb-10 max-w-lg opacity-0 animate-fade-in-up animation-delay-200">
               NEO LIFE SCIENCES PVT LTD is a specialist pharmaceutical trader and exporter, sourcing WHO-GMP certified generics, medical devices and herbal formulations from India's finest certified manufacturers — delivering them to regulated healthcare markets across every continent.
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap gap-4 opacity-0 animate-fade-in-up animation-delay-300">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 opacity-0 animate-fade-in-up animation-delay-300">
               <button
                 onClick={() => scrollTo("contact")}
-                className="bg-gold text-emerald px-7 py-4 text-[12px] tracking-[0.15em] uppercase font-semibold hover:bg-gold-light transition-colors duration-200 shadow-[0_4px_20px_rgba(201,150,59,0.15)]"
+                className="bg-blue-600 text-white px-7 py-4 text-[12px] tracking-[0.15em] uppercase font-semibold hover:bg-blue-700 active:bg-blue-800 transition-all duration-200 shadow-[0_4px_20px_rgba(37,99,235,0.35)] hover:shadow-[0_6px_25px_rgba(37,99,235,0.45)] w-full sm:w-auto text-center rounded-sm hover:-translate-y-0.5"
               >
                 Start Sourcing Enquiry
               </button>
               <button
                 onClick={() => scrollTo("products")}
-                className="border border-cream/30 text-cream px-7 py-4 text-[12px] tracking-[0.15em] uppercase hover:border-cream/60 hover:bg-white/5 transition-all duration-200"
+                className="border border-white/30 text-cream px-7 py-4 text-[12px] tracking-[0.15em] uppercase hover:border-blue-400 hover:bg-blue-600/15 hover:text-white transition-all duration-200 w-full sm:w-auto text-center rounded-sm"
               >
                 Browse Portfolio
               </button>
             </div>
 
             {/* Trust Stats Row */}
-            <div className="mt-16 border-t border-cream/10 pt-10 grid grid-cols-3 gap-6 opacity-0 animate-fade-in-up animation-delay-400">
+            <div className="mt-12 sm:mt-16 border-t border-cream/10 pt-8 sm:pt-10 grid grid-cols-3 gap-3 sm:gap-6 opacity-0 animate-fade-in-up animation-delay-400">
               <div>
-                <div className="text-[22px] font-semibold text-cream">50+</div>
-                <div className="text-[11px] tracking-[0.1em] uppercase text-cream/40 mt-1">Export Markets</div>
+                <div className="text-[18px] sm:text-[22px] font-semibold text-cream">50+</div>
+                <div className="text-[10px] sm:text-[11px] tracking-[0.1em] uppercase text-cream/40 mt-1">Export Markets</div>
               </div>
-              <div className="border-l border-cream/10 pl-6">
-                <div className="text-[22px] font-semibold text-cream">WHO-GMP</div>
-                <div className="text-[11px] tracking-[0.1em] uppercase text-cream/40 mt-1">Certified Sourcing</div>
+              <div className="border-l border-cream/10 pl-3 sm:pl-6">
+                <div className="text-[18px] sm:text-[22px] font-semibold text-cream">WHO-GMP</div>
+                <div className="text-[10px] sm:text-[11px] tracking-[0.1em] uppercase text-cream/40 mt-1">Certified Sourcing</div>
               </div>
-              <div className="border-l border-cream/10 pl-6">
-                <div className="text-[22px] font-semibold text-cream">10</div>
-                <div className="text-[11px] tracking-[0.1em] uppercase text-cream/40 mt-1">Product Groups</div>
+              <div className="border-l border-cream/10 pl-3 sm:pl-6">
+                <div className="text-[18px] sm:text-[22px] font-semibold text-cream">10</div>
+                <div className="text-[10px] sm:text-[11px] tracking-[0.1em] uppercase text-cream/40 mt-1">Product Groups</div>
               </div>
             </div>
 
@@ -262,7 +324,7 @@ export default function Home() {
         </div>
 
         {/* Right Panel */}
-        <div className="bg-cream grid-texture flex items-center justify-center py-20 relative overflow-hidden border-t lg:border-t-0 lg:border-l border-emerald/5 min-h-[600px] px-6 lg:px-12">
+        <div className="bg-cream grid-texture flex items-center justify-center py-16 sm:py-20 relative overflow-hidden border-t lg:border-t-0 lg:border-l border-emerald/5 min-h-[400px] sm:min-h-[600px] px-6 lg:px-12">
 
           {/* Layered Image Frame */}
           <div className="relative w-full max-w-[420px] aspect-[4/5] shadow-[0_30px_100px_rgba(10,26,18,0.12)] group opacity-0 animate-fade-in-right animation-delay-200">
@@ -340,7 +402,7 @@ export default function Home() {
       </div>
 
       {/* About Section */}
-      <section id="about" className="bg-cream py-28 md:py-36 relative overflow-hidden">
+      <section id="about" className="bg-cream py-20 sm:py-28 md:py-36 relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           {/* Left Column: Context */}
@@ -348,10 +410,10 @@ export default function Home() {
             <span className="text-gold text-[11px] font-medium tracking-[0.22em] uppercase block mb-3">
               ABOUT THE COMPANY
             </span>
-            <h2 className="font-playfair text-[40px] md:text-[44px] font-normal leading-tight text-ink mb-8">
+            <h2 className="font-playfair text-[32px] sm:text-[40px] md:text-[44px] font-normal leading-tight text-ink mb-8">
               Pharmaceutical Excellence With Ayurvedic Roots
             </h2>
-            <div className="space-y-6 text-ink-mid text-[17px] leading-relaxed">
+            <div className="space-y-5 sm:space-y-6 text-ink-mid text-[15px] sm:text-[17px] leading-relaxed">
               <p>
                 Neo Life Sciences is a specialist B2B pharmaceutical trading and global export partner based out of India's healthcare innovation hub, Hyderabad. Rather than operating raw manufacturing assets, we act as a streamlined sourcing catalyst for regulated international markets.
               </p>
@@ -417,7 +479,7 @@ export default function Home() {
       </section>
 
       {/* Leadership Section */}
-      <section id="leadership" className="bg-[#0A1A12] py-28 md:py-36 text-cream relative overflow-hidden">
+      <section id="leadership" className="bg-[#0A1A12] py-20 sm:py-28 md:py-36 text-cream relative overflow-hidden">
         {/* Subtle decorative background vector */}
         <div className="absolute right-[-10%] top-[-10%] w-[50%] h-[50%] rounded-full bg-gold/5 blur-[100px] pointer-events-none" />
 
@@ -427,7 +489,7 @@ export default function Home() {
             <span className="text-gold text-[11px] font-medium tracking-[0.22em] uppercase block mb-3">
               EXECUTIVE LEADERSHIP
             </span>
-            <h2 className="font-playfair text-[40px] md:text-[44px] font-normal leading-tight text-white mb-16">
+            <h2 className="font-playfair text-[32px] sm:text-[40px] md:text-[44px] font-normal leading-tight text-white mb-16">
               Guided by Experience & Vision
             </h2>
           </div>
@@ -504,14 +566,14 @@ export default function Home() {
       </section>
 
       {/* Product Portfolio Section (10-Card Numbered Grid) */}
-      <section id="products" className="bg-cream py-28 md:py-36 relative overflow-hidden">
+      <section id="products" className="bg-cream py-20 sm:py-28 md:py-36 relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-6 md:px-12">
 
           <div className="mb-20 reveal">
             <span className="text-gold text-[11px] font-medium tracking-[0.22em] uppercase block mb-3">
               PRODUCT PORTFOLIO
             </span>
-            <h2 className="font-playfair text-[40px] md:text-[44px] font-normal leading-tight text-ink">
+            <h2 className="font-playfair text-[32px] sm:text-[40px] md:text-[44px] font-normal leading-tight text-ink">
               What We Source & Export
             </h2>
           </div>
@@ -521,7 +583,7 @@ export default function Home() {
             {displayedProducts.map((product, idx) => (
               <div
                 key={idx}
-                className="bg-cream p-8 hover:bg-white hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(10,26,18,0.06)] transition-all duration-300 group flex flex-col justify-between min-h-[320px] relative overflow-hidden reveal"
+                className="bg-cream p-6 sm:p-8 hover:bg-white hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(10,26,18,0.06)] transition-all duration-300 group flex flex-col justify-between min-h-[260px] sm:min-h-[320px] relative overflow-hidden reveal"
                 style={{ transitionDelay: `${(idx % 5) * 100}ms` }}
               >
                 {/* Background Image Container */}
@@ -612,14 +674,14 @@ export default function Home() {
       </section>
 
       {/* Sourcing Process Workflow */}
-      <section className="bg-[#FAF7F2] py-28 md:py-36 relative overflow-hidden">
+      <section className="bg-[#FAF7F2] py-20 sm:py-28 md:py-36 relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-6 md:px-12">
 
           <div className="mb-20 text-center max-w-2xl mx-auto reveal">
             <span className="text-gold text-[11px] font-medium tracking-[0.22em] uppercase block mb-3">
               HOW WE WORK
             </span>
-            <h2 className="font-playfair text-[40px] md:text-[44px] font-normal leading-tight text-ink">
+            <h2 className="font-playfair text-[32px] sm:text-[40px] md:text-[44px] font-normal leading-tight text-ink">
               From Enquiry to Delivery
             </h2>
             <p className="text-ink-soft mt-3 text-sm">
@@ -671,14 +733,14 @@ export default function Home() {
       </section>
 
       {/* Why Us Section */}
-      <section id="whyus" className="bg-[#0A1A12] py-28 md:py-36 text-cream relative overflow-hidden">
+      <section id="whyus" className="bg-[#0A1A12] py-20 sm:py-28 md:py-36 text-cream relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-6 md:px-12">
 
           <div className="mb-20 text-center max-w-2xl mx-auto reveal">
             <span className="text-gold text-[11px] font-medium tracking-[0.22em] uppercase block mb-3">
               OUR DIFFERENTIATORS
             </span>
-            <h2 className="font-playfair text-[40px] md:text-[44px] font-normal leading-tight text-white">
+            <h2 className="font-playfair text-[32px] sm:text-[40px] md:text-[44px] font-normal leading-tight text-white">
               Why Global Buyers Choose Neo Life Sciences
             </h2>
           </div>
@@ -735,14 +797,14 @@ export default function Home() {
       </section>
 
       {/* B2B Lead Capture & Contact Section */}
-      <section id="contact" className="bg-cream py-28 md:py-36 relative overflow-hidden">
+      <section id="contact" className="bg-cream py-20 sm:py-28 md:py-36 relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-6 md:px-12">
 
           <div className="mb-16 reveal">
             <span className="text-gold text-[11px] font-medium tracking-[0.22em] uppercase block mb-3">
               ACQUISITIONS & LOGISTICS
             </span>
-            <h2 className="font-playfair text-[40px] md:text-[44px] font-normal leading-tight text-ink">
+            <h2 className="font-playfair text-[32px] sm:text-[40px] md:text-[44px] font-normal leading-tight text-ink">
               Start Your Sourcing Enquiry
             </h2>
           </div>
@@ -1013,9 +1075,9 @@ export default function Home() {
                             key={idx}
                             type="button"
                             onClick={() => handleDocToggle(doc)}
-                            className={`px-3 py-1.5 text-[10px] tracking-wide uppercase font-semibold transition-all duration-200 border ${isSelected
-                              ? "bg-emerald text-cream border-emerald"
-                              : "border-ink/15 text-ink/50 hover:border-gold hover:text-gold"
+                            className={`px-3.5 py-1.5 text-[11px] tracking-wide uppercase font-semibold transition-all duration-200 border rounded-sm ${isSelected
+                              ? "bg-blue-600 text-white border-blue-600 shadow-sm"
+                              : "border-slate-300 bg-white/70 text-slate-700 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50/50"
                               }`}
                           >
                             {doc}
@@ -1033,7 +1095,7 @@ export default function Home() {
                       required
                       rows={4}
                       placeholder="Share exact dosage configurations, therapeutic volume demands, and compliance requirements..."
-                      className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full resize-y min-h-[100px]"
+                      className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none transition-all duration-200 w-full resize-y min-h-[100px]"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     />
@@ -1044,7 +1106,7 @@ export default function Home() {
                     <button
                       type="submit"
                       disabled={formSubmitting}
-                      className="bg-emerald text-gold px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-emerald-soft transition-colors w-full flex items-center justify-center gap-3 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-semibold transition-all duration-200 w-full flex items-center justify-center gap-3 shadow-[0_4px_18px_rgba(37,99,235,0.35)] hover:shadow-[0_6px_24px_rgba(37,99,235,0.45)] disabled:opacity-50 disabled:cursor-not-allowed rounded-sm hover:-translate-y-0.5"
                     >
                       {formSubmitting ? "TRANSMITTING..." : "SEND ENQUIRY"} {!formSubmitting && <ArrowRight size={14} />}
                     </button>

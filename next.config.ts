@@ -5,7 +5,9 @@ const nextConfig: NextConfig = {
     config.resolve.fallback = { fs: false, path: false };
     return config;
   },
-  turbopack: {},
+  turbopack: {
+    root: __dirname,
+  },
 };
 
 export default nextConfig;

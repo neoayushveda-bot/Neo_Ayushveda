@@ -57,7 +57,7 @@ export default function ProductCategoryPage() {
             </p>
             <Link
               href="/"
-              className="inline-flex items-center gap-2 text-gold hover:text-gold-light font-semibold transition-colors"
+              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Home
@@ -232,13 +232,13 @@ export default function ProductCategoryPage() {
                         >
                           <Link
                             href={buildEnquiryUrl(category.name, group.groupTitle, item.name)}
-                            className="group relative h-full p-4 rounded-xl border border-emerald/8 bg-white hover:border-gold/40 hover:shadow-[0_8px_30px_rgba(201,150,59,0.08)] transition-all duration-300 flex items-center gap-3"
+                            className="group relative h-full p-4 rounded-xl border border-emerald/8 bg-white hover:border-blue-500/40 hover:shadow-[0_8px_30px_rgba(37,99,235,0.12)] transition-all duration-300 flex items-center gap-3"
                           >
-                            <div className="w-2 h-2 rounded-full bg-gold/60 group-hover:bg-gold group-hover:scale-125 transition-all duration-300 shrink-0" />
-                            <h3 className="text-[14px] font-semibold text-ink group-hover:text-emerald transition-colors leading-snug flex-1">
+                            <div className="w-2 h-2 rounded-full bg-blue-600/60 group-hover:bg-blue-600 group-hover:scale-125 transition-all duration-300 shrink-0" />
+                            <h3 className="text-[14px] font-semibold text-ink group-hover:text-blue-600 transition-colors leading-snug flex-1">
                               {item.name}
                             </h3>
-                            <div className="flex items-center gap-1 text-gold/0 group-hover:text-gold transition-all duration-300 shrink-0">
+                            <div className="flex items-center gap-1 text-blue-600/0 group-hover:text-blue-600 transition-all duration-300 shrink-0">
                               <span className="text-[9px] font-bold uppercase tracking-wider hidden sm:inline">Enquire</span>
                               <ArrowRight className="w-3.5 h-3.5" />
                             </div>
@@ -271,15 +271,15 @@ export default function ProductCategoryPage() {
                   <Link
                     key={cat.slug}
                     href={`/products/${cat.slug}`}
-                    className="reveal-scale group relative p-5 rounded-xl border border-white/8 bg-white/[0.03] hover:bg-white/[0.07] hover:border-gold/30 transition-all duration-300"
+                    className="reveal-scale group relative p-5 rounded-xl border border-white/8 bg-white/[0.03] hover:bg-white/[0.07] hover:border-blue-400/40 transition-all duration-300"
                     style={{ transitionDelay: `${i * 60}ms` }}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-[14px] font-semibold text-cream group-hover:text-gold transition-colors leading-snug pr-2">
+                      <h3 className="text-[14px] font-semibold text-cream group-hover:text-blue-400 transition-colors leading-snug pr-2">
                         {cat.name}
                       </h3>
                       {cat.badge && (
-                        <span className="text-[8px] font-semibold uppercase px-1.5 py-0.5 rounded bg-gold/15 text-gold border border-gold/30 shrink-0 whitespace-nowrap">
+                        <span className="text-[8px] font-semibold uppercase px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-400/30 shrink-0 whitespace-nowrap">
                           {cat.badge}
                         </span>
                       )}
@@ -287,7 +287,7 @@ export default function ProductCategoryPage() {
                     <p className="text-[11px] text-cream/40 group-hover:text-cream/60 transition-colors line-clamp-2 leading-relaxed">
                       {cat.shortDesc}
                     </p>
-                    <div className="mt-3 flex items-center gap-1 text-gold/0 group-hover:text-gold text-[10px] font-semibold uppercase tracking-wider transition-all duration-300">
+                    <div className="mt-3 flex items-center gap-1 text-blue-400/0 group-hover:text-blue-400 text-[10px] font-semibold uppercase tracking-wider transition-all duration-300">
                       View Details
                       <ChevronRight className="w-3 h-3" />
                     </div>
@@ -300,7 +300,7 @@ export default function ProductCategoryPage() {
             <div className="text-center mt-12 reveal">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-gold hover:text-gold-light font-semibold text-[12px] tracking-[0.15em] uppercase transition-colors"
+                className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold text-[12px] tracking-[0.15em] uppercase transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home
