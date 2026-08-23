@@ -18,15 +18,18 @@ export async function POST(request: Request) {
     const formattedPhone = phoneVal.startsWith("+") ? `'${phoneVal}` : phoneVal;
 
     const payload = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
+      timestamp: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+      firstName: data.firstName || "",
+      lastName: data.lastName || "",
+      email: data.email || "",
       phone: formattedPhone,
-      company: data.company,
-      country: data.country,
-      category: data.category,
-      selectedDocs: Array.isArray(data.selectedDocs) ? data.selectedDocs.join(", ") : "",
-      message: data.message,
+      company: data.company || "",
+      country: data.country || "",
+      category: data.category || "",
+      productEnquiry: data.productEnquiry || "",
+      productGroup: data.productGroup || "",
+      selectedDocs: Array.isArray(data.selectedDocs) ? data.selectedDocs.join(", ") : (data.selectedDocs || ""),
+      message: data.message || "",
     };
 
     // Forward the POST request to the deployed Google Apps Script URL
