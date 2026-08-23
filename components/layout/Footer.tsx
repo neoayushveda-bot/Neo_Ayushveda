@@ -27,11 +27,11 @@ export default function Footer() {
           {/* Column 1 - Brand */}
           <div className="flex flex-col gap-6">
             <div className="flex items-center">
-              <div className="bg-white px-3.5 py-2 rounded-md shadow-sm border border-white/10">
+              <div className="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-white/10">
                 <img
                   src="/images/Logo.png"
                   alt="Neo Life Sciences Logo"
-                  className="h-12 w-auto object-contain"
+                  className="h-16 md:h-[68px] w-auto object-contain"
                 />
               </div>
             </div>

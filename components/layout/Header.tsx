@@ -136,7 +136,7 @@ export default function Header() {
             <img 
               src="/images/Logo.png" 
               alt="Neo Life Sciences Logo" 
-              className="h-10 md:h-12 w-auto object-contain"
+              className="h-12 sm:h-14 md:h-[60px] w-auto object-contain transition-all"
             />
           </Link>
 
