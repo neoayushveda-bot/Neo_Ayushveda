@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import { ArrowLeft, ChevronRight, Layers, GitBranch, ArrowRight, Send } from "lucide-react";
+import { ArrowLeft, ChevronRight, Boxes, Activity, Stethoscope, ArrowRight, MousePointerClick } from "lucide-react";
 import Header from "../../../../components/layout/Header";
 import Footer from "../../../../components/layout/Footer";
 import {
@@ -125,7 +125,7 @@ export default function ProductCategoryPage() {
             {/* Stats bar */}
             <div className="flex items-center gap-6 mt-10 opacity-0 animate-fade-in-up animation-delay-400">
               <div className="flex items-center gap-2">
-                <Layers className="w-4 h-4 text-gold" />
+                <Boxes className="w-4 h-4 text-gold" />
                 <span className="text-[12px] text-cream/50 tracking-wider uppercase">
                   {category.subcategories.length}{" "}
                   {category.subcategories.length === 1 ? "Category" : "Categories"}
@@ -133,14 +133,14 @@ export default function ProductCategoryPage() {
               </div>
               <div className="w-px h-4 bg-cream/15" />
               <div className="flex items-center gap-2">
-                <GitBranch className="w-4 h-4 text-gold" />
+                <Activity className="w-4 h-4 text-gold" />
                 <span className="text-[12px] text-cream/50 tracking-wider uppercase">
                   {category.subcategories.reduce((acc, sc) => acc + sc.items.length, 0)} Segments
                 </span>
               </div>
               <div className="w-px h-4 bg-cream/15" />
               <div className="flex items-center gap-2">
-                <Send className="w-4 h-4 text-gold" />
+                <MousePointerClick className="w-4 h-4 text-gold" />
                 <span className="text-[12px] text-cream/50 tracking-wider uppercase">
                   Click any item to enquire
                 </span>
@@ -190,7 +190,7 @@ export default function ProductCategoryPage() {
                               {/* Parent header */}
                               <div className="flex items-center gap-3 mb-4">
                                 <div className="w-10 h-10 rounded-lg bg-emerald flex items-center justify-center shrink-0">
-                                  <GitBranch className="w-4.5 h-4.5 text-gold" />
+                                  <Stethoscope className="w-4.5 h-4.5 text-gold" />
                                 </div>
                                 <div>
                                   <h3 className="text-[15px] font-semibold text-ink group-hover:text-emerald transition-colors">

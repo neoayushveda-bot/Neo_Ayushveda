@@ -10,7 +10,7 @@ import {
   ShieldCheck,
   Send,
   FileText,
-  Sparkles,
+  Pill,
 } from "lucide-react";
 import Header from "../../../components/layout/Header";
 import Footer from "../../../components/layout/Footer";
@@ -532,7 +532,7 @@ function EnquiryFormContent() {
                         Product / Segment
                       </span>
                       <div className="border border-gold/30 bg-gold-pale/20 px-4 py-3 text-[15px] text-ink flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-gold" />
+                        <Pill className="w-4 h-4 text-gold" />
                         <span className="font-semibold">{productParam}</span>
                         {groupParam && (
                           <span className="text-ink-soft text-sm ml-1">
