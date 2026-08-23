@@ -153,59 +153,32 @@ export default function Header() {
                         )}
                       </button>
 
-                      {/* Mega Dropdown */}
+                      {/* Desktop Products Dropdown Menu — Clean White Card Layout matching screenshot */}
                       <div
                         id="products-mega-menu"
-                        className={`absolute top-[calc(100%-8px)] left-1/2 -translate-x-1/2 w-[520px] bg-white border border-emerald/15 shadow-2xl rounded-2xl overflow-hidden transition-all duration-200 z-50 ${
+                        role="menu"
+                        aria-label="Products Categories"
+                        className={`absolute top-[calc(100%+4px)] left-1/2 -translate-x-1/2 w-[340px] bg-white rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.12)] border border-slate-200/80 overflow-hidden transition-all duration-200 transform origin-top z-50 p-4 ${
                           productsHovered
                             ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
                             : "opacity-0 scale-95 -translate-y-1 pointer-events-none"
                         }`}
                       >
-                        <div className="flex items-center justify-between px-6 py-3.5 bg-emerald border-b border-white/10">
-                          <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-blue-400 font-montserrat flex items-center gap-2">
-                            <Layers className="w-4 h-4 text-blue-400" />
-                            PRODUCT CATEGORIES
-                          </span>
-                          <span className="text-[10px] font-bold tracking-wider text-cream/70 font-montserrat">
-                            WHO-GMP & AYUSH
-                          </span>
-                        </div>
-
-                        <div className="grid grid-cols-1 gap-1.5 p-4 bg-white font-inter">
+                        <div className="flex flex-col gap-3 font-jakarta">
                           {PRODUCT_CATEGORIES.map((cat) => (
                             <Link
                               key={cat.href}
                               href={cat.href}
+                              role="menuitem"
+                              tabIndex={productsHovered ? 0 : -1}
                               onClick={() => setProductsHovered(false)}
-                              className="group flex items-start gap-3 p-3 rounded-xl hover:bg-cream/60 border border-transparent hover:border-emerald/10 transition-all"
+                              className="block p-2 rounded-xl hover:bg-slate-50 transition-colors"
                             >
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center justify-between gap-2 mb-0.5">
-                                  <h4 className="text-[13px] font-bold text-ink group-hover:text-blue-600 transition-colors font-montserrat">
-                                    {cat.name}
-                                  </h4>
-                                  {cat.badge && (
-                                    <span className="text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-blue-50 text-blue-600 border border-blue-200 shrink-0 font-montserrat">
-                                      {cat.badge}
-                                    </span>
-                                  )}
-                                </div>
-                                <p className="text-[12px] text-ink-soft line-clamp-1">
-                                  {cat.shortDesc}
-                                </p>
-                              </div>
+                              <span className="text-[14px] font-semibold text-[#2C3830] hover:text-blue-600 transition-colors leading-snug block">
+                                {cat.name}
+                              </span>
                             </Link>
                           ))}
-                        </div>
-
-                        <div className="px-6 py-3.5 bg-cream border-t border-emerald/10 text-right">
-                          <button
-                            onClick={() => scrollTo("products")}
-                            className="text-blue-600 hover:text-blue-700 font-bold tracking-wider uppercase text-[11px] inline-flex items-center gap-1.5 transition-colors font-montserrat"
-                          >
-                            View All Products <ArrowRight className="w-3.5 h-3.5" />
-                          </button>
                         </div>
                       </div>
                     </li>
@@ -254,17 +227,14 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay — Dark Emerald Premium Branding */}
+      {/* Mobile Menu Overlay — Clean White Layout */}
       <div
-        className={`fixed inset-0 bg-emerald text-cream z-40 lg:hidden flex flex-col justify-between px-6 pt-24 pb-8 transition-all duration-300 ${
+        className={`fixed inset-0 bg-white text-slate-800 z-40 lg:hidden flex flex-col justify-between px-6 pt-24 pb-8 transition-all duration-300 ${
           mobileMenuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none"
         }`}
       >
-        {/* Background decorative glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-
         <nav className="w-full max-w-sm mx-auto font-montserrat flex-1 flex flex-col justify-center overflow-y-auto z-10">
-          <ul className="flex flex-col gap-3 text-center">
+          <ul className="flex flex-col gap-2 text-center">
             {NAV_ITEMS.map((item) => {
               const isProducts = item.id === "products";
 
@@ -274,24 +244,24 @@ export default function Header() {
                     <button
                       onClick={() => setProductsMobileOpen(!productsMobileOpen)}
                       className={`text-[16px] font-bold tracking-[0.16em] uppercase transition-colors py-3 flex items-center justify-center gap-2 w-full ${
-                        activeSection === item.id || productsMobileOpen ? "text-blue-400 font-extrabold" : "text-white hover:text-blue-300"
+                        activeSection === item.id || productsMobileOpen ? "text-blue-600" : "text-slate-800 hover:text-blue-600"
                       }`}
                     >
                       {item.label}
                       <ChevronDown
                         className={`w-4 h-4 transition-transform duration-200 ${
-                          productsMobileOpen ? "rotate-180 text-blue-400" : "text-white/60"
+                          productsMobileOpen ? "rotate-180 text-blue-600" : "text-slate-400"
                         }`}
                       />
                     </button>
 
-                    {/* Mobile Products Accordion — Clean White Card Layout */}
+                    {/* Mobile Products Accordion — Clean White Card Layout matching screenshot */}
                     <div
                       className={`overflow-hidden transition-all duration-300 ${
                         productsMobileOpen ? "max-h-[500px] mt-2 mb-4 opacity-100" : "max-h-0 opacity-0"
                       }`}
                     >
-                      <div className="flex flex-col gap-1.5 p-4 bg-white rounded-2xl border border-slate-200/80 shadow-xl text-left font-jakarta">
+                      <div className="flex flex-col gap-1 p-4 bg-slate-50 rounded-2xl border border-slate-200/80 shadow-sm text-left font-jakarta">
                         {PRODUCT_CATEGORIES.map((cat) => (
                           <Link
                             key={cat.href}
@@ -300,9 +270,9 @@ export default function Header() {
                               setMobileMenuOpen(false);
                               setProductsMobileOpen(false);
                             }}
-                            className="block p-3 rounded-xl hover:bg-slate-50 transition-colors"
+                            className="block p-3 rounded-xl hover:bg-white transition-colors"
                           >
-                            <span className="text-[14px] font-semibold text-slate-800 hover:text-blue-600 transition-colors leading-snug block">
+                            <span className="text-[15px] font-semibold text-[#2C3830] hover:text-blue-600 transition-colors leading-snug block">
                               {cat.name}
                             </span>
                           </Link>
@@ -318,7 +288,7 @@ export default function Header() {
                   <button
                     onClick={() => scrollTo(item.id)}
                     className={`text-[16px] font-bold tracking-[0.16em] uppercase transition-colors py-3 block w-full ${
-                      activeSection === item.id ? "text-blue-400 font-extrabold" : "text-white hover:text-blue-300"
+                      activeSection === item.id ? "text-blue-600" : "text-slate-800 hover:text-blue-600"
                     }`}
                   >
                     {item.label}
@@ -330,20 +300,20 @@ export default function Header() {
         </nav>
 
         {/* Bottom CTA & Contact in Mobile Menu */}
-        <div className="w-full max-w-sm mx-auto pt-6 border-t border-white/10 flex flex-col gap-4 font-montserrat z-10">
+        <div className="w-full max-w-sm mx-auto pt-6 border-t border-slate-200/80 flex flex-col gap-4 font-montserrat z-10">
           <button
             onClick={() => scrollTo("contact")}
-            className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white py-4 rounded-xl text-[13px] tracking-[0.16em] uppercase font-bold shadow-lg shadow-blue-600/30 transition-all active:scale-98"
+            className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white py-4 rounded-xl text-[13px] tracking-[0.16em] uppercase font-bold shadow-lg shadow-blue-600/25 transition-all active:scale-98"
           >
             ENQUIRE NOW
           </button>
-          <div className="flex items-center justify-center gap-4 text-[11px] text-cream/60 font-inter">
+          <div className="flex items-center justify-center gap-4 text-[12px] text-slate-500 font-inter">
             <span className="flex items-center gap-1">
-              <Phone className="w-3 h-3 text-gold" /> 040-35247813
+              <Phone className="w-3.5 h-3.5 text-blue-600" /> 040-35247813
             </span>
             <span>•</span>
             <span className="flex items-center gap-1">
-              <Mail className="w-3 h-3 text-gold" /> info@neolspharma.com
+              <Mail className="w-3.5 h-3.5 text-blue-600" /> info@neolspharma.com
             </span>
           </div>
         </div>
