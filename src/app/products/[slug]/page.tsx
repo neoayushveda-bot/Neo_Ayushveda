@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, ChevronRight, Boxes, Activity, Stethoscope, ArrowRight, MousePointerClick } from "lucide-react";
 import Header from "../../../../components/layout/Header";
 import Footer from "../../../../components/layout/Footer";
+import InfiniteMarquee from "../../../../components/layout/InfiniteMarquee";
 import {
   getCategoryBySlug,
   PRODUCT_CATEGORY_DETAILS,
@@ -148,6 +149,9 @@ export default function ProductCategoryPage() {
             </div>
           </div>
         </section>
+
+        {/* ─── Infinite Marquee Ticker ─── */}
+        <InfiniteMarquee />
 
         {/* ─── Subcategory Sections ─── */}
         <section className="py-16 md:py-24">

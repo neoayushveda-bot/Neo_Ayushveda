@@ -11,9 +11,18 @@ import {
   Send,
   FileText,
   Pill,
+  Calendar,
+  MapPin,
+  Building2,
+  CheckCircle2,
+  Award,
+  Phone,
+  Mail,
+  Globe,
 } from "lucide-react";
 import Header from "../../../components/layout/Header";
 import Footer from "../../../components/layout/Footer";
+import InfiniteMarquee from "../../../components/layout/InfiniteMarquee";
 
 const countryCodes = [
   { code: "+971", label: "AE" },
@@ -282,339 +291,454 @@ function EnquiryFormContent() {
           </div>
         </section>
 
+        {/* ─── Infinite Marquee Ticker ─── */}
+        <InfiniteMarquee />
+
         {/* ─── Enquiry Form Section ─── */}
         <section className="py-16 md:py-24">
-          <div className="max-w-[900px] mx-auto px-6 md:px-12">
-            <div className="reveal">
-              <div className="bg-white border border-emerald/10 p-8 md:p-10 shadow-2xl relative">
-                {/* Decorative corner */}
-                <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-gold/20 pointer-events-none" />
-                <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-gold/20 pointer-events-none" />
+          <div className="max-w-[1280px] mx-auto px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+              
+              {/* Left Column (Form) - 7 cols */}
+              <div className="lg:col-span-7 reveal">
+                <div className="bg-white border border-emerald/10 p-8 md:p-10 shadow-2xl relative rounded-xl">
+                  {/* Decorative corner */}
+                  <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-gold/20 pointer-events-none" />
+                  <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-gold/20 pointer-events-none" />
 
-                {/* Form Header */}
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-10 h-10 rounded-lg bg-emerald flex items-center justify-center">
-                    <Send className="w-4.5 h-4.5 text-gold" />
-                  </div>
-                  <div>
-                    <h2 className="font-playfair text-xl text-ink">
-                      Sourcing Enquiry Form
-                    </h2>
-                    <p className="text-[11px] text-ink-soft tracking-wide">
-                      All fields marked are required • Response within 24–48 hrs
-                    </p>
-                  </div>
-                </div>
-
-                {formSubmitted && (
-                  <div className="bg-emerald/5 border border-gold/30 text-emerald p-6 mb-8 flex items-start gap-3 animate-fade-in-up">
-                    <ShieldCheck
-                      size={20}
-                      className="text-gold shrink-0 mt-0.5"
-                    />
+                  {/* Form Header */}
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="w-10 h-10 rounded-lg bg-emerald flex items-center justify-center">
+                      <Send className="w-4.5 h-4.5 text-gold" />
+                    </div>
                     <div>
-                      <h4 className="text-sm font-semibold tracking-wide uppercase text-emerald">
-                        ENQUIRY TRANSMITTED
-                      </h4>
-                      <p className="text-xs text-ink-soft mt-1 leading-relaxed">
-                        Thank you for your B2B sourcing enquiry. Our regulatory
-                        and logistics desks will analyze your specifications and
-                        respond within 24–48 business hours with an initial
-                        draft schedule.
+                      <h2 className="font-playfair text-xl text-ink">
+                        Sourcing Enquiry Form
+                      </h2>
+                      <p className="text-[11px] text-ink-soft tracking-wide">
+                        All fields marked are required • Response within 24–48 hrs
                       </p>
                     </div>
                   </div>
-                )}
 
-                {formError && (
-                  <div className="bg-red-500/10 border border-red-500/30 text-red-600 p-6 mb-8 flex items-start gap-3 animate-fade-in-up text-xs leading-relaxed">
-                    <div>
-                      <h4 className="text-sm font-semibold tracking-wide uppercase text-red-700">
-                        TRANSMISSION FAILED
-                      </h4>
-                      <p className="mt-1">{formError}</p>
-                    </div>
-                  </div>
-                )}
-
-                <form onSubmit={handleFormSubmit} className="space-y-6">
-                  {/* Row 1 - Names */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="firstName"
-                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                      >
-                        First Name
-                      </label>
-                      <input
-                        id="firstName"
-                        type="text"
-                        required
-                        placeholder="e.g. John"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
-                        value={formData.firstName}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            firstName: e.target.value,
-                          })
-                        }
+                  {formSubmitted && (
+                    <div className="bg-emerald/5 border border-gold/30 text-emerald p-6 mb-8 flex items-start gap-3 animate-fade-in-up rounded-lg">
+                      <ShieldCheck
+                        size={20}
+                        className="text-gold shrink-0 mt-0.5"
                       />
-                    </div>
-
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="lastName"
-                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                      >
-                        Last Name
-                      </label>
-                      <input
-                        id="lastName"
-                        type="text"
-                        required
-                        placeholder="e.g. Doe"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
-                        value={formData.lastName}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            lastName: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-                  </div>
-
-                  {/* Row 2 - Email & Phone */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="email"
-                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                      >
-                        Email Address
-                      </label>
-                      <input
-                        id="email"
-                        type="email"
-                        required
-                        placeholder="e.g. buyer@clinicaltrade.com"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                      />
-                    </div>
-
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="phone"
-                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                      >
-                        Phone / WhatsApp
-                      </label>
-                      <div className="flex gap-2 items-center">
-                        <select
-                          className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-3 py-3 text-[15px] text-ink focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-24 shrink-0"
-                          value={phoneCode}
-                          onChange={(e) => setPhoneCode(e.target.value)}
-                        >
-                          {countryCodes.map((c, i) => (
-                            <option
-                              key={i}
-                              value={c.code}
-                              className="text-ink bg-cream"
-                            >
-                              {c.label} ({c.code})
-                            </option>
-                          ))}
-                        </select>
-                        <input
-                          id="phone"
-                          type="tel"
-                          required
-                          placeholder="e.g. 9032550436"
-                          className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 flex-grow"
-                          value={formData.phone}
-                          onChange={(e) =>
-                            setFormData({ ...formData, phone: e.target.value })
-                          }
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Row 3 - Company */}
-                  <div className="flex flex-col">
-                    <label
-                      htmlFor="company"
-                      className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                    >
-                      Company Name
-                    </label>
-                    <input
-                      id="company"
-                      type="text"
-                      required
-                      placeholder="e.g. Global Pharma Logistics Ltd"
-                      className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
-                      value={formData.company}
-                      onChange={(e) =>
-                        setFormData({ ...formData, company: e.target.value })
-                      }
-                    />
-                  </div>
-
-                  {/* Row 4 - Dropdowns */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="country"
-                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                      >
-                        Destination Country
-                      </label>
-                      <select
-                        id="country"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
-                        value={formData.country}
-                        onChange={(e) =>
-                          setFormData({ ...formData, country: e.target.value })
-                        }
-                      >
-                        {countriesList.map((c, i) => (
-                          <option
-                            key={i}
-                            value={c}
-                            className="text-ink bg-cream"
-                          >
-                            {c}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="category"
-                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                      >
-                        Product Category
-                      </label>
-                      <select
-                        id="category"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
-                        value={formData.category}
-                        onChange={(e) =>
-                          setFormData({ ...formData, category: e.target.value })
-                        }
-                      >
-                        {categoryOptions.map((cat, i) => (
-                          <option
-                            key={i}
-                            value={cat}
-                            className="text-ink bg-cream"
-                          >
-                            {cat}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Product context (read-only display if pre-filled) */}
-                  {productParam && (
-                    <div className="flex flex-col">
-                      <span className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold">
-                        Product / Segment
-                      </span>
-                      <div className="border border-gold/30 bg-gold-pale/20 px-4 py-3 text-[15px] text-ink flex items-center gap-2">
-                        <Pill className="w-4 h-4 text-gold" />
-                        <span className="font-semibold">{productParam}</span>
-                        {groupParam && (
-                          <span className="text-ink-soft text-sm ml-1">
-                            — {groupParam}
-                          </span>
-                        )}
+                      <div>
+                        <h4 className="text-sm font-semibold tracking-wide uppercase text-emerald">
+                          ENQUIRY TRANSMITTED
+                        </h4>
+                        <p className="text-xs text-ink-soft mt-1 leading-relaxed">
+                          Thank you for your B2B sourcing enquiry. Our regulatory
+                          and logistics desks will analyze your specifications and
+                          respond within 24–48 business hours with an initial
+                          draft schedule.
+                        </p>
                       </div>
                     </div>
                   )}
 
-                  {/* Row 5 - Documentation Chips */}
-                  <div className="flex flex-col">
-                    <span className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-3 font-semibold block">
-                      Required Documentation (Select all that apply)
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {docOptions.map((doc, idx) => {
-                        const isSelected = selectedDocs.includes(doc);
-                        return (
-                          <button
-                            key={idx}
-                            type="button"
-                            onClick={() => handleDocToggle(doc)}
-                            className={`px-3.5 py-1.5 text-[11px] tracking-wide uppercase font-semibold transition-all duration-200 border rounded-sm ${
-                              isSelected
-                                ? "bg-blue-600 text-white border-blue-600 shadow-sm"
-                                : "border-slate-300 bg-white/70 text-slate-700 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50/50"
-                            }`}
+                  {formError && (
+                    <div className="bg-red-500/10 border border-red-500/30 text-red-600 p-6 mb-8 flex items-start gap-3 animate-fade-in-up text-xs leading-relaxed rounded-lg">
+                      <div>
+                        <h4 className="text-sm font-semibold tracking-wide uppercase text-red-700">
+                          TRANSMISSION FAILED
+                        </h4>
+                        <p className="mt-1">{formError}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  <form onSubmit={handleFormSubmit} className="space-y-6">
+                    {/* Row 1 - Names */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="flex flex-col">
+                        <label
+                          htmlFor="firstName"
+                          className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
+                        >
+                          First Name
+                        </label>
+                        <input
+                          id="firstName"
+                          type="text"
+                          required
+                          placeholder="e.g. John"
+                          className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full rounded-md"
+                          value={formData.firstName}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              firstName: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+
+                      <div className="flex flex-col">
+                        <label
+                          htmlFor="lastName"
+                          className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
+                        >
+                          Last Name
+                        </label>
+                        <input
+                          id="lastName"
+                          type="text"
+                          required
+                          placeholder="e.g. Doe"
+                          className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full rounded-md"
+                          value={formData.lastName}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              lastName: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                    </div>
+
+                    {/* Row 2 - Email & Phone */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="flex flex-col">
+                        <label
+                          htmlFor="email"
+                          className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
+                        >
+                          Email Address
+                        </label>
+                        <input
+                          id="email"
+                          type="email"
+                          required
+                          placeholder="e.g. buyer@clinicaltrade.com"
+                          className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full rounded-md"
+                          value={formData.email}
+                          onChange={(e) =>
+                            setFormData({ ...formData, email: e.target.value })
+                          }
+                        />
+                      </div>
+
+                      <div className="flex flex-col">
+                        <label
+                          htmlFor="phone"
+                          className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
+                        >
+                          Phone / WhatsApp
+                        </label>
+                        <div className="flex gap-2 items-center">
+                          <select
+                            className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-3 py-3 text-[15px] text-ink focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-24 shrink-0 rounded-md"
+                            value={phoneCode}
+                            onChange={(e) => setPhoneCode(e.target.value)}
                           >
-                            {doc}
-                          </button>
-                        );
-                      })}
+                            {countryCodes.map((c, i) => (
+                              <option
+                                key={i}
+                                value={c.code}
+                                className="text-ink bg-cream"
+                              >
+                                {c.label} ({c.code})
+                              </option>
+                            ))}
+                          </select>
+                          <input
+                            id="phone"
+                            type="tel"
+                            required
+                            placeholder="e.g. 9032550436"
+                            className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 flex-grow rounded-md"
+                            value={formData.phone}
+                            onChange={(e) =>
+                              setFormData({ ...formData, phone: e.target.value })
+                            }
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Row 3 - Company */}
+                    <div className="flex flex-col">
+                      <label
+                        htmlFor="company"
+                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
+                      >
+                        Company Name
+                      </label>
+                      <input
+                        id="company"
+                        type="text"
+                        required
+                        placeholder="e.g. Global Pharma Logistics Ltd"
+                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full rounded-md"
+                        value={formData.company}
+                        onChange={(e) =>
+                          setFormData({ ...formData, company: e.target.value })
+                        }
+                      />
+                    </div>
+
+                    {/* Row 4 - Dropdowns */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="flex flex-col">
+                        <label
+                          htmlFor="country"
+                          className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
+                        >
+                          Destination Country
+                        </label>
+                        <select
+                          id="country"
+                          className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full rounded-md"
+                          value={formData.country}
+                          onChange={(e) =>
+                            setFormData({ ...formData, country: e.target.value })
+                          }
+                        >
+                          {countriesList.map((c, i) => (
+                            <option
+                              key={i}
+                              value={c}
+                              className="text-ink bg-cream"
+                            >
+                              {c}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="flex flex-col">
+                        <label
+                          htmlFor="category"
+                          className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
+                        >
+                          Product Category
+                        </label>
+                        <select
+                          id="category"
+                          className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full rounded-md"
+                          value={formData.category}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              category: e.target.value,
+                            })
+                          }
+                        >
+                          {categoryOptions.map((cat, i) => (
+                            <option
+                              key={i}
+                              value={cat}
+                              className="text-ink bg-cream"
+                            >
+                              {cat}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Product context (read-only display if pre-filled) */}
+                    {productParam && (
+                      <div className="flex flex-col">
+                        <span className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold">
+                          Product / Segment
+                        </span>
+                        <div className="border border-gold/30 bg-gold-pale/20 px-4 py-3 text-[15px] text-ink flex items-center gap-2 rounded-md">
+                          <Pill className="w-4 h-4 text-gold" />
+                          <span className="font-semibold">{productParam}</span>
+                          {groupParam && (
+                            <span className="text-ink-soft text-sm ml-1">
+                              — {groupParam}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Row 5 - Documentation Chips */}
+                    <div className="flex flex-col">
+                      <span className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-3 font-semibold block">
+                        Required Documentation (Select all that apply)
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {docOptions.map((doc, idx) => {
+                          const isSelected = selectedDocs.includes(doc);
+                          return (
+                            <button
+                              key={idx}
+                              type="button"
+                              onClick={() => handleDocToggle(doc)}
+                              className={`px-3 py-1 rounded-md text-[10px] tracking-wide uppercase font-bold transition-colors border font-montserrat ${
+                                isSelected
+                                  ? "bg-gold text-emerald border-gold"
+                                  : "border-emerald/15 text-ink-mid bg-cream/50 hover:border-gold"
+                              }`}
+                            >
+                              {doc}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Message Field */}
+                    <div className="flex flex-col">
+                      <label
+                        htmlFor="message"
+                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
+                      >
+                        Enquiry Specifications / Dosage Demands
+                      </label>
+                      <textarea
+                        id="message"
+                        required
+                        rows={5}
+                        placeholder="Share exact dosage configurations, therapeutic volume demands, and compliance requirements..."
+                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full resize-y min-h-[120px] rounded-md"
+                        value={formData.message}
+                        onChange={(e) =>
+                          setFormData({ ...formData, message: e.target.value })
+                        }
+                      />
+                    </div>
+
+                    {/* Submit Button */}
+                    <div className="pt-4">
+                      <button
+                        type="submit"
+                        disabled={formSubmitting}
+                        className="bg-gold hover:bg-gold-light text-emerald font-montserrat font-bold px-8 py-4 text-[12px] tracking-[0.18em] uppercase transition-all duration-200 w-full flex items-center justify-center gap-3 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed rounded-lg active:scale-98"
+                      >
+                        {formSubmitting ? "TRANSMITTING..." : "SUBMIT SOURCING ENQUIRY"}{" "}
+                        {!formSubmitting && <ArrowRight size={15} />}
+                      </button>
+                      <p className="text-[10px] text-ink/35 text-center mt-4 font-jakarta tracking-wide">
+                        We typically respond within 24–48 business hours. All
+                        enquiries are treated with strict commercial
+                        confidentiality.
+                      </p>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              {/* Right Column (iPHEX 2026 Event & Regulatory Sidebar) - 5 cols */}
+              <div className="lg:col-span-5 space-y-6 reveal">
+                
+                {/* iPHEX 2026 Poster Event Card */}
+                <div className="bg-emerald border border-gold/30 p-7 rounded-xl text-cream shadow-xl relative overflow-hidden font-montserrat">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-full blur-2xl pointer-events-none" />
+                  
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-[9px] font-extrabold uppercase tracking-[0.18em] px-2.5 py-1 rounded bg-gold/20 text-gold border border-gold/40">
+                      EXPO INVITATION
+                    </span>
+                    <span className="text-[10px] text-cream/60 uppercase tracking-wider font-semibold">
+                      iPHEX 2026
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-white leading-snug mb-2">
+                    Meet Us at iPHEX 2026
+                  </h3>
+                  <p className="text-cream/70 text-xs font-inter leading-relaxed mb-5">
+                    Neo Life Sciences Pvt. Ltd. (Formerly Neo Ayushveda Pvt Ltd) cordially invites all international healthcare delegates, regulatory trade partners, and buyers to meet our leadership team.
+                  </p>
+
+                  <div className="bg-white/5 border border-white/10 p-4 rounded-lg space-y-3 font-montserrat mb-5">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-md bg-gold/20 border border-gold/40 flex items-center justify-center shrink-0">
+                        <Calendar className="w-4 h-4 text-gold" />
+                      </div>
+                      <div>
+                        <div className="text-[9px] text-gold uppercase tracking-wider font-bold">Event Dates</div>
+                        <div className="text-xs font-bold text-white">7th to 9th September 2026</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 border-t border-white/10 pt-3">
+                      <div className="w-8 h-8 rounded-md bg-gold/20 border border-gold/40 flex items-center justify-center shrink-0">
+                        <MapPin className="w-4 h-4 text-gold" />
+                      </div>
+                      <div>
+                        <div className="text-[9px] text-gold uppercase tracking-wider font-bold">Stall Location</div>
+                        <div className="text-xs font-bold text-white">Hall No. 3 | Stall No. 3FC-07</div>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Row 6 - Message */}
-                  <div className="flex flex-col">
-                    <label
-                      htmlFor="message"
-                      className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                    >
-                      Message or Specific Requirements
-                    </label>
-                    <textarea
-                      id="message"
-                      required
-                      rows={5}
-                      placeholder="Share exact dosage configurations, therapeutic volume demands, and compliance requirements..."
-                      className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none transition-all duration-200 w-full resize-y min-h-[120px]"
-                      value={formData.message}
-                      onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
-                      }
-                    />
+                  <div className="text-[11px] text-cream/50 italic font-inter">
+                    "Delivering Healthcare Beyond Borders"
                   </div>
+                </div>
 
-                  {/* Submit Button */}
-                  <div className="pt-4">
-                    <button
-                      type="submit"
-                      disabled={formSubmitting}
-                      className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-semibold transition-all duration-200 w-full flex items-center justify-center gap-3 shadow-[0_4px_18px_rgba(37,99,235,0.35)] hover:shadow-[0_6px_24px_rgba(37,99,235,0.45)] disabled:opacity-50 disabled:cursor-not-allowed rounded-sm hover:-translate-y-0.5"
-                    >
-                      {formSubmitting ? "TRANSMITTING..." : "SEND ENQUIRY"}{" "}
-                      {!formSubmitting && <ArrowRight size={14} />}
-                    </button>
-                    <p className="text-[10px] text-ink/35 text-center mt-4 font-jakarta tracking-wide">
-                      We typically respond within 24–48 business hours. All
-                      enquiries are treated with strict commercial
-                      confidentiality.
-                    </p>
+                {/* Regulatory Compliance Standards */}
+                <div className="bg-white border border-emerald/10 p-6 rounded-xl shadow-md font-montserrat">
+                  <div className="flex items-center gap-2 mb-3">
+                    <ShieldCheck className="w-4 h-4 text-gold" />
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-ink">
+                      Regulatory Compliance Standards
+                    </h4>
                   </div>
-                </form>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {["WHO-GMP", "EU-GMP", "US FDA", "PIC/S", "OTHER SRIs"].map((badge, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[10px] font-bold px-2.5 py-1 rounded bg-emerald/5 text-emerald border border-emerald/15 tracking-wide"
+                      >
+                        {badge}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-xs text-ink-soft font-inter leading-relaxed">
+                    Sourced therapeutics & medical devices are manufactured strictly under certified WHO-GMP, EU-GMP, and US FDA compliant facilities with complete CTD dossier support.
+                  </p>
+                </div>
+
+                {/* Corporate Head Office Info */}
+                <div className="bg-cream/60 border border-emerald/10 p-6 rounded-xl shadow-sm font-montserrat">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Building2 className="w-4 h-4 text-gold" />
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-ink">
+                      Corporate Head Office
+                    </h4>
+                  </div>
+                  <p className="text-xs text-ink-mid font-inter leading-relaxed mb-3">
+                    <strong>Neo Life Sciences Pvt. Ltd.</strong><br />
+                    <span className="text-ink-soft text-[11px]">(Formerly Neo Ayushveda Pvt Ltd)</span><br />
+                    201-2nd Floor, Above ICICI Bank, Plot 13/A/B Lane 12, MLA Colony, Road No. 12, Banjara Hills, Hyderabad – 500034, Telangana, India
+                  </p>
+                  <div className="pt-3 border-t border-emerald/10 flex flex-col gap-1.5 text-xs text-ink-mid font-inter">
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-3.5 h-3.5 text-gold shrink-0" />
+                      <span>Corporate Phone: 040-35247813</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Mail className="w-3.5 h-3.5 text-gold shrink-0" />
+                      <span>info@neolspharma.com</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Globe className="w-3.5 h-3.5 text-gold shrink-0" />
+                      <span>www.neolspharma.com</span>
+                    </div>
+                  </div>
+                </div>
+
               </div>
+
             </div>
 
             {/* Back link */}
-            <div className="text-center mt-10 reveal">
+            <div className="text-center mt-12 reveal">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold text-[12px] tracking-[0.15em] uppercase transition-colors"
+                className="inline-flex items-center gap-2 text-gold hover:text-gold-light font-bold text-[12px] tracking-[0.15em] uppercase transition-colors font-montserrat"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home

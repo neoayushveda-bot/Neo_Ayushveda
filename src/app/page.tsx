@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
+import InfiniteMarquee from "../../components/layout/InfiniteMarquee";
 
 // Loader Skeleton for MapLibre
 function MapSkeleton() {
@@ -370,37 +371,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust Ticker (Marquee) */}
-      <div className="w-full bg-emerald py-5 overflow-hidden border-t border-b border-gold/10 relative z-10 shadow-md">
-        <div className="animate-marquee select-none flex items-center">
-          {[...Array(3)].map((_, i) => (
-            <span key={i} className="text-[10px] tracking-[0.2em] uppercase text-gold/60 font-semibold flex items-center">
-              PHARMACEUTICAL GENERICS
-              <span className="mx-4 text-gold/30">◆</span>
-              MEDICAL DEVICES
-              <span className="mx-4 text-gold/30">◆</span>
-              WHO-GMP CERTIFIED
-              <span className="mx-4 text-gold/30">◆</span>
-              CE COMPLIANT
-              <span className="mx-4 text-gold/30">◆</span>
-              AYURVEDIC MEDICINES
-              <span className="mx-4 text-gold/30">◆</span>
-              HERBAL NUTRACEUTICALS
-              <span className="mx-4 text-gold/30">◆</span>
-              COSMECEUTICALS
-              <span className="mx-4 text-gold/30">◆</span>
-              GLOBAL EXPORTS
-              <span className="mx-4 text-gold/30">◆</span>
-              PRIVATE LABEL
-              <span className="mx-4 text-gold/30">◆</span>
-              CONTRACT SOURCING
-              <span className="mx-4 text-gold/30">◆</span>
-              US FDA DOSSIER SUPPORT
-              <span className="mx-4 text-gold/30">◆</span>
-            </span>
-          ))}
-        </div>
-      </div>
+      {/* Trust Ticker (Infinite Marquee with Poster Highlights) */}
+      <InfiniteMarquee />
 
       {/* About Section */}
       <section id="about" className="bg-cream py-20 sm:py-28 md:py-36 relative overflow-hidden">

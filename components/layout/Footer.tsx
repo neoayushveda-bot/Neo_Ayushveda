@@ -139,8 +139,37 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Regulatory Compliance Badges Bar */}
+        <div className="border-t border-white/10 pt-8 pb-8 flex flex-col md:flex-row items-center justify-between gap-6 font-jakarta">
+          <div>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold block mb-2">
+              REGULATORY COMPLIANCE STANDARDS
+            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              {["WHO-GMP", "EU-GMP", "US FDA", "PIC/S", "OTHER SRIs"].map((badge, idx) => (
+                <span
+                  key={idx}
+                  className="text-[10px] font-bold px-3 py-1 rounded bg-white/5 border border-gold/30 text-gold tracking-wider uppercase"
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="text-right md:text-right max-w-md">
+            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-gold block mb-1">
+              CORPORATE HEAD OFFICE
+            </span>
+            <p className="text-[11px] text-cream/60 leading-relaxed font-inter">
+              Neo Life Sciences Pvt. Ltd. (Formerly Neo Ayushveda Pvt Ltd)<br />
+              201-2nd Floor, Above ICICI Bank, Plot 13/A/B Lane 12, MLA Colony, Road No. 12, Banjara Hills, Hyderabad – 500034, Telangana, India
+            </p>
+          </div>
+        </div>
+
         {/* Disclaimer / Notice */}
-        <div className="border-t border-white/10 pt-8 pb-4 mb-8">
+        <div className="border-t border-white/10 pt-6 pb-4 mb-8">
           <p className="text-[11px] text-cream/35 leading-relaxed max-w-4xl">
             <span className="font-semibold text-gold/60 uppercase tracking-wider block mb-1">Regulatory & Medical Disclaimer</span>
             Statements made on this website have not been evaluated by the Food and Drug Administration (FDA) or local health ministries. Products showcased are manufactured by licensed third-party manufacturers holding valid WHO-GMP, ISO, or AYUSH certifications. Sourced therapeutics, generics, and devices are intended for distribution to qualified importers and registered healthcare buyers only. We do not provide clinical advice or sell directly to individual consumers.
