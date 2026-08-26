@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 130" fill="none">
+  <!-- "n" letter -->
+  <text x="28" y="78" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="700" fill="#1B3A5C" letter-spacing="-1">n</text>
+  
+  <!-- "e" letter -->
+  <text x="82" y="78" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="700" fill="#1B3A5C" letter-spacing="-1">e</text>
+  
+  <!-- "o" letter -->
+  <text x="140" y="78" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="700" fill="#1B3A5C" letter-spacing="-1">o</text>
+  
+  <!-- Globe/dot on top of "o" - larger and more detailed -->
+  <circle cx="185" cy="14" r="11" fill="#4A9B3F"/>
+  <!-- Globe meridian lines -->
+  <ellipse cx="185" cy="14" rx="11" ry="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"/>
+  <ellipse cx="185" cy="14" rx="5.5" ry="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"/>
+  <ellipse cx="185" cy="14" rx="2.5" ry="11" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+  <line x1="174" y1="14" x2="196" y2="14" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"/>
+  <line x1="175" y1="9" x2="195" y2="9" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+  <line x1="175" y1="19" x2="195" y2="19" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+  
+  <!-- Green curved swoosh line below "neo" (Amazon-style) - THICK and prominent -->
+  <path d="M 30 88 Q 110 112, 198 86" stroke="#4A9B3F" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Arrow tip at the end of swoosh -->
+  <polygon points="193,89 202,82 199,92" fill="#4A9B3F"/>
+  
+  <!-- Tagline: QUALITY • COMPLIANCE • ACCESS -->
+  <text x="30" y="118" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#1B3A5C" letter-spacing="2">QUALITY</text>
+  <text x="112" y="118" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#4A9B3F">•</text>
+  <text x="124" y="118" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#1B3A5C" letter-spacing="2">COMPLIANCE</text>
+  <text x="238" y="118" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#4A9B3F">•</text>
+  <text x="250" y="118" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#1B3A5C" letter-spacing="2">ACCESS</text>
+</svg>

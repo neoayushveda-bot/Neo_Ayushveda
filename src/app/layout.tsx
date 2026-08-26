@@ -1,17 +1,27 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Serif, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-playfair",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-ibm-plex-sans",
+  display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
+const ibmPlexSerif = IBM_Plex_Serif({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-jakarta",
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-ibm-plex-serif",
+  display: "swap",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-ibm-plex-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -45,8 +55,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${jakarta.variable} scroll-smooth`}>
-      <body className="bg-cream text-ink font-jakarta antialiased selection:bg-gold/30 selection:text-ink">{children}</body>
+    <html
+      lang="en"
+      className={`${ibmPlexSans.variable} ${ibmPlexSerif.variable} ${ibmPlexMono.variable} scroll-smooth`}
+    >
+      <body className="bg-white text-slate-900 font-sans antialiased selection:bg-[#003A95]/15 selection:text-[#003A95]">
+        {children}
+      </body>
     </html>
   );
 }

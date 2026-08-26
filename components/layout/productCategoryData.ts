@@ -25,7 +25,7 @@ export const PRODUCT_CATEGORY_DETAILS: ProductCategoryDetail[] = [
     shortDesc:
       "WHO-GMP certified generics, specialty therapeutics, injectables, vaccines, nutraceuticals & cosmeceuticals.",
     heroDesc:
-      "Comprehensive range of WHO-GMP certified finished dosage forms — generics, specialty therapeutics, injectables, vaccines, nutraceuticals, and dermatology products — spanning all major therapeutic areas for global healthcare needs.",
+      "WHO-GMP certified finished dosage forms including generics, specialty therapeutics, injectables, vaccines, nutraceuticals, and dermatology products for global healthcare needs.",
     subcategories: [
       {
         groupTitle: "Generics",
@@ -107,7 +107,7 @@ export const PRODUCT_CATEGORY_DETAILS: ProductCategoryDetail[] = [
     shortDesc:
       "High-purity therapeutic APIs & specialty advanced molecules with comprehensive DMF filings.",
     heroDesc:
-      "High-purity Active Pharmaceutical Ingredients (APIs) with comprehensive DMF filings and regulatory documentation — covering therapeutic, advanced, and specialty chemical categories for global formulation partners.",
+      "High-purity APIs with comprehensive DMF filings and regulatory documentation, covering therapeutic and advanced categories for global formulation partners.",
     subcategories: [
       {
         groupTitle: "Therapeutic APIs",
@@ -145,7 +145,7 @@ export const PRODUCT_CATEGORY_DETAILS: ProductCategoryDetail[] = [
     shortDesc:
       "CE & ISO 13485 certified hospital consumables, surgical products, diagnostics & medical equipment.",
     heroDesc:
-      "CE-marked and ISO 13485 certified medical devices, hospital consumables, surgical products, diagnostic kits, and medical equipment — meeting international quality and safety standards for institutional healthcare.",
+      "CE-marked and ISO 13485 certified medical devices, consumables, surgical products, diagnostics, and equipment meeting global safety standards.",
     subcategories: [
       {
         groupTitle: "Hospital Consumables",

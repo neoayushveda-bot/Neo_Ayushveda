@@ -1,12 +1,14 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
+import { Mail, Phone, MapPin, Globe, ShieldCheck, ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const offset = 80; // Header height
+      const offset = 80;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -20,154 +22,178 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-emerald border-t border-gold/20 text-cream">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-12 py-16 lg:py-24">
-        {/* Top Bar Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Column 1 - Brand */}
-          <div className="flex flex-col gap-6">
+    <footer className="bg-slate-900 border-t border-slate-800 text-slate-300 font-sans">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 py-16 lg:py-20">
+        
+        {/* Top Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-slate-800">
+          
+          {/* Column 1 - Brand & Identity (4 cols) */}
+          <div className="lg:col-span-4 flex flex-col gap-5">
             <div className="flex items-center">
-              <div className="bg-white px-3.5 py-2 rounded-md shadow-sm border border-white/10">
+              <div className="bg-white px-3.5 py-2 rounded-md shadow-sm">
                 <img
                   src="/images/Logo.png"
                   alt="Neo Life Sciences Logo"
-                  className="h-12 w-auto object-contain"
+                  className="h-10 w-auto object-contain"
                 />
               </div>
             </div>
-            <p className="font-playfair italic text-cream/50 text-[18px] leading-relaxed">
-              "Healing Traditions.<br />Modern Technology."
+            <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
+              NEO LIFE SCIENCES PVT LTD is an international pharmaceutical trading and B2B export enterprise sourcing WHO-GMP certified generics, medical devices, APIs, and standardized herbal formulations from India to 50+ regulated markets worldwide.
             </p>
-            <div className="flex items-center gap-4 mt-2">
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-cream/40 hover:text-gold hover:bg-gold/10 hover:border-gold/30 transition-all duration-300"
-                aria-label="LinkedIn"
-              >
-                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                </svg>
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-cream/40 hover:text-gold hover:bg-gold/10 hover:border-gold/30 transition-all duration-300"
-                aria-label="Twitter/X"
-              >
-                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
+            <div className="flex items-center gap-2 pt-1 font-mono text-[11px] text-[#A4D73B]">
+              <ShieldCheck className="w-4 h-4 text-[#7CB800]" />
+              <span>WHO-GMP • ISO 9001:2015 • CTD Compliant</span>
             </div>
           </div>
 
-          {/* Column 2 - PRODUCTS */}
-          <div>
-            <h4 className="text-[10px] tracking-[0.2em] uppercase text-gold/80 mb-6 font-semibold">
-              PRODUCTS
+          {/* Column 2 - Products (3 cols) */}
+          <div className="lg:col-span-3">
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-100 mb-4 pb-2 border-b border-slate-800">
+              Product Portfolio
             </h4>
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-2.5 text-sm">
               {[
-                "Pharmaceutical Generics",
-                "Medical Devices",
-                "Ayurvedic Medicines",
-                "Herbal Nutraceuticals",
-                "Cosmeceuticals",
-                "Bulk Drugs & RSM",
-                "Active Ingredients"
+                { label: "Pharmaceutical Generics (Rx)", href: "/products/finished-pharmaceutical-healthcare-products" },
+                { label: "Specialty Therapeutics", href: "/products/finished-pharmaceutical-healthcare-products" },
+                { label: "Active Ingredients (APIs)", href: "/products/active-pharmaceutical-ingredients" },
+                { label: "Medical Devices & Diagnostics", href: "/products/medical-devices-diagnostics" },
+                { label: "Classical Ayurvedic Medicines", href: "/products/finished-pharmaceutical-healthcare-products" },
+                { label: "Herbal Nutraceuticals", href: "/products/finished-pharmaceutical-healthcare-products" },
+                { label: "Clinical Cosmeceuticals", href: "/products/finished-pharmaceutical-healthcare-products" },
               ].map((link, idx) => (
                 <li key={idx}>
-                  <button
-                    onClick={() => scrollTo("products")}
-                    className="text-[13px] text-cream/45 hover:text-cream/80 text-left transition-colors duration-200"
+                  <Link
+                    href={link.href}
+                    className="text-slate-400 hover:text-sky-400 transition-colors flex items-center gap-1 group"
                   >
-                    {link}
-                  </button>
+                    <span>{link.label}</span>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3 - SERVICES */}
-          <div>
-            <h4 className="text-[10px] tracking-[0.2em] uppercase text-gold/80 mb-6 font-semibold">
-              SERVICES
+          {/* Column 3 - Corporate & Services (2 cols) */}
+          <div className="lg:col-span-2">
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-100 mb-4 pb-2 border-b border-slate-800">
+              Company
             </h4>
-            <ul className="flex flex-col gap-3">
-              {[
-                "B2B Sourcing",
-                "Export Documentation",
-                "Regulatory Affairs Support",
-                "Private Labelling",
-                "Contract Sourcing",
-                "Dossier Preparation"
-              ].map((link, idx) => (
-                <li key={idx} className="text-[13px] text-cream/45 cursor-default hover:text-cream/80 transition-colors duration-200">
-                  {link}
-                </li>
-              ))}
+            <ul className="flex flex-col gap-2.5 text-sm">
+              <li>
+                <Link href="/about" className="text-slate-400 hover:text-sky-400 transition-colors">
+                  About Enterprise
+                </Link>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollTo("leadership")}
+                  className="text-slate-400 hover:text-sky-400 text-left transition-colors"
+                >
+                  Executive Leadership
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollTo("exports")}
+                  className="text-slate-400 hover:text-sky-400 text-left transition-colors"
+                >
+                  Global Trade Routes
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollTo("certifications")}
+                  className="text-slate-400 hover:text-sky-400 text-left transition-colors"
+                >
+                  Accreditation Matrix
+                </button>
+              </li>
+              <li>
+                <Link href="/enquiry" className="text-slate-400 hover:text-sky-400 transition-colors">
+                  Procurement Desk
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy-policy" className="text-slate-400 hover:text-sky-400 transition-colors">
+                  Privacy Policy & Data
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Column 4 - COMPANY */}
-          <div>
-            <h4 className="text-[10px] tracking-[0.2em] uppercase text-gold/80 mb-6 font-semibold">
-              COMPANY
+          {/* Column 4 - Registered Office (3 cols) */}
+          <div className="lg:col-span-3">
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-100 mb-4 pb-2 border-b border-slate-800">
+              Registered Office
             </h4>
-            <ul className="flex flex-col gap-3">
-              {[
-                { label: "About Us", id: "about" },
-                { label: "Leadership", id: "leadership" },
-                { label: "Global Reach", id: "exports" },
-                { label: "Certifications", id: "certifications" },
-                { label: "Why Choose Us", id: "whyus" },
-                { label: "Enquiry Form", id: "contact" }
-              ].map((link, idx) => (
-                <li key={idx}>
-                  <button
-                    onClick={() => scrollTo(link.id)}
-                    className="text-[13px] text-cream/45 hover:text-cream/80 text-left transition-colors duration-200"
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <div className="flex flex-col gap-3 text-sm text-slate-400">
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-sky-400 shrink-0 mt-1" />
+                <address className="not-italic leading-relaxed text-xs font-mono">
+                  <strong className="text-slate-200 block text-xs font-heading font-bold">NEO LIFE SCIENCES PVT LTD</strong>
+                  201-2nd Floor, Above ICICI Bank,<br />
+                  Plot 13/A/B Lane 12, MLA Colony,<br />
+                  Banjara Hills, Hyderabad – 500034,<br />
+                  Telangana, India
+                </address>
+              </div>
+
+              <div className="flex items-center gap-2.5 pt-2 border-t border-slate-800 text-xs">
+                <Phone className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                <a href="tel:+914035247813" className="hover:text-sky-400 transition-colors">
+                  040-35247813
+                </a>
+                <span>/</span>
+                <a href="tel:+918712443610" className="hover:text-sky-400 transition-colors">
+                  +91 87124 43610
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2.5 text-xs">
+                <Mail className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                <a href="mailto:contact@neoayushveda.com" className="hover:text-sky-400 transition-colors">
+                  contact@neoayushveda.com
+                </a>
+              </div>
+            </div>
           </div>
+
         </div>
 
-        {/* Disclaimer / Notice */}
-        <div className="border-t border-white/10 pt-8 pb-4 mb-8">
-          <p className="text-[11px] text-cream/35 leading-relaxed max-w-4xl">
-            <span className="font-semibold text-gold/60 uppercase tracking-wider block mb-1">Regulatory & Medical Disclaimer</span>
-            Statements made on this website have not been evaluated by the Food and Drug Administration (FDA) or local health ministries. Products showcased are manufactured by licensed third-party manufacturers holding valid WHO-GMP, ISO, or AYUSH certifications. Sourced therapeutics, generics, and devices are intended for distribution to qualified importers and registered healthcare buyers only. We do not provide clinical advice or sell directly to individual consumers.
+        {/* Regulatory Disclaimer Banner */}
+        <div className="py-6 border-b border-slate-800 text-[11px] text-slate-400 leading-relaxed">
+          <p>
+            <strong className="text-slate-300">Regulatory & B2B Trading Disclaimer:</strong> NEO LIFE SCIENCES PVT LTD is a specialist B2B pharmaceutical sourcing and international export company registered in Hyderabad, India. Products displayed on this portal are offered strictly for wholesale institutional procurement, licensed distributors, and international healthcare tenders. We do not engage in direct-to-consumer retail sales. All export transactions are accompanied by certified COAs, WHO-GMP credentials, and CTD dossiers compliant with destination Ministry of Health authorities.
           </p>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-cream/30">
-          <div className="flex items-center gap-2 flex-wrap justify-center md:justify-start">
-            <span>© {new Date().getFullYear()} NEO LIFE SCIENCES PVT LTD. All rights reserved.</span>
-            <span className="text-white/10 hidden md:inline">|</span>
-            <span>
-              Designed by&nbsp;
-              <a
-                href="https://www.creat8rlabs.site/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cream/50 hover:text-gold transition-colors font-semibold"
-              >
-                Creat8r Labs
-              </a>
-            </span>
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <div>
+            © {new Date().getFullYear()} NEO LIFE SCIENCES PVT LTD. All rights reserved. (Formerly Neo Ayushveda Pvt Ltd).
           </div>
-          <span className="tracking-wide">
-            Made in India <span className="mx-1.5 text-gold/30">◆</span> Trusted Worldwide <span className="mx-1.5 text-gold/30">◆</span> Registered: Hyderabad, Telangana
-          </span>
+          <div className="flex items-center gap-4 text-slate-400">
+            <Link href="/privacy-policy" className="hover:text-slate-200 transition-colors">
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link href="/enquiry" className="hover:text-slate-200 transition-colors">
+              Sourcing Terms
+            </Link>
+            <span>•</span>
+            <a
+              href="https://creat8rlabs.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-sky-400 transition-colors"
+            >
+              Designed by creat8rlabs
+            </a>
+          </div>
         </div>
+
       </div>
     </footer>
   );

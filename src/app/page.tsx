@@ -2,9 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import dynamic from "next/dynamic";
+import Link from "next/link";
 import {
-  Sparkles,
   Pill,
   Stethoscope,
   Leaf,
@@ -19,26 +18,78 @@ import {
   MessageCircle,
   ArrowRight,
   ChevronRight,
-  Compass,
-  X
+  CheckCircle2,
+  Building2,
+  X,
+  FileCheck2,
+  FlaskConical,
+  Boxes,
+  Truck,
+  FileSpreadsheet
 } from "lucide-react";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
+import { WorldMap } from "../../components/ui/world-map";
 
-// Loader Skeleton for MapLibre
-function MapSkeleton() {
-  return (
-    <div className="h-[520px] w-full bg-[#0E2218] animate-pulse flex items-center justify-center">
-      <span className="text-gold/40 text-xs uppercase tracking-widest animate-pulse">Initializing Vector Map...</span>
-    </div>
-  );
-}
-
-// Lazy Load Map Section (Client Side Only)
-const GlobalReach = dynamic(() => import("../../components/sections/GlobalReach"), {
-  ssr: false,
-  loading: () => <MapSkeleton />
-});
+// Global capital routes originating from Hyderabad HQ (17.3850° N, 78.4867° E)
+const heroMapDots = [
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: 51.5074, lng: -0.1278, label: "London" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: 40.7128, lng: -74.0060, label: "New York" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: 35.6762, lng: 139.6503, label: "Tokyo" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: 52.5200, lng: 13.4050, label: "Berlin" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: 25.2048, lng: 55.2708, label: "Dubai" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: 1.3521, lng: 103.8198, label: "Singapore" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: -1.2921, lng: 36.8219, label: "Nairobi" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: 30.0444, lng: 31.2357, label: "Cairo" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: -15.7975, lng: -47.8919, label: "Brasília" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: 24.7136, lng: 46.6753, label: "Riyadh" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: 14.5995, lng: 120.9842, label: "Manila" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: -6.2088, lng: 106.8456, label: "Jakarta" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: 48.8566, lng: 2.3522, label: "Paris" },
+  },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: -35.2809, lng: 149.1300, label: "Canberra" },
+  },
+];
 
 export default function Home() {
   const [displayedProducts, setDisplayedProducts] = useState<any[]>(productsList);
@@ -68,7 +119,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
     const elements = document.querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale");
@@ -81,7 +132,6 @@ export default function Home() {
   const [showIphexPopup, setShowIphexPopup] = useState(false);
 
   useEffect(() => {
-    // Only show once per session
     if (typeof window !== "undefined" && !sessionStorage.getItem("iphex_popup_shown")) {
       const timer = setTimeout(() => {
         setShowIphexPopup(true);
@@ -91,7 +141,6 @@ export default function Home() {
     }
   }, []);
 
-  // Lock body scroll when popup is open
   useEffect(() => {
     if (showIphexPopup) {
       document.body.style.overflow = "hidden";
@@ -229,32 +278,28 @@ export default function Home() {
           className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6"
           onClick={() => setShowIphexPopup(false)}
         >
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in-up" style={{ animationDuration: '0.3s' }} />
+          <div className="absolute inset-0 bg-slate-950/65 backdrop-blur-sm animate-fade-in-up" style={{ animationDuration: '0.25s' }} />
 
-          {/* Modal Content */}
           <div
-            className="relative z-10 max-w-[420px] w-full max-h-[90vh] overflow-y-auto rounded-lg shadow-[0_25px_80px_rgba(0,0,0,0.4)] animate-fade-in-up"
-            style={{ animationDuration: '0.4s', animationDelay: '0.1s' }}
+            className="relative z-10 max-w-[440px] w-full max-h-[90vh] overflow-y-auto rounded-2xl shadow-[0_25px_80px_rgba(15,23,42,0.4)] animate-fade-in-up bg-white p-2.5 border border-slate-200"
+            style={{ animationDuration: '0.35s', animationDelay: '0.05s' }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
             <button
               onClick={() => setShowIphexPopup(false)}
-              className="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center text-ink hover:bg-white hover:scale-110 transition-all duration-150 border border-black/10"
+              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/95 backdrop-blur-sm shadow-md flex items-center justify-center text-slate-700 hover:bg-white hover:scale-105 transition-transform duration-150 ease-out active:scale-[0.96] border border-slate-200"
               aria-label="Close popup"
             >
-              <X size={18} strokeWidth={2.5} />
+              <X size={16} strokeWidth={2} />
             </button>
 
-            {/* Flyer Image */}
             <Image
               src="/images/iphex_2026_poster.jpg"
-              alt="iPHEX 2026 Exhibition Invitation — Neo Life Sciences Pvt. Ltd. — Hall No. 3, Stall No. 3FC-07, 7th to 9th September 2026"
+              alt="iPHEX 2026 Exhibition Invitation — Neo Life Sciences Pvt. Ltd."
               width={420}
               height={630}
               style={{ width: "100%", height: "auto" }}
-              className="w-full h-auto rounded-lg"
+              className="w-full h-auto rounded-xl outline outline-1 -outline-offset-1 outline-black/10"
               priority
               unoptimized
             />
@@ -262,290 +307,285 @@ export default function Home() {
         </div>
       )}
 
-      {/* Hero Section */}
-      <section id="hero" className="min-h-screen grid grid-cols-1 lg:grid-cols-2 pt-20">
+      {/* ─── Hero Section (Dr. Reddy's Inspired Clean Layout + Interactive Hyderabad Globe) ─── */}
+      <section id="hero" className="relative pt-24 pb-14 sm:pb-18 lg:pt-32 lg:pb-24 bg-gradient-to-b from-slate-50/80 via-white to-white overflow-hidden font-sans border-b border-slate-200/80">
+        <div className="absolute inset-0 grid-texture opacity-40 pointer-events-none" />
 
-        {/* Left Panel */}
-        <div className="bg-emerald text-cream flex flex-col justify-center px-6 md:px-12 lg:px-20 py-24 relative overflow-hidden">
-          {/* Subtle background glow */}
-          <div className="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] rounded-full bg-gold/5 blur-[120px] pointer-events-none" />
-
-          <div className="relative z-10">
-            {/* Eyebrow */}
-            <div className="mb-6 flex items-center opacity-0 animate-fade-in-up">
-              <span className="inline-block w-6 h-px bg-gold mr-3" />
-              <span className="text-gold text-[10px] tracking-[0.22em] uppercase font-semibold">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
+          
+          {/* Top Hero Text */}
+          <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-10 lg:mb-12">
+            
+            {/* Eyebrow badge */}
+            <div className="inline-flex items-center gap-2 bg-sky-50 border border-sky-200/80 rounded-full px-3.5 py-1 mb-5 shadow-sm opacity-0 animate-fade-in-up">
+              <span className="w-2 h-2 rounded-full bg-[#7CB800] animate-pulse" />
+              <span className="text-sky-800 font-mono text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-semibold">
                 INTERNATIONAL PHARMACEUTICAL TRADERS & EXPORTERS
               </span>
             </div>
 
-            {/* H1 Heading */}
-            <h1 className="font-playfair text-[36px] sm:text-[48px] md:text-[64px] font-bold leading-[1.05] tracking-[-0.02em] text-white opacity-0 animate-fade-in-up animation-delay-100">
-              Precision Pharma <br />
-              <span className="text-gold font-normal italic">From India To The World.</span>
+            {/* Editorial Headline */}
+            <h1 className="font-serif text-[34px] sm:text-[46px] md:text-[56px] lg:text-[62px] font-bold text-slate-900 leading-[1.12] tracking-tight opacity-0 animate-fade-in-up animation-delay-100">
+              Precision Pharma. <br />
+              <span className="italic text-sky-600 font-normal">From India To The World.</span>
             </h1>
 
-            {/* Body Description */}
-            <p className="text-cream/65 text-[15px] sm:text-[17px] leading-relaxed mt-6 mb-10 max-w-lg opacity-0 animate-fade-in-up animation-delay-200">
-              NEO LIFE SCIENCES PVT LTD is a specialist pharmaceutical trader and exporter, sourcing WHO-GMP certified generics, medical devices and herbal formulations from India's finest certified manufacturers — delivering them to regulated healthcare markets across every continent.
+            {/* Description */}
+            <p className="text-slate-600 text-[15px] sm:text-[17px] leading-relaxed mt-5 max-w-2xl mx-auto opacity-0 animate-fade-in-up animation-delay-200">
+              Hyderabad-based B2B pharmaceutical exporter sourcing WHO-GMP certified generics, therapeutics, medical devices, and herbal formulations across 50+ countries.
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 opacity-0 animate-fade-in-up animation-delay-300">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-7 opacity-0 animate-fade-in-up animation-delay-300">
               <button
                 onClick={() => scrollTo("contact")}
-                className="bg-blue-600 text-white px-7 py-4 text-[12px] tracking-[0.15em] uppercase font-semibold hover:bg-blue-700 active:bg-blue-800 transition-all duration-200 shadow-[0_4px_20px_rgba(37,99,235,0.35)] hover:shadow-[0_6px_25px_rgba(37,99,235,0.45)] w-full sm:w-auto text-center rounded-sm hover:-translate-y-0.5"
+                className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white ps-7 pe-6 py-3.5 text-xs tracking-[0.14em] uppercase font-semibold rounded-md shadow-md hover:shadow-lg transition-transform duration-150 ease-out active:scale-[0.96] flex items-center justify-center gap-2 hover:-translate-y-0.5 w-full sm:w-auto text-center"
               >
-                Start Sourcing Enquiry
+                <span>Start Sourcing Enquiry</span>
+                <ArrowRight size={14} />
               </button>
               <button
                 onClick={() => scrollTo("products")}
-                className="border border-white/30 text-cream px-7 py-4 text-[12px] tracking-[0.15em] uppercase hover:border-blue-400 hover:bg-blue-600/15 hover:text-white transition-all duration-200 w-full sm:w-auto text-center rounded-sm"
+                className="border border-slate-300 bg-white hover:bg-slate-50 hover:border-sky-500 hover:text-sky-600 text-slate-700 px-7 py-3.5 text-xs tracking-[0.14em] uppercase font-semibold rounded-md shadow-sm transition-transform duration-150 ease-out active:scale-[0.96] w-full sm:w-auto text-center"
               >
-                Browse Portfolio
+                Browse Product Directory
               </button>
             </div>
-
-            {/* Trust Stats Row */}
-            <div className="mt-12 sm:mt-16 border-t border-cream/10 pt-8 sm:pt-10 grid grid-cols-3 gap-3 sm:gap-6 opacity-0 animate-fade-in-up animation-delay-400">
-              <div>
-                <div className="text-[18px] sm:text-[22px] font-semibold text-cream">50+</div>
-                <div className="text-[10px] sm:text-[11px] tracking-[0.1em] uppercase text-cream/40 mt-1">Export Markets</div>
-              </div>
-              <div className="border-l border-cream/10 pl-3 sm:pl-6">
-                <div className="text-[18px] sm:text-[22px] font-semibold text-cream">WHO-GMP</div>
-                <div className="text-[10px] sm:text-[11px] tracking-[0.1em] uppercase text-cream/40 mt-1">Certified Sourcing</div>
-              </div>
-              <div className="border-l border-cream/10 pl-3 sm:pl-6">
-                <div className="text-[18px] sm:text-[22px] font-semibold text-cream">10</div>
-                <div className="text-[10px] sm:text-[11px] tracking-[0.1em] uppercase text-cream/40 mt-1">Product Groups</div>
-              </div>
-            </div>
-
           </div>
-        </div>
 
-        {/* Right Panel */}
-        <div className="bg-cream grid-texture flex items-center justify-center py-16 sm:py-20 relative overflow-hidden border-t lg:border-t-0 lg:border-l border-emerald/5 min-h-[400px] sm:min-h-[600px] px-6 lg:px-12">
+          {/* Interactive World Map (Connecting World Capitals from Hyderabad HQ, India) */}
+          <div className="relative w-full max-w-5xl mx-auto opacity-0 animate-fade-in-up animation-delay-400">
+            <WorldMap
+              dots={heroMapDots}
+              lineColor="#003A95"
+              className="w-full"
+            />
 
-          {/* Layered Image Frame */}
-          <div className="relative w-full max-w-[420px] aspect-[4/5] shadow-[0_30px_100px_rgba(10,26,18,0.12)] group opacity-0 animate-fade-in-right animation-delay-200">
-
-            {/* Decorative background gold frame offset */}
-            <div className="absolute inset-0 border border-gold/40 translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2" />
-
-            {/* Outer border of main image container */}
-            <div className="absolute inset-0 bg-white p-3 border border-emerald/5">
-              <div className="relative w-full h-full overflow-hidden bg-[#0A1A12]">
-                {/* Main Image */}
-                <Image
-                  src="/images/hero_pharma_botanical.png"
-                  alt="Neo Life Sciences Premium Pharmaceutical Sourcing"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 420px"
-                  className="object-cover transition-transform duration-[1000ms] group-hover:scale-105"
-                  priority
-                />
-
-                {/* Subtle dark green vignette overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-emerald/40 via-transparent to-transparent pointer-events-none" />
+            {/* Verified Metrics Row Under Map */}
+            <div className="mt-6 bg-white border border-slate-200/90 rounded-xl p-5 sm:p-6 shadow-sm grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
+              <div className="sm:border-r border-slate-200 sm:pr-4">
+                <div className="font-mono text-2xl sm:text-3xl font-bold text-slate-900">50+</div>
+                <div className="text-xs font-mono tracking-wider uppercase text-slate-500 mt-1 font-semibold">Export Markets Worldwide</div>
+              </div>
+              <div className="sm:border-r border-slate-200 sm:px-4">
+                <div className="font-mono text-2xl sm:text-3xl font-bold text-sky-600">WHO-GMP</div>
+                <div className="text-xs font-mono tracking-wider uppercase text-slate-500 mt-1 font-semibold">Certified Sourcing Partners</div>
+              </div>
+              <div className="sm:pl-4">
+                <div className="font-mono text-2xl sm:text-3xl font-bold text-slate-900">10</div>
+                <div className="text-xs font-mono tracking-wider uppercase text-slate-500 mt-1 font-semibold">Specialized Therapeutic Divisions</div>
               </div>
             </div>
-
-            {/* Overlaid floating glass brand badge */}
-            <div className="absolute -left-6 bottom-12 hidden sm:block opacity-0 animate-fade-in-left animation-delay-400">
-              <div className="animate-float bg-white/80 backdrop-blur-md border border-emerald/10 p-5 shadow-[0_15px_40px_rgba(10,26,18,0.08)] max-w-[180px]">
-                <div className="w-8 h-8 rounded-full border border-gold/60 flex items-center justify-center mb-2.5">
-                  <span className="text-gold text-[10px] font-semibold tracking-wider font-playfair italic">N</span>
-                </div>
-                <p className="text-[8px] tracking-[0.2em] uppercase text-ink-soft mb-0.5 font-jakarta">ESTABLISHED</p>
-                <h4 className="text-[12px] font-bold text-ink tracking-wide uppercase leading-none mb-1 font-jakarta">HYDERABAD</h4>
-                <p className="text-[9px] text-ink-soft leading-normal font-jakarta">Global Sourcing Hub</p>
-              </div>
-            </div>
-
-            {/* Animated decorative ring behind the top right of the card */}
-            <div className="absolute -top-12 -right-12 w-28 h-28 rounded-full border border-dashed border-gold/30 animate-[spin_40s_linear_infinite] pointer-events-none" />
           </div>
 
         </div>
       </section>
 
-      {/* Trust Ticker (Marquee) */}
-      <div className="w-full bg-emerald py-5 overflow-hidden border-t border-b border-gold/10 relative z-10 shadow-md">
+      {/* ─── Trust Ticker (Marquee) ─── */}
+      <div className="w-full bg-slate-50 py-3.5 overflow-hidden border-b border-slate-200 relative z-10 font-mono">
         <div className="animate-marquee select-none flex items-center">
           {[...Array(3)].map((_, i) => (
-            <span key={i} className="text-[10px] tracking-[0.2em] uppercase text-gold/60 font-semibold flex items-center">
+            <span key={i} className="text-xs tracking-[0.16em] uppercase text-slate-600 font-semibold flex items-center">
               PHARMACEUTICAL GENERICS
-              <span className="mx-4 text-gold/30">◆</span>
+              <span className="mx-4 text-[#7CB800]">◆</span>
               MEDICAL DEVICES
-              <span className="mx-4 text-gold/30">◆</span>
-              WHO-GMP CERTIFIED
-              <span className="mx-4 text-gold/30">◆</span>
+              <span className="mx-4 text-[#7CB800]">◆</span>
+              WHO-GMP CERTIFIED SOURCING
+              <span className="mx-4 text-[#7CB800]">◆</span>
               CE COMPLIANT
-              <span className="mx-4 text-gold/30">◆</span>
+              <span className="mx-4 text-[#7CB800]">◆</span>
               AYURVEDIC MEDICINES
-              <span className="mx-4 text-gold/30">◆</span>
+              <span className="mx-4 text-[#7CB800]">◆</span>
               HERBAL NUTRACEUTICALS
-              <span className="mx-4 text-gold/30">◆</span>
+              <span className="mx-4 text-[#7CB800]">◆</span>
               COSMECEUTICALS
-              <span className="mx-4 text-gold/30">◆</span>
-              GLOBAL EXPORTS
-              <span className="mx-4 text-gold/30">◆</span>
-              PRIVATE LABEL
-              <span className="mx-4 text-gold/30">◆</span>
-              CONTRACT SOURCING
-              <span className="mx-4 text-gold/30">◆</span>
-              US FDA DOSSIER SUPPORT
-              <span className="mx-4 text-gold/30">◆</span>
+              <span className="mx-4 text-[#7CB800]">◆</span>
+              GLOBAL EXPORTS (50+ COUNTRIES)
+              <span className="mx-4 text-[#7CB800]">◆</span>
+              PRIVATE LABEL & CONTRACT SOURCING
+              <span className="mx-4 text-[#7CB800]">◆</span>
+              US FDA CTD DOSSIER SUPPORT
+              <span className="mx-4 text-[#7CB800]">◆</span>
             </span>
           ))}
         </div>
       </div>
 
-      {/* About Section */}
-      <section id="about" className="bg-cream py-20 sm:py-28 md:py-36 relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      {/* ─── About Section (Featuring Real Pharma Cleanroom & Logistics Photos) ─── */}
+      <section id="about" className="bg-white py-16 sm:py-24 lg:py-28 relative overflow-hidden font-sans border-b border-slate-100">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-14">
+            <div className="lg:col-span-6 reveal">
+              <span className="text-sky-600 font-mono text-xs font-semibold tracking-[0.2em] uppercase block mb-3">
+                ABOUT THE ENTERPRISE
+              </span>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-slate-900 mb-5">
+                Pharmaceutical Excellence With Ayurvedic Roots
+              </h2>
+              <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+                <p>
+                  Neo Life Sciences is a specialist B2B pharmaceutical trading and global export partner based in Hyderabad. We act as a streamlined sourcing catalyst for regulated international markets, collaborating with certified manufacturing laboratories holding WHO-GMP, ISO 9001:2015, and ISO 13485 accreditations.
+                </p>
+                <p>
+                  Every therapeutic batch, device shipment, and standardized extract is fully traceable to its origin. Our dedicated regulatory affairs department coordinates import licensing, MOH permit approvals, and compiles product registration dossiers in CTD formats for swift market entry.
+                </p>
+              </div>
+            </div>
 
-          {/* Left Column: Context */}
-          <div className="reveal">
-            <span className="text-gold text-[11px] font-medium tracking-[0.22em] uppercase block mb-3">
-              ABOUT THE COMPANY
-            </span>
-            <h2 className="font-playfair text-[32px] sm:text-[40px] md:text-[44px] font-normal leading-tight text-ink mb-8">
-              Pharmaceutical Excellence With Ayurvedic Roots
-            </h2>
-            <div className="space-y-5 sm:space-y-6 text-ink-mid text-[15px] sm:text-[17px] leading-relaxed">
-              <p>
-                Neo Life Sciences is a specialist B2B pharmaceutical trading and global export partner based out of India's healthcare innovation hub, Hyderabad. Rather than operating raw manufacturing assets, we act as a streamlined sourcing catalyst for regulated international markets.
-              </p>
-              <p>
-                We collaborate strictly with certified manufacturing laboratories holding WHO-GMP, ISO 9001:2015, and ISO 13485 accreditations. Every therapeutic batch, device shipment, and standardized extract is fully traceable back to its origin.
-              </p>
-              <p>
-                Our technical strength lies in our dedicated regulatory affairs department. We coordinate import licensing, MOH permit approvals, and compile complete product registration dossiers in Common Technical Document (CTD) formats to secure market entries swiftly.
-              </p>
+            {/* Real Cleanroom Photography Showcase */}
+            <div className="lg:col-span-6 reveal-right">
+              <div className="relative rounded-2xl overflow-hidden shadow-md border border-slate-200 aspect-[16/10] bg-slate-900 group">
+                <Image
+                  src="/images/pharma_cleanroom.jpg"
+                  alt="Modern WHO-GMP Pharmaceutical Cleanroom Manufacturing and Packaging"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105 outline outline-1 -outline-offset-1 outline-black/10"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent pointer-events-none" />
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <div className="text-[10px] font-mono font-semibold uppercase tracking-wider text-sky-400 mb-1">
+                    CERTIFIED MANUFACTURING COLLABORATION
+                  </div>
+                  <div className="text-xs sm:text-sm font-bold leading-snug">
+                    WHO-GMP Certified Blister Packaging & Cleanroom Facilities
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 3 Real Life-Sciences Capability Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
+            
+            {/* Card 1 - Cold Chain Logistics */}
+            <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:shadow-md hover:border-sky-500 transition-all duration-200 group reveal">
+              <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
+                <Image
+                  src="/images/logistics_cold_chain.jpg"
+                  alt="International Pharmaceutical Cold Chain Air Freight Logistics"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded">
+                  Cold-Chain Freight
+                </div>
+              </div>
+              <div className="p-5">
+                <h3 className="text-base font-bold text-slate-900 mb-1.5">Global Air & Sea Logistics</h3>
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  Temperature-controlled containers and real-time data loggers ensuring cold-chain integrity across international shipping routes.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 2 - Analytical QC Testing */}
+            <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:shadow-md hover:border-sky-500 transition-all duration-200 group reveal delay-100">
+              <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
+                <Image
+                  src="/images/pharma_qc_lab.jpg"
+                  alt="Analytical QC Laboratory HPLC Chemical Assays for Dossier Verification"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded">
+                  Analytical QC
+                </div>
+              </div>
+              <div className="p-5">
+                <h3 className="text-base font-bold text-slate-900 mb-1.5">Analytical Laboratory Testing</h3>
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  Rigorous HPLC, assay, and microbial purity testing for every consignment, backed by batch-specific Certificates of Analysis (COA).
+                </p>
+              </div>
+            </div>
+
+            {/* Card 3 - CTD Regulatory Dossiers */}
+            <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:shadow-md hover:border-sky-500 transition-all duration-200 group p-5 sm:p-6 flex flex-col justify-between reveal delay-200">
+              <div>
+                <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
+                  <FileCheck2 size={22} />
+                </div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-sky-600 font-semibold mb-1">
+                  REGULATORY AFFAIRS
+                </div>
+                <h3 className="text-base font-bold text-slate-900 mb-1.5">CTD / ACTD Dossier Compilation</h3>
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  Technical dossier filing, stability documentation, and MOH permit coordination to accelerate international market registration.
+                </p>
+              </div>
+              <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-xs text-slate-500 flex items-center gap-1.5">
+                <ShieldCheck size={14} className="text-[#7CB800]" />
+                <span>US FDA CTD & EU GMP Ready</span>
+              </div>
             </div>
 
           </div>
 
-          {/* Right Column: Capabilities Card Matrix */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-            {/* Card 1 */}
-            <div className="border border-emerald/10 bg-white/40 backdrop-blur-xs p-8 hover:border-gold/30 hover:shadow-lg transition-all duration-300 group hover:-translate-y-1 reveal delay-100">
-              <div className="w-12 h-12 rounded-full bg-emerald/5 flex items-center justify-center mb-6 group-hover:bg-gold-pale transition-colors duration-300 text-gold">
-                <Pill size={24} />
-              </div>
-              <h3 className="text-[18px] font-semibold text-ink tracking-wide mb-3">Pharma Trading</h3>
-              <p className="text-ink-soft text-[14px] leading-relaxed">
-                Sourcing WHO-GMP generic formulations, oncology products, and custom injectables from certified facilities.
-              </p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="border border-emerald/10 bg-white/40 backdrop-blur-xs p-8 hover:border-gold/30 hover:shadow-lg transition-all duration-300 group hover:-translate-y-1 reveal delay-200">
-              <div className="w-12 h-12 rounded-full bg-emerald/5 flex items-center justify-center mb-6 group-hover:bg-gold-pale transition-colors duration-300 text-gold">
-                <Stethoscope size={24} />
-              </div>
-              <h3 className="text-[18px] font-semibold text-ink tracking-wide mb-3">Medical Devices</h3>
-              <p className="text-ink-soft text-[14px] leading-relaxed">
-                CE and ISO 13485 compliant clinical diagnostics, surgical equipment, and rehabilitation hardware.
-              </p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="border border-emerald/10 bg-white/40 backdrop-blur-xs p-8 hover:border-gold/30 hover:shadow-lg transition-all duration-300 group hover:-translate-y-1 reveal delay-300">
-              <div className="w-12 h-12 rounded-full bg-emerald/5 flex items-center justify-center mb-6 group-hover:bg-gold-pale transition-colors duration-300 text-gold">
-                <Leaf size={24} />
-              </div>
-              <h3 className="text-[18px] font-semibold text-ink tracking-wide mb-3">Herbal & Ayurveda</h3>
-              <p className="text-ink-soft text-[14px] leading-relaxed">
-                AYUSH-certified classical organic extracts, dietary nutraceuticals, and functional wellness cosmetics.
-              </p>
-            </div>
-
-            {/* Card 4 */}
-            <div className="border border-emerald/10 bg-white/40 backdrop-blur-xs p-8 hover:border-gold/30 hover:shadow-lg transition-all duration-300 group hover:-translate-y-1 reveal delay-400">
-              <div className="w-12 h-12 rounded-full bg-emerald/5 flex items-center justify-center mb-6 group-hover:bg-gold-pale transition-colors duration-300 text-gold">
-                <Globe size={24} />
-              </div>
-              <h3 className="text-[18px] font-semibold text-ink tracking-wide mb-3">Global Exports</h3>
-              <p className="text-ink-soft text-[14px] leading-relaxed">
-                Cold-chain air cargo and shipping logistics with complex customs clearing and dossier registration support.
-              </p>
-            </div>
-
-          </div>
         </div>
       </section>
 
-      {/* Leadership Section */}
-      <section id="leadership" className="bg-[#0A1A12] py-20 sm:py-28 md:py-36 text-cream relative overflow-hidden">
-        {/* Subtle decorative background vector */}
-        <div className="absolute right-[-10%] top-[-10%] w-[50%] h-[50%] rounded-full bg-gold/5 blur-[100px] pointer-events-none" />
+      {/* ─── Leadership Section ─── */}
+      <section id="leadership" className="bg-slate-900 py-16 sm:py-24 text-slate-100 relative overflow-hidden font-sans border-b border-slate-800">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
 
-        <div className="max-w-[1280px] mx-auto px-6 md:px-12">
-
-          <div className="reveal">
-            <span className="text-gold text-[11px] font-medium tracking-[0.22em] uppercase block mb-3">
+          <div className="reveal mb-12">
+            <span className="text-sky-400 font-mono text-xs font-semibold tracking-[0.2em] uppercase block mb-2">
               EXECUTIVE LEADERSHIP
             </span>
-            <h2 className="font-playfair text-[32px] sm:text-[40px] md:text-[44px] font-normal leading-tight text-white mb-16">
-              Guided by Experience & Vision
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white">
+              Guided by Experience & Governance
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-slate-950 p-6 sm:p-10 rounded-2xl border border-slate-800 shadow-xl">
 
-            {/* Avatar Frame (col-span-4) */}
+            {/* Portrait Frame (4 cols) */}
             <div className="lg:col-span-4 reveal-left">
-              <div className="aspect-[3/4] bg-[#122A1C] border border-white/10 relative overflow-hidden flex items-center justify-center shadow-2xl">
-                {/* Visual texture lines */}
-                <div className="absolute inset-0 bg-radial-gradient opacity-10" />
-
-                {/* Main Image */}
+              <div className="aspect-[3/4] max-w-[320px] mx-auto lg:max-w-none bg-slate-900 border border-slate-800 rounded-xl relative overflow-hidden flex items-center justify-center shadow-lg">
                 <Image
                   src="/images/Founder.jpeg"
                   alt="Anil Kumar Eravathri - Managing Director"
                   fill
                   sizes="(max-width: 1024px) 100vw, 33vw"
-                  className="object-cover object-top"
+                  className="object-cover object-top outline outline-1 -outline-offset-1 outline-white/10"
                   priority
                 />
 
-                {/* Director Badge */}
-                <div className="absolute top-4 left-4 bg-gold text-emerald text-[9px] font-semibold tracking-[0.2em] uppercase px-3.5 py-1.5 shadow-md z-10">
+                <div className="absolute top-3.5 left-3.5 bg-sky-600 text-white font-mono text-[9px] font-bold tracking-[0.16em] uppercase px-3 py-1 rounded shadow-md z-10">
                   Managing Director
                 </div>
               </div>
             </div>
 
-            {/* Profile Bio (col-span-8) */}
+            {/* Profile Bio (8 cols) */}
             <div className="lg:col-span-8 reveal">
-              <h3 className="font-playfair text-[32px] md:text-[36px] font-bold text-white leading-none">
+              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white leading-tight">
                 Anil Kumar Eravathri
               </h3>
-              <p className="text-[14px] font-medium text-gold/70 mt-2 font-jakarta tracking-wider uppercase">
+              <p className="text-xs sm:text-sm font-semibold text-[#A4D73B] mt-1 uppercase tracking-wider font-mono">
                 Founder & Managing Director, NEO LIFE SCIENCES PVT LTD
               </p>
 
-              <div className="w-12 h-px bg-gold/40 my-6" />
+              <div className="w-12 h-0.5 bg-[#7CB800] my-4" />
 
-              <div className="space-y-6 text-cream/70 text-[16px] leading-relaxed max-w-2xl font-jakarta">
+              <div className="space-y-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">
                 <p>
-                  Prior to founding Neo Life Sciences, Mr. Eravathri spent over a decade running a successful IT staffing enterprise in the United States, building deep organizational expertise in cross-border business development, corporate logistics, and international regulatory compliance.
+                  Prior to founding Neo Life Sciences, Mr. Eravathri spent over a decade running a successful IT staffing enterprise in the US, building deep expertise in cross-border business development, logistics, and international compliance.
                 </p>
                 <p>
-                  A prominent public figure, he is a former Member of the Legislative Assembly (MLA) of Andhra Pradesh and served as Government Whip. This background brings a unique combination of administrative policy insight, governance experience, and strong institutional relationships across India's industrial sectors.
+                  A former Member of the Legislative Assembly (MLA) of Andhra Pradesh and Government Whip, his background provides unique policy insight, governance experience, and strong institutional relationships across India&apos;s industrial sectors.
                 </p>
                 <p>
-                  Currently serving as the Chairman of the Telangana  Mineral Development Corporation (TGMDC), Mr. Eravathri coordinates direct policy interfaces and possesses an unparalleled grasp of regulatory standards for healthcare devices, clinical manufacturing, and trade logistics.
+                  Currently serving as the Chairman of the Telangana Mineral Development Corporation (TGMDC), he coordinates direct policy interfaces and possesses a strong grasp of regulatory standards for healthcare devices, manufacturing, and trade logistics.
                 </p>
               </div>
 
               {/* Achievement Pills */}
-              <div className="flex flex-wrap gap-2.5 mt-8 max-w-2xl">
+              <div className="flex flex-wrap gap-2 mt-5">
                 {[
                   "INTERNATIONAL BUSINESS",
                   "FORMER MLA & GOVT. WHIP",
@@ -554,7 +594,7 @@ export default function Home() {
                 ].map((pill, idx) => (
                   <span
                     key={idx}
-                    className="border border-white/15 text-cream/60 text-[10px] tracking-[0.15em] uppercase px-4 py-1.5 font-semibold bg-white/[0.02] hover:border-gold/30 hover:text-gold transition-colors duration-300"
+                    className="border border-slate-700 text-slate-300 font-mono text-[9px] sm:text-[10px] tracking-wider uppercase px-2.5 py-1 font-semibold bg-slate-900 rounded"
                   >
                     {pill}
                   </span>
@@ -567,67 +607,74 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Product Portfolio Section (10-Card Numbered Grid) */}
-      <section id="products" className="bg-cream py-20 sm:py-28 md:py-36 relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-12">
+      {/* ─── Product Portfolio Section (6-Card Grid) ─── */}
+      <section id="products" className="bg-white py-16 sm:py-24 relative overflow-hidden font-sans border-b border-slate-100">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
 
-          <div className="mb-20 reveal">
-            <span className="text-gold text-[11px] font-medium tracking-[0.22em] uppercase block mb-3">
-              PRODUCT PORTFOLIO
-            </span>
-            <h2 className="font-playfair text-[32px] sm:text-[40px] md:text-[44px] font-normal leading-tight text-ink">
-              What We Source & Export
-            </h2>
+          <div className="mb-12 reveal flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <div>
+              <span className="text-sky-600 font-mono text-xs font-semibold tracking-[0.2em] uppercase block mb-2">
+                PRODUCT DIRECTORY
+              </span>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-slate-900">
+                What We Source & Export
+              </h2>
+            </div>
+            <Link
+              href="/enquiry"
+              className="text-xs font-mono font-semibold uppercase tracking-wider text-sky-600 hover:text-sky-700 flex items-center gap-1.5 transition-colors self-start sm:self-auto"
+            >
+              Request Custom Batch RFQ <ArrowRight size={14} />
+            </Link>
           </div>
 
-          {/* Numbered Grid (Gap-px style border) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px bg-emerald/10 border border-emerald/10 shadow-xl">
+          {/* 6-Card Product Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {displayedProducts.map((product, idx) => (
               <div
                 key={idx}
-                className="bg-cream p-6 sm:p-8 hover:bg-white hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(10,26,18,0.06)] transition-all duration-300 group flex flex-col justify-between min-h-[260px] sm:min-h-[320px] relative overflow-hidden reveal"
-                style={{ transitionDelay: `${(idx % 5) * 100}ms` }}
+                className="bg-white p-6 sm:p-7 rounded-xl border border-slate-200 hover:border-sky-500 hover:-translate-y-1.5 hover:shadow-lg transition-all duration-200 group flex flex-col justify-between min-h-[300px] sm:min-h-[320px] relative overflow-hidden reveal"
+                style={{ transitionDelay: `${(idx % 3) * 80}ms` }}
               >
-                {/* Background Image Container */}
-                <div className="absolute inset-0 z-0 pointer-events-none">
+                {/* Background image preview */}
+                <div className="absolute inset-0 z-0 pointer-events-none opacity-5 group-hover:opacity-10 transition-opacity">
                   <Image
                     src={product.bgImage}
                     alt=""
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover opacity-5 group-hover:opacity-15 transition-all duration-700 scale-100 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-cream/20 via-transparent to-transparent z-10" />
                 </div>
 
                 <div className="relative z-10">
                   {/* Top card metadata */}
                   <div className="flex justify-between items-baseline mb-4">
-                    <span className="font-playfair text-[44px] font-bold text-ink/10 group-hover:text-gold/20 transition-colors duration-300 leading-none">
+                    <span className="font-serif text-3xl sm:text-4xl font-bold text-slate-300 group-hover:text-sky-600 transition-colors leading-none">
                       {product.num}
                     </span>
-                    <span className="text-[9px] tracking-[0.18em] uppercase text-gold font-semibold">
+                    <span className="text-[9px] sm:text-[10px] font-mono tracking-wider uppercase text-sky-700 bg-sky-50 border border-sky-200/60 px-2.5 py-1 rounded font-semibold">
                       {product.category}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-[17px] font-semibold text-ink mb-3 group-hover:text-emerald transition-colors duration-300">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2 group-hover:text-sky-700 transition-colors">
                     {product.title}
                   </h3>
 
                   {/* Desc */}
-                  <p className="text-[14px] text-ink-soft leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {product.desc}
                   </p>
                 </div>
 
                 {/* Tag list */}
-                <div className="flex flex-wrap gap-1 mt-6 relative z-10">
+                <div className="flex flex-wrap gap-1.5 mt-5 relative z-10 pt-4 border-t border-slate-100">
                   {product.tags && Array.isArray(product.tags) && product.tags.map((tag: string, tagIdx: number) => (
                     <span
                       key={tagIdx}
-                      className="text-[9px] tracking-[0.1em] uppercase bg-emerald/[0.06] text-emerald px-2 py-1 font-semibold border border-emerald/10 transition-all duration-300 group-hover:bg-emerald group-hover:text-gold group-hover:border-gold/25"
+                      className="text-[9px] sm:text-[10px] font-mono tracking-wide uppercase bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-medium"
                     >
                       {tag}
                     </span>
@@ -640,14 +687,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Global Reach / Map Section */}
-      <GlobalReach />
+      {/* ─── Certification Badges Section ─── */}
+      <section id="certifications" className="bg-slate-50 py-14 sm:py-16 border-b border-slate-200 font-sans">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
 
-      {/* Certification Badges Section */}
-      <section id="certifications" className="bg-cream py-16 border-b border-emerald/10">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-12">
+          <div className="text-center mb-8 reveal">
+            <span className="text-sky-600 font-mono text-xs font-semibold tracking-[0.2em] uppercase block mb-2">
+              COMPLIANCE & STANDARDS
+            </span>
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+              International Accreditation & Quality Frameworks
+            </h3>
+          </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-px bg-emerald/10 border border-emerald/10 shadow-sm">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2.5">
             {[
               "WHO-GMP",
               "EU-GMP",
@@ -661,11 +714,11 @@ export default function Home() {
             ].map((cert, idx) => (
               <div
                 key={idx}
-                className="bg-cream px-6 py-10 text-center flex flex-col items-center justify-center hover:bg-gold-pale transition-colors duration-300 reveal"
-                style={{ transitionDelay: `${(idx % 9) * 80}ms` }}
+                className="bg-white border border-slate-200 rounded-lg p-4 text-center flex flex-col items-center justify-center hover:bg-sky-50 hover:border-sky-300 transition-colors duration-200 reveal shadow-sm"
+                style={{ transitionDelay: `${(idx % 9) * 50}ms` }}
               >
-                <ShieldCheck size={24} className="text-ink/30 mb-3 mx-auto" />
-                <span className="text-[11px] tracking-[0.2em] uppercase font-semibold text-ink/75">
+                <ShieldCheck size={20} className="text-[#7CB800] mb-1.5 mx-auto" />
+                <span className="text-[11px] font-mono tracking-wider uppercase font-bold text-slate-800">
                   {cert}
                 </span>
               </div>
@@ -675,121 +728,112 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sourcing Process Workflow */}
-      <section className="bg-[#FAF7F2] py-20 sm:py-28 md:py-36 relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-12">
+      {/* ─── Sourcing Process Workflow ─── */}
+      <section className="bg-white py-16 sm:py-24 relative overflow-hidden font-sans border-b border-slate-200">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
 
-          <div className="mb-20 text-center max-w-2xl mx-auto reveal">
-            <span className="text-gold text-[11px] font-medium tracking-[0.22em] uppercase block mb-3">
+          <div className="mb-12 text-center max-w-2xl mx-auto reveal">
+            <span className="text-sky-600 font-mono text-xs font-semibold tracking-[0.2em] uppercase block mb-2">
               HOW WE WORK
             </span>
-            <h2 className="font-playfair text-[32px] sm:text-[40px] md:text-[44px] font-normal leading-tight text-ink">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-slate-900">
               From Enquiry to Delivery
             </h2>
-            <p className="text-ink-soft mt-3 text-sm">
+            <p className="text-slate-600 mt-2 text-xs sm:text-sm">
               We guide pharmaceutical procurement cycles with complete accountability at every milestone.
             </p>
           </div>
 
-          {/* Stepper container */}
-          <div className="relative mt-16">
-            {/* Connecting line on desktop */}
-            <div className="hidden lg:block absolute top-6 left-12 right-12 h-px bg-emerald/10 z-0" />
-
-            {/* Step list */}
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 relative z-10">
-              {workflowSteps.map((step, idx) => (
-                <div key={idx} className="flex flex-col items-center lg:items-start text-center lg:text-left group relative reveal" style={{ transitionDelay: `${idx * 150}ms` }}>
-
-                  {/* Circle Step */}
-                  <div className="w-12 h-12 rounded-full border border-emerald/10 bg-white flex items-center justify-center shadow-md group-hover:border-gold group-hover:bg-gold-pale transition-all duration-300">
-                    <span className="font-playfair text-gold font-bold text-lg italic">
-                      {step.num}
-                    </span>
+          {/* Step list */}
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 relative z-10">
+            {workflowSteps.map((step, idx) => (
+              <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md hover:bg-white transition-all flex flex-col justify-between group relative reveal" style={{ transitionDelay: `${idx * 80}ms` }}>
+                <div>
+                  <div className="w-9 h-9 rounded-lg bg-sky-50 text-sky-600 font-mono font-bold flex items-center justify-center text-xs border border-sky-100 group-hover:bg-sky-600 group-hover:text-white transition-colors mb-3">
+                    {step.num}
                   </div>
 
-                  {/* Details */}
-                  <h3 className="text-[15px] font-semibold text-ink mt-6 mb-2">
+                  <h3 className="text-sm font-bold text-slate-900 mb-1.5">
                     {step.title}
                   </h3>
-                  <p className="text-[13px] text-ink-soft leading-relaxed max-w-[240px] lg:max-w-none">
+                  <p className="text-xs text-slate-600 leading-relaxed mb-3">
                     {step.desc}
                   </p>
-
-                  {/* Tooltip detail box */}
-                  <div className="opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none absolute left-1/2 lg:left-0 transform -translate-x-1/2 lg:translate-x-0 bottom-[105%] w-60 bg-emerald text-cream p-4 shadow-xl z-20 transition-all duration-300 border border-gold/20">
-                    <span className="text-gold text-[8px] font-semibold tracking-wider block mb-1.5 uppercase">MILESTONE SPECIFICS</span>
-                    <ul className="text-[11px] text-cream/70 leading-relaxed space-y-1.5 list-disc pl-3 font-jakarta">
-                      {step.details.map((detail, dIdx) => (
-                        <li key={dIdx}>{detail}</li>
-                      ))}
-                    </ul>
-                  </div>
-
                 </div>
-              ))}
-            </div>
+
+                <div className="border-t border-slate-200 pt-3">
+                  <ul className="text-[11px] text-slate-500 space-y-1 font-mono">
+                    {step.details.map((detail, dIdx) => (
+                      <li key={dIdx} className="flex items-center gap-1.5">
+                        <CheckCircle2 size={12} className="text-[#7CB800] shrink-0" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
           </div>
 
         </div>
       </section>
 
-      {/* Why Us Section */}
-      <section id="whyus" className="bg-[#0A1A12] py-20 sm:py-28 md:py-36 text-cream relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-12">
+      {/* ─── Why Us Section ─── */}
+      <section id="whyus" className="bg-slate-50 py-16 sm:py-24 relative overflow-hidden font-sans border-b border-slate-200">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
 
-          <div className="mb-20 text-center max-w-2xl mx-auto reveal">
-            <span className="text-gold text-[11px] font-medium tracking-[0.22em] uppercase block mb-3">
+          <div className="mb-12 text-center max-w-2xl mx-auto reveal">
+            <span className="text-sky-600 font-mono text-xs font-semibold tracking-[0.2em] uppercase block mb-2">
               OUR DIFFERENTIATORS
             </span>
-            <h2 className="font-playfair text-[32px] sm:text-[40px] md:text-[44px] font-normal leading-tight text-white">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-slate-900">
               Why Global Buyers Choose Neo Life Sciences
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
 
             {/* Card 1 */}
-            <div className="border border-white/10 p-8 hover:border-gold/30 hover:bg-white/[0.02] transition-colors duration-300 reveal delay-100">
-              <div className="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center text-gold mb-6">
+            <div className="border border-slate-200 bg-white p-6 rounded-xl hover:border-sky-500 hover:shadow-md transition-all duration-200 reveal delay-100">
+              <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
                 <Scale size={20} />
               </div>
-              <h3 className="text-[18px] font-semibold text-white tracking-wide mb-3">Regulatory Precision</h3>
-              <p className="text-cream/60 text-[14px] leading-relaxed">
-                We don't just source — we document. Every export shipment includes WHO-GMP certs, Certificate of Analysis (COA), Certificate of Origin (COO), and dossiers compiled strictly in CTD format.
+              <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1.5">Regulatory Precision</h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                Every export shipment includes WHO-GMP certificates, COA, COO, and technical dossiers compiled strictly in CTD format.
               </p>
             </div>
 
             {/* Card 2 */}
-            <div className="border border-white/10 p-8 hover:border-gold/30 hover:bg-white/[0.02] transition-colors duration-300 reveal delay-200">
-              <div className="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center text-gold mb-6">
+            <div className="border border-slate-200 bg-white p-6 rounded-xl hover:border-sky-500 hover:shadow-md transition-all duration-200 reveal delay-200">
+              <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
                 <ShieldCheck size={20} />
               </div>
-              <h3 className="text-[18px] font-semibold text-white tracking-wide mb-3">100% Certified Sourcing</h3>
-              <p className="text-cream/60 text-[14px] leading-relaxed">
-                We contract exclusively with licensed manufacturers audited by global bodies. We implement complete batch isolation and traceability to prevent quality bottlenecks.
+              <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1.5">100% Certified Sourcing</h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                We contract exclusively with globally audited manufacturers, implementing full batch isolation and traceability for maximum quality control.
               </p>
             </div>
 
             {/* Card 3 */}
-            <div className="border border-white/10 p-8 hover:border-gold/30 hover:bg-white/[0.02] transition-colors duration-300 reveal delay-300">
-              <div className="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center text-gold mb-6">
+            <div className="border border-slate-200 bg-white p-6 rounded-xl hover:border-sky-500 hover:shadow-md transition-all duration-200 reveal delay-300">
+              <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
                 <Zap size={20} />
               </div>
-              <h3 className="text-[18px] font-semibold text-white tracking-wide mb-3">Velocity & Transparency</h3>
-              <p className="text-cream/60 text-[14px] leading-relaxed">
-                Get pricing quotations within 48 business hours. Track regulatory dossier status and shipping configurations transparently via a dedicated international trade manager.
+              <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1.5">Velocity & Transparency</h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                Get pricing quotations within 48 business hours and track dossier and shipping status transparently with a dedicated trade manager.
               </p>
             </div>
 
             {/* Card 4 */}
-            <div className="border border-white/10 p-8 hover:border-gold/30 hover:bg-white/[0.02] transition-colors duration-300 reveal delay-400">
-              <div className="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center text-gold mb-6">
+            <div className="border border-slate-200 bg-white p-6 rounded-xl hover:border-sky-500 hover:shadow-md transition-all duration-200 reveal delay-400">
+              <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
                 <Clock size={20} />
               </div>
-              <h3 className="text-[18px] font-semibold text-white tracking-wide mb-3">On-Time Delivery</h3>
-              <p className="text-cream/60 text-[14px] leading-relaxed">
-                Streamlined global logistics with temperature-tracked cold chain support and direct customs clearance to guarantee prompt, uninterrupted B2B supply lines.
+              <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1.5">On-Time Delivery</h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                Temperature-tracked cold chain logistics and direct customs clearance to guarantee prompt, uninterrupted B2B supply lines.
               </p>
             </div>
 
@@ -798,74 +842,78 @@ export default function Home() {
         </div>
       </section>
 
-      {/* B2B Lead Capture & Contact Section */}
-      <section id="contact" className="bg-cream py-20 sm:py-28 md:py-36 relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-12">
+      {/* ─── B2B Sourcing Desk & Contact Section ─── */}
+      <section id="contact" className="bg-white py-16 sm:py-24 relative overflow-hidden font-sans">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
 
-          <div className="mb-16 reveal">
-            <span className="text-gold text-[11px] font-medium tracking-[0.22em] uppercase block mb-3">
+          <div className="mb-12 reveal">
+            <span className="text-sky-600 font-mono text-xs font-semibold tracking-[0.2em] uppercase block mb-2">
               ACQUISITIONS & LOGISTICS
             </span>
-            <h2 className="font-playfair text-[32px] sm:text-[40px] md:text-[44px] font-normal leading-tight text-ink">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-slate-900">
               Start Your Sourcing Enquiry
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
 
-            {/* Left Panel - Corporate Info (col-span-2) */}
+            {/* Left Panel - Corporate Info (2 cols) */}
             <div className="lg:col-span-2 reveal-left">
-              <div className="bg-emerald text-cream p-8 md:p-10 shadow-2xl relative overflow-hidden space-y-8 border border-white/5">
+              <div className="bg-slate-900 text-slate-100 p-6 sm:p-8 rounded-2xl shadow-xl relative overflow-hidden space-y-5 border border-slate-800">
+
+                <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono mb-2">
+                  Corporate Headquarters
+                </h3>
 
                 {/* Contact Items */}
-                <div className="space-y-6">
+                <div className="space-y-4">
 
-                  <div className="flex gap-4 items-start">
-                    <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gold shrink-0 mt-1">
-                      <Mail size={16} />
+                  <div className="flex gap-3 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <Mail size={15} />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[9px] tracking-wider uppercase text-gold/60 font-semibold mb-0.5">Email Sourcing</span>
-                      <a href="mailto:contact@neoayushveda.com" className="text-[15px] font-semibold text-white hover:text-gold transition-colors">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Email Sourcing</span>
+                      <a href="mailto:contact@neoayushveda.com" className="text-xs sm:text-sm font-semibold text-white hover:text-sky-400 transition-colors">
                         contact@neoayushveda.com
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex gap-4 items-start">
-                    <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gold shrink-0 mt-1">
-                      <Phone size={16} />
+                  <div className="flex gap-3 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <Phone size={15} />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[9px] tracking-wider uppercase text-gold/60 font-semibold mb-0.5">Corporate Phone</span>
-                      <a href="tel:+914035247813" className="text-[15px] font-semibold text-white hover:text-gold transition-colors">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Corporate Phone</span>
+                      <a href="tel:+914035247813" className="text-xs sm:text-sm font-semibold text-white hover:text-sky-400 transition-colors">
                         040-35247813
                       </a>
-                      <a href="tel:+918712443610" className="text-[15px] font-semibold text-white hover:text-gold transition-colors">
+                      <a href="tel:+918712443610" className="text-xs sm:text-sm font-semibold text-white hover:text-sky-400 transition-colors">
                         +91 87124 43610
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex gap-4 items-start">
-                    <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gold shrink-0 mt-1">
-                      <MessageCircle size={16} />
+                  <div className="flex gap-3 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <MessageCircle size={15} />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[9px] tracking-wider uppercase text-gold/60 font-semibold mb-0.5">WhatsApp Brokerage</span>
-                      <span className="text-[15px] font-semibold text-white">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">WhatsApp Brokerage</span>
+                      <span className="text-xs sm:text-sm font-semibold text-white">
                         Available on Request
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex gap-4 items-start">
-                    <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gold shrink-0 mt-1">
-                      <MapPin size={16} />
+                  <div className="flex gap-3 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <MapPin size={15} />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[9px] tracking-wider uppercase text-gold/60 font-semibold mb-0.5">Registered Office Address</span>
-                      <address className="text-[14px] text-cream/70 not-italic leading-relaxed">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Registered Office Address</span>
+                      <address className="text-xs text-slate-300 not-italic leading-relaxed font-mono">
                         201-2nd Floor, Above ICICI Bank,<br />
                         Plot 13/A/B Lane 12, MLA Colony,<br />
                         Banjara Hills, Hyderabad – 500034,<br />
@@ -874,13 +922,13 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="flex gap-4 items-start">
-                    <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gold shrink-0 mt-1">
-                      <Clock size={16} />
+                  <div className="flex gap-3 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <Clock size={15} />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[9px] tracking-wider uppercase text-gold/60 font-semibold mb-0.5">Business Hours</span>
-                      <span className="text-[14px] text-cream/70">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Business Hours</span>
+                      <span className="text-xs text-slate-300 font-mono">
                         Monday – Saturday: 9:00 AM – 6:00 PM IST
                       </span>
                     </div>
@@ -888,12 +936,12 @@ export default function Home() {
 
                 </div>
 
-                {/* Regulatory Tags inside Dark Card */}
-                <div className="border-t border-white/10 pt-8 mt-8">
-                  <h4 className="text-[9px] tracking-[0.2em] uppercase text-gold/70 mb-4 font-semibold">
+                {/* Regulatory Tags */}
+                <div className="border-t border-slate-800 pt-4 mt-4">
+                  <h4 className="text-[10px] font-mono tracking-[0.16em] uppercase text-sky-400 mb-2 font-semibold">
                     REGULATORY DOCUMENTATION SUPPORTED
                   </h4>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {[
                       "CTD Dossier",
                       "GMP Certificate",
@@ -903,7 +951,7 @@ export default function Home() {
                     ].map((doc, idx) => (
                       <span
                         key={idx}
-                        className="border border-white/15 bg-white/[0.02] text-cream/50 text-[10px] tracking-wide uppercase px-3 py-1 font-semibold"
+                        className="border border-slate-700 bg-slate-800 text-slate-300 font-mono text-[9px] uppercase px-2 py-0.5 font-semibold rounded"
                       >
                         {doc}
                       </span>
@@ -914,16 +962,16 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Panel - Enquiry Form (col-span-3) */}
+            {/* Right Panel - Enquiry Form (3 cols) */}
             <div className="lg:col-span-3 reveal-right">
-              <div className="bg-white border border-emerald/10 p-8 md:p-10 shadow-2xl relative">
+              <div className="bg-slate-50 border border-slate-200 p-6 sm:p-8 rounded-2xl shadow-sm relative">
 
                 {formSubmitted && (
-                  <div className="bg-emerald/5 border border-gold/30 text-emerald p-6 mb-8 flex items-start gap-3 animate-fade-in">
-                    <ShieldCheck size={20} className="text-gold shrink-0 mt-0.5" />
+                  <div className="bg-sky-50 border border-sky-300 text-sky-900 p-4 rounded-lg mb-5 flex items-start gap-3 animate-fade-in text-sm">
+                    <ShieldCheck size={20} className="text-sky-600 shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="text-sm font-semibold tracking-wide uppercase text-emerald">ENQUIRY TRANSMITTED</h4>
-                      <p className="text-xs text-ink-soft mt-1 leading-relaxed">
+                      <h4 className="font-bold uppercase tracking-wider text-sky-900 font-mono text-xs">ENQUIRY TRANSMITTED</h4>
+                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                         Thank you for your B2B sourcing enquiry. Our regulatory and logistics desks will analyze your specifications and respond within 24–48 business hours with an initial draft schedule.
                       </p>
                     </div>
@@ -931,41 +979,39 @@ export default function Home() {
                 )}
 
                 {formError && (
-                  <div className="bg-red-500/10 border border-red-500/30 text-red-600 p-6 mb-8 flex items-start gap-3 animate-fade-in text-xs leading-relaxed">
+                  <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg mb-5 flex items-start gap-3 animate-fade-in text-xs leading-relaxed">
                     <div>
-                      <h4 className="text-sm font-semibold tracking-wide uppercase text-red-700">TRANSMISSION FAILED</h4>
-                      <p className="mt-1">
-                        {formError}
-                      </p>
+                      <h4 className="font-bold uppercase tracking-wider text-red-800 font-mono">TRANSMISSION FAILED</h4>
+                      <p className="mt-1">{formError}</p>
                     </div>
                   </div>
                 )}
 
-                <form onSubmit={handleFormSubmit} className="space-y-6">
+                <form onSubmit={handleFormSubmit} className="space-y-4">
 
                   {/* Row 1 - Names */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                     <div className="flex flex-col">
-                      <label htmlFor="firstName" className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold">First Name</label>
+                      <label htmlFor="firstName" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">First Name</label>
                       <input
                         id="firstName"
                         type="text"
                         required
                         placeholder="e.g. John"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
+                        className="border border-slate-300 bg-white px-3 py-2.5 rounded-md text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-600 focus:ring-1 focus:ring-sky-600 focus:outline-none transition-all w-full"
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                       />
                     </div>
 
                     <div className="flex flex-col">
-                      <label htmlFor="lastName" className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold">Last Name</label>
+                      <label htmlFor="lastName" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Last Name</label>
                       <input
                         id="lastName"
                         type="text"
                         required
                         placeholder="e.g. Doe"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
+                        className="border border-slate-300 bg-white px-3 py-2.5 rounded-md text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-600 focus:ring-1 focus:ring-sky-600 focus:outline-none transition-all w-full"
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                       />
@@ -973,30 +1019,30 @@ export default function Home() {
                   </div>
 
                   {/* Row 2 - Email & Phone */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                     <div className="flex flex-col">
-                      <label htmlFor="email" className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold">Email Address</label>
+                      <label htmlFor="email" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Email Address</label>
                       <input
                         id="email"
                         type="email"
                         required
                         placeholder="e.g. buyer@clinicaltrade.com"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
+                        className="border border-slate-300 bg-white px-3 py-2.5 rounded-md text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-600 focus:ring-1 focus:ring-sky-600 focus:outline-none transition-all w-full"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       />
                     </div>
 
                     <div className="flex flex-col">
-                      <label htmlFor="phone" className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold">Phone / WhatsApp</label>
+                      <label htmlFor="phone" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Phone / WhatsApp</label>
                       <div className="flex gap-2 items-center">
                         <select
-                          className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-3 py-3 text-[15px] text-ink focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-24 shrink-0"
+                          className="border border-slate-300 bg-white px-2 py-2.5 rounded-md text-sm text-slate-900 focus:border-sky-600 focus:outline-none w-24 shrink-0 font-mono"
                           value={phoneCode}
                           onChange={(e) => setPhoneCode(e.target.value)}
                         >
                           {countryCodes.map((c, i) => (
-                            <option key={i} value={c.code} className="text-ink bg-cream">
+                            <option key={i} value={c.code}>
                               {c.label} ({c.code})
                             </option>
                           ))}
@@ -1006,7 +1052,7 @@ export default function Home() {
                           type="tel"
                           required
                           placeholder="e.g. 9032550436"
-                          className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 flex-grow"
+                          className="border border-slate-300 bg-white px-3 py-2.5 rounded-md text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-600 focus:ring-1 focus:ring-sky-600 focus:outline-none transition-all flex-grow"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         />
@@ -1016,39 +1062,39 @@ export default function Home() {
 
                   {/* Row 3 - Company */}
                   <div className="flex flex-col">
-                    <label htmlFor="company" className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold">Company Name</label>
+                    <label htmlFor="company" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Company Name</label>
                     <input
                       id="company"
                       type="text"
                       required
                       placeholder="e.g. Global Pharma Logistics Ltd"
-                      className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
+                      className="border border-slate-300 bg-white px-3 py-2.5 rounded-md text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-600 focus:ring-1 focus:ring-sky-600 focus:outline-none transition-all w-full"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     />
                   </div>
 
                   {/* Row 4 - Dropdowns */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                     <div className="flex flex-col">
-                      <label htmlFor="country" className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold">Destination Country</label>
+                      <label htmlFor="country" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Destination Country</label>
                       <select
                         id="country"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
+                        className="border border-slate-300 bg-white px-3 py-2.5 rounded-md text-sm text-slate-900 focus:border-sky-600 focus:outline-none w-full"
                         value={formData.country}
                         onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                       >
                         {countriesList.map((c, i) => (
-                          <option key={i} value={c} className="text-ink bg-cream">{c}</option>
+                          <option key={i} value={c}>{c}</option>
                         ))}
                       </select>
                     </div>
 
                     <div className="flex flex-col">
-                      <label htmlFor="category" className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold">Product Category</label>
+                      <label htmlFor="category" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Product Category</label>
                       <select
                         id="category"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
+                        className="border border-slate-300 bg-white px-3 py-2.5 rounded-md text-sm text-slate-900 focus:border-sky-600 focus:outline-none w-full"
                         value={formData.category}
                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                       >
@@ -1058,7 +1104,7 @@ export default function Home() {
                           "Multiple Categories", "Pharmaceutical Generics", "Specialty Therapeutics",
                           "Other"
                         ].map((cat, i) => (
-                          <option key={i} value={cat} className="text-ink bg-cream">{cat}</option>
+                          <option key={i} value={cat}>{cat}</option>
                         ))}
                       </select>
                     </div>
@@ -1066,10 +1112,10 @@ export default function Home() {
 
                   {/* Row 5 - Documentation Chips */}
                   <div className="flex flex-col">
-                    <span className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-3 font-semibold block">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2 block">
                       Required Documentation (Select all that apply)
                     </span>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5">
                       {docOptions.map((doc, idx) => {
                         const isSelected = selectedDocs.includes(doc);
                         return (
@@ -1077,10 +1123,11 @@ export default function Home() {
                             key={idx}
                             type="button"
                             onClick={() => handleDocToggle(doc)}
-                            className={`px-3.5 py-1.5 text-[11px] tracking-wide uppercase font-semibold transition-all duration-200 border rounded-sm ${isSelected
-                              ? "bg-blue-600 text-white border-blue-600 shadow-sm"
-                              : "border-slate-300 bg-white/70 text-slate-700 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50/50"
-                              }`}
+                            className={`px-3 py-1.5 text-[11px] font-semibold tracking-wide uppercase rounded transition-transform duration-150 ease-out active:scale-[0.96] border ${
+                              isSelected
+                                ? "bg-sky-600 text-white border-sky-600 shadow-sm"
+                                : "border-slate-300 bg-white text-slate-700 hover:border-sky-500 hover:text-sky-600 hover:bg-sky-50/50"
+                            }`}
                           >
                             {doc}
                           </button>
@@ -1091,28 +1138,28 @@ export default function Home() {
 
                   {/* Row 6 - Message */}
                   <div className="flex flex-col">
-                    <label htmlFor="message" className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold">Message or Health Goal</label>
+                    <label htmlFor="message" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Message or Specific Requirements</label>
                     <textarea
                       id="message"
                       required
                       rows={4}
                       placeholder="Share exact dosage configurations, therapeutic volume demands, and compliance requirements..."
-                      className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none transition-all duration-200 w-full resize-y min-h-[100px]"
+                      className="border border-slate-300 bg-white px-3 py-2.5 rounded-md text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-600 focus:ring-1 focus:ring-sky-600 focus:outline-none transition-all w-full resize-y min-h-[85px]"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     />
                   </div>
 
                   {/* Submit Button */}
-                  <div className="pt-4">
+                  <div className="pt-1">
                     <button
                       type="submit"
                       disabled={formSubmitting}
-                      className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-semibold transition-all duration-200 w-full flex items-center justify-center gap-3 shadow-[0_4px_18px_rgba(37,99,235,0.35)] hover:shadow-[0_6px_24px_rgba(37,99,235,0.45)] disabled:opacity-50 disabled:cursor-not-allowed rounded-sm hover:-translate-y-0.5"
+                      className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white ps-8 pe-7 py-3.5 text-xs tracking-[0.16em] uppercase font-semibold rounded-md transition-transform duration-150 ease-out active:scale-[0.96] w-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5"
                     >
-                      {formSubmitting ? "TRANSMITTING..." : "SEND ENQUIRY"} {!formSubmitting && <ArrowRight size={14} />}
+                      {formSubmitting ? "TRANSMITTING..." : "SEND ENQUIRY"} {!formSubmitting && <ArrowRight size={15} />}
                     </button>
-                    <p className="text-[10px] text-ink/35 text-center mt-4 font-jakarta tracking-wide">
+                    <p className="text-[11px] text-slate-500 text-center mt-2.5">
                       We typically respond within 24–48 business hours. All enquiries are treated with strict commercial confidentiality.
                     </p>
                   </div>
@@ -1135,93 +1182,51 @@ export default function Home() {
 const productsList = [
   {
     num: "01",
-    category: "Rx / OTC",
-    title: "Pharmaceutical Generics (Rx)",
-    desc: "Sourcing prescription generic medicines across all major therapeutic categories (HIV/AIDS therapeutics, oncology, cardiovascular, CNS) from WHO-GMP certified facilities.",
-    tags: ["Tablets", "Capsules", "HIV/AIDS Care", "Dossiers"],
-    bgImage: "/images/prod_generics_rx.png"
+    category: "DMF Filed",
+    title: "APIs",
+    desc: "Active Pharmaceutical Ingredients (APIs) and intermediates sourced from US FDA-inspected and WHO-GMP certified plants with comprehensive DMF filings.",
+    tags: ["Active Ingredients", "DMF Files", "RSM", "Intermediates"],
+    bgImage: "/images/prod_apis.png"
   },
   {
     num: "02",
     category: "Rx / OTC",
-    title: "Specialty Therapeutics",
-    desc: "Exporting therapeutic solutions including oncology treatments, diabetes care, HIV/AIDS, tuberculosis (TB), critical care medicines, cardiovascular care, injectables, vaccines, and daily nutraceuticals.",
-    tags: [
-      "Oncology",
-      "Diabetes Care",
-      "HIV/AIDS",
-      "Tuberculosis (TB)",
-      "Critical Care",
-      "Cardiovascular",
-      "Injectables",
-      "Vaccines",
-      "Nutraceuticals"
-    ],
-    bgImage: "/images/prod_generics_otc.png"
+    title: "Finished Formulations (Oral)",
+    desc: "WHO-GMP certified oral dosage forms including tablets, capsules, syrups, suspensions, and dry powders across all major therapeutic segments.",
+    tags: ["Tablets", "Capsules", "Syrups", "Suspensions"],
+    bgImage: "/images/prod_generics_rx.png"
   },
   {
     num: "03",
-    category: "Standardized",
-    title: "Nutraceuticals",
-    desc: "Premium daily health supplements, vitamins, multi-minerals, and organic nutrient formulations for international health markets.",
-    tags: ["Vitamins", "Minerals", "Daily Care"],
-    bgImage: "/images/prod_nutraceuticals.png"
-  },
-  {
-    num: "04",
     category: "Specialty Rx",
-    title: "Injectable Vaccines",
-    desc: "We found all pharmaceuticals for Anti Diseases, Critical care injectables, vials, pre-filled syringes, and high-safety vaccines processed under strict aseptic cleanroom environments.",
-    tags: ["Injectables", "Vaccines", "Critical Care"],
+    title: "Injectables",
+    desc: "Critical care injectables, vials, ampoules, pre-filled syringes, and lyophilized products processed in aseptic cleanroom environments.",
+    tags: ["Vials", "Ampoules", "Pre-Filled Syringes", "Critical Care"],
     bgImage: "/images/prod_injectables.png"
   },
   {
+    num: "04",
+    category: "Branded",
+    title: "Specialty & Branded Generics",
+    desc: "High-value branded generics and specialty therapeutics across oncology, cardiovascular, CNS, diabetes, and HIV/AIDS categories.",
+    tags: ["Oncology", "Cardiovascular", "CNS", "Diabetes"],
+    bgImage: "/images/prod_generics_otc.png"
+  },
+  {
     num: "05",
-    category: "DMF Filed",
-    title: "APIs",
-    desc: "Active Pharmaceutical Ingredients, bulk drug actives, and regulatory intermediates sourced from US FDA-inspected manufacturing plants.",
-    tags: ["Active Ingredients", "DMF Files", "RSM"],
-    bgImage: "/images/prod_apis.png"
+    category: "AYUSH / Health",
+    title: "Nutraceuticals & Ayush Supplements",
+    desc: "Premium nutraceuticals, vitamins, minerals, herbal supplements, and AYUSH-certified Ayurvedic formulations for global wellness markets.",
+    tags: ["Vitamins", "Ayurvedic", "Herbal", "Supplements"],
+    bgImage: "/images/prod_nutraceuticals.png"
   },
   {
     num: "06",
     category: "Class II & III",
     title: "Medical Devices",
-    desc: "CE, ISO 13485, and FDA-ready surgical instruments, diagnostic equipment, healthcare disposables, and clinical hardware.",
-    tags: ["Diagnostics", "Surgical", "Disposables"],
+    desc: "CE, ISO 13485, and FDA-ready surgical instruments, diagnostics, hospital consumables, and healthcare disposables.",
+    tags: ["Diagnostics", "Surgical", "Disposables", "Consumables"],
     bgImage: "/images/prod_devices.png"
-  },
-  {
-    num: "07",
-    category: "AYUSH Certified",
-    title: "Ayurvedic Medicines",
-    desc: "Classical Ayurvedic formulations, natural wellness vatis, churnas, and tailas sourced from licensed AYUSH GMP manufacturers.",
-    tags: ["Vatis", "Churnas", "Asavas", "Tailas"],
-    bgImage: "/images/prod_ayurvedic.png"
-  },
-  {
-    num: "08",
-    category: "Standardized",
-    title: "Herbal Nutraceuticals",
-    desc: "Standardized organic botanical extracts, phytochemical actives, and custom herbal capsule ingredients with complete batch COAs.",
-    tags: ["Ashwagandha", "Turmeric", "Moringa"],
-    bgImage: "/images/prod_herbal.png"
-  },
-  {
-    num: "09",
-    category: "Halal / Vegan",
-    title: "Cosmeceuticals",
-    desc: "Dermatologist-recommended skincare, clinical haircare, and personal wellness cosmetics available with Halal or Vegan certifications.",
-    tags: ["Skincare", "Haircare", "Medicated"],
-    bgImage: "/images/prod_cosmeceuticals.png"
-  },
-  {
-    num: "10",
-    category: "Bulk Actives",
-    title: "Bulk Drugs",
-    desc: "Exporting raw materials, bulk drug formulations, and high-purity chemical substances to global pharmaceutical manufacturers.",
-    tags: ["Bulk Actives", "Intermediates", "Raw Materials"],
-    bgImage: "/images/prod_bulk_drugs.png"
   }
 ];
 

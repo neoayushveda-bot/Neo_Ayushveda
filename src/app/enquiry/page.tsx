@@ -4,37 +4,513 @@ import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
-  ArrowLeft,
+  ShieldCheck,
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  MessageCircle,
   ArrowRight,
   ChevronRight,
-  ShieldCheck,
-  Send,
-  FileText,
   Sparkles,
+  FileCheck2,
+  AlertCircle
 } from "lucide-react";
 import Header from "../../../components/layout/Header";
 import Footer from "../../../components/layout/Footer";
 
-const countryCodes = [
-  { code: "+971", label: "AE" },
-  { code: "+55", label: "BR" },
-  { code: "+49", label: "DE" },
-  { code: "+20", label: "EG" },
-  { code: "+44", label: "GB" },
-  { code: "+62", label: "ID" },
-  { code: "+91", label: "IN" },
-  { code: "+254", label: "KE" },
-  { code: "+7", label: "KZ" },
-  { code: "+94", label: "LK" },
-  { code: "+234", label: "NG" },
-  { code: "+63", label: "PH" },
-  { code: "+974", label: "QA" },
-  { code: "+966", label: "SA" },
-  { code: "+1", label: "US" },
-  { code: "+998", label: "UZ" },
-  { code: "+84", label: "VN" },
-  { code: "+27", label: "ZA" },
-];
+function EnquiryContent() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category") || "";
+  const groupParam = searchParams.get("group") || "";
+  const productParam = searchParams.get("product") || "";
+
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formSubmitting, setFormSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [phoneCode, setPhoneCode] = useState("+91");
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    company: "",
+    country: "United Arab Emirates (UAE)",
+    category: categoryParam || "Pharmaceutical Generics",
+    message: productParam
+      ? `Enquiry for: ${productParam}${groupParam ? ` (${groupParam})` : ""}`
+      : "",
+  });
+
+  const countryCodes = [
+    { code: "+971", label: "AE" },
+    { code: "+55", label: "BR" },
+    { code: "+49", label: "DE" },
+    { code: "+20", label: "EG" },
+    { code: "+44", label: "GB" },
+    { code: "+62", label: "ID" },
+    { code: "+91", label: "IN" },
+    { code: "+254", label: "KE" },
+    { code: "+7", label: "KZ" },
+    { code: "+94", label: "LK" },
+    { code: "+234", label: "NG" },
+    { code: "+63", label: "PH" },
+    { code: "+974", label: "QA" },
+    { code: "+966", label: "SA" },
+    { code: "+1", label: "US" },
+    { code: "+998", label: "UZ" },
+    { code: "+84", label: "VN" },
+    { code: "+27", label: "ZA" },
+  ];
+
+  const [selectedDocs, setSelectedDocs] = useState<string[]>([]);
+  const docOptions = [
+    "CTD Dossier",
+    "GMP Certificate",
+    "COA / COO",
+    "Import Permit Assistance",
+    "DMF Filing",
+    "Halal Certificate",
+    "CE Mark",
+    "AYUSH Certificate",
+  ];
+
+  const handleDocToggle = (doc: string) => {
+    if (selectedDocs.includes(doc)) {
+      setSelectedDocs(selectedDocs.filter((item) => item !== doc));
+    } else {
+      setSelectedDocs([...selectedDocs, doc]);
+    }
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitting(true);
+    setFormError("");
+    setFormSubmitted(false);
+
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          phone: `${phoneCode} ${formData.phone}`,
+          selectedDocs,
+          productContext: productParam ? { product: productParam, group: groupParam } : undefined,
+        }),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.error || "Failed to transmit enquiry.");
+      }
+
+      setFormSubmitted(true);
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        company: "",
+        country: "United Arab Emirates (UAE)",
+        category: "Pharmaceutical Generics",
+        message: "",
+      });
+      setSelectedDocs([]);
+      setTimeout(() => setFormSubmitted(false), 8000);
+    } catch (error: any) {
+      setFormError(
+        error.message ||
+          "An unexpected network error occurred. Please verify your connection."
+      );
+    } finally {
+      setFormSubmitting(false);
+    }
+  };
+
+  return (
+    <main className="min-h-screen bg-white text-slate-900 font-sans">
+      {/* ─── Hero Section ─── */}
+      <section className="relative bg-gradient-to-b from-slate-50 via-white to-white pt-28 pb-16 md:pt-36 md:pb-24 text-slate-900 overflow-hidden border-b border-slate-200/80">
+        <div className="absolute inset-0 grid-texture opacity-50 pointer-events-none" />
+
+        <div className="relative max-w-[1280px] mx-auto px-6 md:px-12">
+          <nav className="flex items-center gap-2 text-xs tracking-wider uppercase mb-6 opacity-0 animate-fade-in-up font-mono">
+            <Link href="/" className="text-slate-500 hover:text-sky-600 transition-colors">
+              Home
+            </Link>
+            <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+            <span className="text-sky-600 font-bold">B2B Sourcing Enquiry</span>
+          </nav>
+
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 bg-sky-50 border border-sky-200/80 rounded-full px-3.5 py-1 mb-4 opacity-0 animate-fade-in-up">
+              <span className="w-2 h-2 rounded-full bg-[#7CB800] animate-pulse" />
+              <span className="text-sky-800 font-mono text-[11px] tracking-[0.16em] uppercase font-semibold">
+                ACQUISITIONS & LOGISTICS DESK
+              </span>
+            </div>
+
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.12] text-slate-900 tracking-tight opacity-0 animate-fade-in-up animation-delay-100">
+              Start Your B2B Sourcing Enquiry
+            </h1>
+
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed mt-5 opacity-0 animate-fade-in-up animation-delay-200 max-w-2xl">
+              Connect directly with our international trade and regulatory affairs team.
+              We assess country-specific MOH compliance and provide preliminary quotation
+              schedules within 24–48 business hours.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Main Form Grid ─── */}
+      <section className="py-16 md:py-24 bg-slate-50/50">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
+            
+            {/* Left Panel - Corporate Info (2 cols) */}
+            <div className="lg:col-span-2">
+              <div className="bg-slate-900 text-slate-100 p-8 rounded-2xl shadow-xl space-y-6 border border-slate-800 sticky top-28">
+                <h3 className="text-base font-bold text-white uppercase tracking-wider font-mono mb-2">
+                  Corporate Headquarters
+                </h3>
+
+                <div className="space-y-5 text-sm">
+                  <div className="flex gap-3.5 items-start">
+                    <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <Mail size={16} />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Email Sourcing</span>
+                      <a href="mailto:contact@neoayushveda.com" className="text-sm font-semibold text-white hover:text-sky-400 transition-colors">
+                        contact@neoayushveda.com
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3.5 items-start">
+                    <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <Phone size={16} />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Corporate Phone</span>
+                      <a href="tel:+914035247813" className="text-sm font-semibold text-white hover:text-sky-400 transition-colors">
+                        040-35247813
+                      </a>
+                      <a href="tel:+918712443610" className="text-sm font-semibold text-white hover:text-sky-400 transition-colors">
+                        +91 87124 43610
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3.5 items-start">
+                    <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <MessageCircle size={16} />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">WhatsApp Brokerage</span>
+                      <span className="text-sm font-semibold text-white">
+                        Available on Request
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3.5 items-start">
+                    <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <MapPin size={16} />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Registered Office Address</span>
+                      <address className="text-xs text-slate-300 not-italic leading-relaxed">
+                        201-2nd Floor, Above ICICI Bank,<br />
+                        Plot 13/A/B Lane 12, MLA Colony,<br />
+                        Banjara Hills, Hyderabad – 500034,<br />
+                        Telangana, India
+                      </address>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3.5 items-start">
+                    <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <Clock size={16} />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Business Hours</span>
+                      <span className="text-xs text-slate-300 font-mono">
+                        Monday – Saturday: 9:00 AM – 6:00 PM IST
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t border-slate-800 pt-5 mt-5">
+                  <h4 className="text-[10px] font-mono tracking-[0.16em] uppercase text-sky-400 mb-2.5 font-semibold">
+                    REGULATORY COMPLIANCE STANDARDS
+                  </h4>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      "WHO-GMP",
+                      "EU-GMP",
+                      "ISO 9001 & 13485",
+                      "AYUSH",
+                      "CE Certified",
+                      "US FDA CTD"
+                    ].map((doc, idx) => (
+                      <span
+                        key={idx}
+                        className="border border-slate-700 bg-slate-800 text-slate-300 font-mono text-[10px] uppercase px-2.5 py-1 font-semibold rounded"
+                      >
+                        {doc}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Panel - Form (3 cols) */}
+            <div className="lg:col-span-3">
+              <div className="bg-white border border-slate-200 p-8 sm:p-10 rounded-2xl shadow-xl">
+                {formSubmitted && (
+                  <div className="bg-sky-50 border border-sky-300 text-sky-900 p-5 rounded-lg mb-6 flex items-start gap-3 animate-fade-in text-sm">
+                    <ShieldCheck size={20} className="text-sky-600 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-bold uppercase tracking-wider text-sky-900 font-mono">ENQUIRY TRANSMITTED</h4>
+                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                        Thank you for your B2B sourcing enquiry. Our regulatory and logistics desks will analyze your specifications and respond within 24–48 business hours with an initial draft schedule.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {formError && (
+                  <div className="bg-red-50 border border-red-200 text-red-700 p-5 rounded-lg mb-6 flex items-start gap-3 animate-fade-in text-xs leading-relaxed">
+                    <AlertCircle size={18} className="shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-bold uppercase tracking-wider text-red-800 font-mono">TRANSMISSION FAILED</h4>
+                      <p className="mt-1">{formError}</p>
+                    </div>
+                  </div>
+                )}
+
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  {/* Pre-filled product badge */}
+                  {productParam && (
+                    <div className="p-3.5 bg-sky-50 border border-sky-200 rounded-xl mb-4 flex items-center gap-2.5">
+                      <Sparkles className="w-4 h-4 text-sky-600 shrink-0" />
+                      <div className="text-xs">
+                        <span className="text-slate-500 font-mono uppercase text-[10px] block">Selected Sourcing Segment</span>
+                        <strong className="text-sky-900 font-bold">{productParam}</strong>
+                        {groupParam && <span className="text-slate-600 ml-1">({groupParam})</span>}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Row 1 - Names */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex flex-col">
+                      <label htmlFor="firstName" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">First Name</label>
+                      <input
+                        id="firstName"
+                        type="text"
+                        required
+                        placeholder="e.g. John"
+                        className="border border-slate-300 bg-white px-3.5 py-2.5 rounded-md text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-600 focus:ring-1 focus:ring-sky-600 focus:outline-none transition-all w-full"
+                        value={formData.firstName}
+                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                      />
+                    </div>
+
+                    <div className="flex flex-col">
+                      <label htmlFor="lastName" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Last Name</label>
+                      <input
+                        id="lastName"
+                        type="text"
+                        required
+                        placeholder="e.g. Doe"
+                        className="border border-slate-300 bg-white px-3.5 py-2.5 rounded-md text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-600 focus:ring-1 focus:ring-sky-600 focus:outline-none transition-all w-full"
+                        value={formData.lastName}
+                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Row 2 - Email & Phone */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex flex-col">
+                      <label htmlFor="email" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Email Address</label>
+                      <input
+                        id="email"
+                        type="email"
+                        required
+                        placeholder="e.g. buyer@clinicaltrade.com"
+                        className="border border-slate-300 bg-white px-3.5 py-2.5 rounded-md text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-600 focus:ring-1 focus:ring-sky-600 focus:outline-none transition-all w-full"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      />
+                    </div>
+
+                    <div className="flex flex-col">
+                      <label htmlFor="phone" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Phone / WhatsApp</label>
+                      <div className="flex gap-2 items-center">
+                        <select
+                          className="border border-slate-300 bg-white px-2 py-2.5 rounded-md text-sm text-slate-900 focus:border-sky-600 focus:outline-none w-24 shrink-0 font-mono"
+                          value={phoneCode}
+                          onChange={(e) => setPhoneCode(e.target.value)}
+                        >
+                          {countryCodes.map((c, i) => (
+                            <option key={i} value={c.code}>
+                              {c.label} ({c.code})
+                            </option>
+                          ))}
+                        </select>
+                        <input
+                          id="phone"
+                          type="tel"
+                          required
+                          placeholder="e.g. 9032550436"
+                          className="border border-slate-300 bg-white px-3.5 py-2.5 rounded-md text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-600 focus:ring-1 focus:ring-sky-600 focus:outline-none transition-all flex-grow"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Row 3 - Company */}
+                  <div className="flex flex-col">
+                    <label htmlFor="company" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Company Name</label>
+                    <input
+                      id="company"
+                      type="text"
+                      required
+                      placeholder="e.g. Global Pharma Logistics Ltd"
+                      className="border border-slate-300 bg-white px-3.5 py-2.5 rounded-md text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-600 focus:ring-1 focus:ring-sky-600 focus:outline-none transition-all w-full"
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    />
+                  </div>
+
+                  {/* Row 4 - Dropdowns */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex flex-col">
+                      <label htmlFor="country" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Destination Country</label>
+                      <select
+                        id="country"
+                        className="border border-slate-300 bg-white px-3.5 py-2.5 rounded-md text-sm text-slate-900 focus:border-sky-600 focus:outline-none w-full"
+                        value={formData.country}
+                        onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                      >
+                        {countriesList.map((c, i) => (
+                          <option key={i} value={c}>{c}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="flex flex-col">
+                      <label htmlFor="category" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Product Category</label>
+                      <select
+                        id="category"
+                        className="border border-slate-300 bg-white px-3.5 py-2.5 rounded-md text-sm text-slate-900 focus:border-sky-600 focus:outline-none w-full"
+                        value={formData.category}
+                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                      >
+                        {[
+                          "APIs", "Ayurvedic Medicines", "Bulk Drugs / RSM",
+                          "Cosmeceuticals", "Herbal Nutraceuticals", "Medical Devices",
+                          "Multiple Categories", "Pharmaceutical Generics", "Specialty Therapeutics",
+                          "Other"
+                        ].map((cat, i) => (
+                          <option key={i} value={cat}>{cat}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Row 5 - Documentation Chips */}
+                  <div className="flex flex-col">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2 block">
+                      Required Documentation (Select all that apply)
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {docOptions.map((doc, idx) => {
+                        const isSelected = selectedDocs.includes(doc);
+                        return (
+                          <button
+                            key={idx}
+                            type="button"
+                            onClick={() => handleDocToggle(doc)}
+                            className={`px-3 py-1.5 text-xs font-semibold tracking-wide uppercase rounded transition-transform duration-150 ease-out active:scale-[0.96] border ${
+                              isSelected
+                                ? "bg-sky-600 text-white border-sky-600 shadow-sm"
+                                : "border-slate-300 bg-slate-50 text-slate-700 hover:border-sky-500 hover:text-sky-600 hover:bg-sky-50/50"
+                            }`}
+                          >
+                            {doc}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Row 6 - Message */}
+                  <div className="flex flex-col">
+                    <label htmlFor="message" className="text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Message or Specific Requirements</label>
+                    <textarea
+                      id="message"
+                      required
+                      rows={5}
+                      placeholder="Share exact dosage configurations, therapeutic volume demands, and compliance requirements..."
+                      className="border border-slate-300 bg-white px-3.5 py-2.5 rounded-md text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-600 focus:ring-1 focus:ring-sky-600 focus:outline-none transition-all w-full resize-y min-h-[110px]"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={formSubmitting}
+                      className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white ps-8 pe-7 py-3.5 text-xs tracking-[0.16em] uppercase font-semibold rounded-md transition-transform duration-150 ease-out active:scale-[0.96] w-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5"
+                    >
+                      {formSubmitting ? "TRANSMITTING..." : "SEND ENQUIRY"} {!formSubmitting && <ArrowRight size={15} />}
+                    </button>
+                    <p className="text-xs text-slate-500 text-center mt-3">
+                      We typically respond within 24–48 business hours. All enquiries are treated with strict commercial confidentiality.
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+export default function EnquiryPage() {
+  return (
+    <>
+      <Header />
+      <Suspense fallback={
+        <div className="min-h-screen flex items-center justify-center bg-white text-slate-400 font-mono text-xs">
+          Loading Procurement Desk...
+        </div>
+      }>
+        <EnquiryContent />
+      </Suspense>
+      <Footer />
+    </>
+  );
+}
 
 const countriesList = [
   "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
@@ -63,583 +539,3 @@ const countriesList = [
   "Zambia", "Zimbabwe",
   "Other"
 ];
-
-const docOptions = [
-  "CTD Dossier",
-  "GMP Certificate",
-  "COA / COO",
-  "Import Permit Assistance",
-  "DMF Filing",
-  "Halal Certificate",
-  "CE Mark",
-  "AYUSH Certificate",
-];
-
-const categoryOptions = [
-  "Finished Pharmaceutical & Healthcare Products",
-  "Active Pharmaceutical Ingredients (APIs)",
-  "Medical Devices & Diagnostics",
-  "Other",
-];
-
-function EnquiryFormContent() {
-  const searchParams = useSearchParams();
-  const categoryParam = searchParams.get("category") || "";
-  const productParam = searchParams.get("product") || "";
-  const groupParam = searchParams.get("group") || "";
-
-  // Determine initial category selection
-  const getInitialCategory = () => {
-    if (categoryParam) {
-      const match = categoryOptions.find(
-        (c) => c.toLowerCase() === categoryParam.toLowerCase()
-      );
-      if (match) return match;
-    }
-    return categoryOptions[0];
-  };
-
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formSubmitting, setFormSubmitting] = useState(false);
-  const [formError, setFormError] = useState("");
-  const [phoneCode, setPhoneCode] = useState("+91");
-  const [selectedDocs, setSelectedDocs] = useState<string[]>([]);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    company: "",
-    country: "United Arab Emirates (UAE)",
-    category: getInitialCategory(),
-    message: productParam
-      ? `I am interested in ${productParam}${groupParam ? ` (${groupParam})` : ""}. Please provide detailed pricing, MOQ, and regulatory documentation.`
-      : "",
-  });
-
-  const handleDocToggle = (doc: string) => {
-    if (selectedDocs.includes(doc)) {
-      setSelectedDocs(selectedDocs.filter((item) => item !== doc));
-    } else {
-      setSelectedDocs([...selectedDocs, doc]);
-    }
-  };
-
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormSubmitting(true);
-    setFormError("");
-    setFormSubmitted(false);
-
-    try {
-      const response = await fetch("/api/enquiry", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          phone: `${phoneCode} ${formData.phone}`,
-          selectedDocs,
-          productEnquiry: productParam || undefined,
-          productGroup: groupParam || undefined,
-        }),
-      });
-
-      if (!response.ok) {
-        const errData = await response.json();
-        throw new Error(errData.error || "Failed to transmit enquiry.");
-      }
-
-      setFormSubmitted(true);
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        company: "",
-        country: "United Arab Emirates (UAE)",
-        category: getInitialCategory(),
-        message: "",
-      });
-      setSelectedDocs([]);
-      setPhoneCode("+91");
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setFormError(err.message);
-      } else {
-        setFormError("Something went wrong. Please try again.");
-      }
-    } finally {
-      setFormSubmitting(false);
-    }
-  };
-
-  // Scroll-reveal observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-    );
-
-    const reveals = document.querySelectorAll(".reveal, .reveal-scale");
-    reveals.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <>
-      <Header />
-      <main className="min-h-screen bg-cream">
-        {/* ─── Hero Section ─── */}
-        <section className="relative bg-emerald pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden">
-          {/* Subtle grid texture */}
-          <div
-            className="absolute inset-0 opacity-[0.04]"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(244,239,235,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(244,239,235,0.15) 1px, transparent 1px)",
-              backgroundSize: "48px 48px",
-            }}
-          />
-          {/* Gradient glows */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-emerald-soft/30 rounded-full blur-[100px] pointer-events-none" />
-
-          <div className="relative max-w-[1280px] mx-auto px-6 md:px-12">
-            {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase mb-8 opacity-0 animate-fade-in-up">
-              <Link
-                href="/"
-                className="text-cream/50 hover:text-gold transition-colors"
-              >
-                Home
-              </Link>
-              <ChevronRight className="w-3 h-3 text-cream/30" />
-              {categoryParam && (
-                <>
-                  <span className="text-cream/50">Products</span>
-                  <ChevronRight className="w-3 h-3 text-cream/30" />
-                </>
-              )}
-              <span className="text-gold font-semibold">Enquiry</span>
-            </nav>
-
-            {/* Context Badge */}
-            {productParam && (
-              <div className="inline-flex items-center gap-2 mb-6 opacity-0 animate-fade-in-up animation-delay-100">
-                <span className="text-[10px] font-semibold uppercase px-3 py-1 rounded-full bg-gold/15 text-gold border border-gold/30 tracking-[0.15em] flex items-center gap-1.5">
-                  <FileText className="w-3 h-3" />
-                  Product Enquiry
-                </span>
-              </div>
-            )}
-
-            {/* Title */}
-            <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl text-cream leading-[1.15] max-w-3xl mb-6 opacity-0 animate-fade-in-up animation-delay-200">
-              {productParam
-                ? `Enquire About ${productParam}`
-                : "Submit Your Sourcing Enquiry"}
-            </h1>
-
-            {/* Description */}
-            <p className="text-cream/60 text-base md:text-lg leading-relaxed max-w-2xl opacity-0 animate-fade-in-up animation-delay-300">
-              {productParam
-                ? `Complete the form below to receive detailed pricing, regulatory documentation, and supply terms for ${productParam}${groupParam ? ` under ${groupParam}` : ""}.`
-                : "Fill in the form below with your requirements and our regulatory and logistics desks will respond within 24–48 business hours."}
-            </p>
-
-            {/* Context chips */}
-            {(categoryParam || productParam || groupParam) && (
-              <div className="flex flex-wrap items-center gap-3 mt-8 opacity-0 animate-fade-in-up animation-delay-400">
-                {categoryParam && (
-                  <span className="text-[11px] text-cream/60 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
-                    <span className="text-cream/40 mr-1">Category:</span>
-                    <span className="text-gold font-semibold">{categoryParam}</span>
-                  </span>
-                )}
-                {groupParam && (
-                  <span className="text-[11px] text-cream/60 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
-                    <span className="text-cream/40 mr-1">Group:</span>
-                    <span className="text-gold font-semibold">{groupParam}</span>
-                  </span>
-                )}
-                {productParam && (
-                  <span className="text-[11px] text-cream/60 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
-                    <span className="text-cream/40 mr-1">Product:</span>
-                    <span className="text-gold font-semibold">{productParam}</span>
-                  </span>
-                )}
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* ─── Enquiry Form Section ─── */}
-        <section className="py-16 md:py-24">
-          <div className="max-w-[900px] mx-auto px-6 md:px-12">
-            <div className="reveal">
-              <div className="bg-white border border-emerald/10 p-8 md:p-10 shadow-2xl relative">
-                {/* Decorative corner */}
-                <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-gold/20 pointer-events-none" />
-                <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-gold/20 pointer-events-none" />
-
-                {/* Form Header */}
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-10 h-10 rounded-lg bg-emerald flex items-center justify-center">
-                    <Send className="w-4.5 h-4.5 text-gold" />
-                  </div>
-                  <div>
-                    <h2 className="font-playfair text-xl text-ink">
-                      Sourcing Enquiry Form
-                    </h2>
-                    <p className="text-[11px] text-ink-soft tracking-wide">
-                      All fields marked are required • Response within 24–48 hrs
-                    </p>
-                  </div>
-                </div>
-
-                {formSubmitted && (
-                  <div className="bg-emerald/5 border border-gold/30 text-emerald p-6 mb-8 flex items-start gap-3 animate-fade-in-up">
-                    <ShieldCheck
-                      size={20}
-                      className="text-gold shrink-0 mt-0.5"
-                    />
-                    <div>
-                      <h4 className="text-sm font-semibold tracking-wide uppercase text-emerald">
-                        ENQUIRY TRANSMITTED
-                      </h4>
-                      <p className="text-xs text-ink-soft mt-1 leading-relaxed">
-                        Thank you for your B2B sourcing enquiry. Our regulatory
-                        and logistics desks will analyze your specifications and
-                        respond within 24–48 business hours with an initial
-                        draft schedule.
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {formError && (
-                  <div className="bg-red-500/10 border border-red-500/30 text-red-600 p-6 mb-8 flex items-start gap-3 animate-fade-in-up text-xs leading-relaxed">
-                    <div>
-                      <h4 className="text-sm font-semibold tracking-wide uppercase text-red-700">
-                        TRANSMISSION FAILED
-                      </h4>
-                      <p className="mt-1">{formError}</p>
-                    </div>
-                  </div>
-                )}
-
-                <form onSubmit={handleFormSubmit} className="space-y-6">
-                  {/* Row 1 - Names */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="firstName"
-                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                      >
-                        First Name
-                      </label>
-                      <input
-                        id="firstName"
-                        type="text"
-                        required
-                        placeholder="e.g. John"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
-                        value={formData.firstName}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            firstName: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="lastName"
-                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                      >
-                        Last Name
-                      </label>
-                      <input
-                        id="lastName"
-                        type="text"
-                        required
-                        placeholder="e.g. Doe"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
-                        value={formData.lastName}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            lastName: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-                  </div>
-
-                  {/* Row 2 - Email & Phone */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="email"
-                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                      >
-                        Email Address
-                      </label>
-                      <input
-                        id="email"
-                        type="email"
-                        required
-                        placeholder="e.g. buyer@clinicaltrade.com"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                      />
-                    </div>
-
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="phone"
-                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                      >
-                        Phone / WhatsApp
-                      </label>
-                      <div className="flex gap-2 items-center">
-                        <select
-                          className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-3 py-3 text-[15px] text-ink focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-24 shrink-0"
-                          value={phoneCode}
-                          onChange={(e) => setPhoneCode(e.target.value)}
-                        >
-                          {countryCodes.map((c, i) => (
-                            <option
-                              key={i}
-                              value={c.code}
-                              className="text-ink bg-cream"
-                            >
-                              {c.label} ({c.code})
-                            </option>
-                          ))}
-                        </select>
-                        <input
-                          id="phone"
-                          type="tel"
-                          required
-                          placeholder="e.g. 9032550436"
-                          className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 flex-grow"
-                          value={formData.phone}
-                          onChange={(e) =>
-                            setFormData({ ...formData, phone: e.target.value })
-                          }
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Row 3 - Company */}
-                  <div className="flex flex-col">
-                    <label
-                      htmlFor="company"
-                      className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                    >
-                      Company Name
-                    </label>
-                    <input
-                      id="company"
-                      type="text"
-                      required
-                      placeholder="e.g. Global Pharma Logistics Ltd"
-                      className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
-                      value={formData.company}
-                      onChange={(e) =>
-                        setFormData({ ...formData, company: e.target.value })
-                      }
-                    />
-                  </div>
-
-                  {/* Row 4 - Dropdowns */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="country"
-                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                      >
-                        Destination Country
-                      </label>
-                      <select
-                        id="country"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
-                        value={formData.country}
-                        onChange={(e) =>
-                          setFormData({ ...formData, country: e.target.value })
-                        }
-                      >
-                        {countriesList.map((c, i) => (
-                          <option
-                            key={i}
-                            value={c}
-                            className="text-ink bg-cream"
-                          >
-                            {c}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div className="flex flex-col">
-                      <label
-                        htmlFor="category"
-                        className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                      >
-                        Product Category
-                      </label>
-                      <select
-                        id="category"
-                        className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none transition-all duration-200 w-full"
-                        value={formData.category}
-                        onChange={(e) =>
-                          setFormData({ ...formData, category: e.target.value })
-                        }
-                      >
-                        {categoryOptions.map((cat, i) => (
-                          <option
-                            key={i}
-                            value={cat}
-                            className="text-ink bg-cream"
-                          >
-                            {cat}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Product context (read-only display if pre-filled) */}
-                  {productParam && (
-                    <div className="flex flex-col">
-                      <span className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold">
-                        Product / Segment
-                      </span>
-                      <div className="border border-gold/30 bg-gold-pale/20 px-4 py-3 text-[15px] text-ink flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-gold" />
-                        <span className="font-semibold">{productParam}</span>
-                        {groupParam && (
-                          <span className="text-ink-soft text-sm ml-1">
-                            — {groupParam}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Row 5 - Documentation Chips */}
-                  <div className="flex flex-col">
-                    <span className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-3 font-semibold block">
-                      Required Documentation (Select all that apply)
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {docOptions.map((doc, idx) => {
-                        const isSelected = selectedDocs.includes(doc);
-                        return (
-                          <button
-                            key={idx}
-                            type="button"
-                            onClick={() => handleDocToggle(doc)}
-                            className={`px-3.5 py-1.5 text-[11px] tracking-wide uppercase font-semibold transition-all duration-200 border rounded-sm ${
-                              isSelected
-                                ? "bg-blue-600 text-white border-blue-600 shadow-sm"
-                                : "border-slate-300 bg-white/70 text-slate-700 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50/50"
-                            }`}
-                          >
-                            {doc}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Row 6 - Message */}
-                  <div className="flex flex-col">
-                    <label
-                      htmlFor="message"
-                      className="text-[11px] tracking-[0.12em] uppercase text-ink/40 mb-2.5 font-semibold"
-                    >
-                      Message or Specific Requirements
-                    </label>
-                    <textarea
-                      id="message"
-                      required
-                      rows={5}
-                      placeholder="Share exact dosage configurations, therapeutic volume demands, and compliance requirements..."
-                      className="border border-emerald/15 bg-[#FAF7F2]/50 focus:bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/30 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none transition-all duration-200 w-full resize-y min-h-[120px]"
-                      value={formData.message}
-                      onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
-                      }
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="pt-4">
-                    <button
-                      type="submit"
-                      disabled={formSubmitting}
-                      className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-semibold transition-all duration-200 w-full flex items-center justify-center gap-3 shadow-[0_4px_18px_rgba(37,99,235,0.35)] hover:shadow-[0_6px_24px_rgba(37,99,235,0.45)] disabled:opacity-50 disabled:cursor-not-allowed rounded-sm hover:-translate-y-0.5"
-                    >
-                      {formSubmitting ? "TRANSMITTING..." : "SEND ENQUIRY"}{" "}
-                      {!formSubmitting && <ArrowRight size={14} />}
-                    </button>
-                    <p className="text-[10px] text-ink/35 text-center mt-4 font-jakarta tracking-wide">
-                      We typically respond within 24–48 business hours. All
-                      enquiries are treated with strict commercial
-                      confidentiality.
-                    </p>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            {/* Back link */}
-            <div className="text-center mt-10 reveal">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold text-[12px] tracking-[0.15em] uppercase transition-colors"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Back to Home
-              </Link>
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
-  );
-}
-
-export default function EnquiryPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen bg-cream flex items-center justify-center">
-          <span className="text-ink-soft text-sm uppercase tracking-widest animate-pulse">
-            Loading Enquiry Form...
-          </span>
-        </div>
-      }
-    >
-      <EnquiryFormContent />
-    </Suspense>
-  );
-}

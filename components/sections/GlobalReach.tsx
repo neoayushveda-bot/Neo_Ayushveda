@@ -58,7 +58,7 @@ export default function GlobalReach() {
             Pharma Exports to Every Continent
           </h2>
           <p className="text-cream/65 text-[17px] leading-relaxed">
-            From our registered office in Hyderabad, we manage pharmaceutical export operations to over 50 countries across six continents, navigating distinct regulatory frameworks for each destination market.
+            From our Hyderabad headquarters, we manage pharmaceutical exports to over 50 countries across six continents, navigating region-specific regulatory frameworks.
           </p>
         </div>
 
@@ -76,13 +76,13 @@ export default function GlobalReach() {
               curvature={0.2}
               samples={60}
               paint={{
-                "line-color": "#C9963B",
+                "line-color": "#7CB800",
                 "line-width": 1.2,
-                "line-opacity": 0.45,
+                "line-opacity": 0.55,
                 "line-dasharray": [3, 3],
               }}
               hoverPaint={{
-                "line-color": "#E4B96A",
+                "line-color": "#A4D73B",
                 "line-width": 2.5,
                 "line-opacity": 0.95,
               }}
