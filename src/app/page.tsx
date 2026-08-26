@@ -92,22 +92,7 @@ const heroMapDots = [
 ];
 
 export default function Home() {
-  const [displayedProducts, setDisplayedProducts] = useState<any[]>(productsList);
-
-  // Dynamic Product Sourcing from Database API
-  useEffect(() => {
-    fetch("/api/products")
-      .then((res) => {
-        if (res.ok) return res.json();
-        return null;
-      })
-      .then((data) => {
-        if (data?.products && data.products.length > 0) {
-          setDisplayedProducts(data.products);
-        }
-      })
-      .catch(() => {});
-  }, []);
+  const displayedProducts = productsList;
 
   // Reveal animations scroll hook
   useEffect(() => {
@@ -119,7 +104,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     );
 
     const elements = document.querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale");
@@ -608,10 +593,10 @@ export default function Home() {
       </section>
 
       {/* ─── Product Portfolio Section (6-Card Grid) ─── */}
-      <section id="products" className="bg-white py-16 sm:py-24 relative overflow-hidden font-sans border-b border-slate-100">
+      <section id="products" className="bg-white pt-10 pb-8 sm:pt-14 sm:pb-10 relative overflow-hidden font-sans border-b border-slate-100">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
 
-          <div className="mb-12 reveal flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+          <div className="mb-8 reveal flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
               <span className="text-sky-600 font-mono text-xs font-semibold tracking-[0.2em] uppercase block mb-2">
                 PRODUCT DIRECTORY
@@ -688,10 +673,10 @@ export default function Home() {
       </section>
 
       {/* ─── Certification Badges Section ─── */}
-      <section id="certifications" className="bg-slate-50 py-14 sm:py-16 border-b border-slate-200 font-sans">
+      <section id="certifications" className="bg-slate-50 py-8 sm:py-10 border-b border-slate-200 font-sans">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
 
-          <div className="text-center mb-8 reveal">
+          <div className="text-center mb-6 reveal">
             <span className="text-sky-600 font-mono text-xs font-semibold tracking-[0.2em] uppercase block mb-2">
               COMPLIANCE & STANDARDS
             </span>

@@ -133,9 +133,9 @@ export default function Header() {
             className="flex items-center shrink-0 cursor-pointer hover:opacity-95 transition-opacity"
           >
             <img 
-              src="/images/neo-logo.svg" 
+              src="/images/neo-logo.png" 
               alt="Neo Life Sciences Logo" 
-              className="h-16 md:h-[72px] w-auto object-contain"
+              className="h-14 md:h-16 w-auto object-contain"
             />
           </Link>
 
