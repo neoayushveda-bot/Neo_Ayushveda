@@ -188,18 +188,6 @@ export function WorldMap({
                     r={isHovered ? "0.9" : "0.55"}
                     fill={isHovered ? "#002D75" : "#003A95"}
                   />
-
-                  {/* Capital Label */}
-                  {dest.label && (
-                    <text
-                      x={dest.x}
-                      y={dest.y - 1.2}
-                      textAnchor="middle"
-                      className="fill-slate-700 text-[2.2px] font-mono font-semibold select-none pointer-events-none"
-                    >
-                      {dest.label}
-                    </text>
-                  )}
                 </g>
               );
             })}
