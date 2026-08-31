@@ -283,7 +283,7 @@ export default function Home() {
             </button>
 
             <Image
-              src="/images/iphex_2026_poster.jpg"
+              src="/images/iphex_2026_poster.png"
               alt="iPHEX 2026 Exhibition Invitation — Neo Life Sciences Pvt. Ltd."
               width={420}
               height={630}
