@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Mail, Phone, MapPin, Globe, ShieldCheck, ArrowUpRight } from "lucide-react";
+import { FaEnvelope, FaPhoneVolume, FaLocationDot, FaShieldHalved } from "react-icons/fa6";
 
 export default function Footer() {
   const scrollTo = (id: string) => {
@@ -40,10 +40,10 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-              NEO LIFE SCIENCES PVT LTD is an international pharmaceutical trading and B2B export enterprise sourcing WHO-GMP certified generics, medical devices, APIs, and standardized herbal formulations from India to 50+ regulated markets worldwide.
+              NEO LIFE SCIENCES PVT LTD is an international pharmaceutical trading and B2B export enterprise sourcing WHO-GMP( PIC/S, EU GMP, US FDA and other SRAs) certified generics, medical devices, APIs, and standardized herbal formulations from India to 50+ regulated markets worldwide.
             </p>
             <div className="flex items-center gap-2 pt-1 font-mono text-[11px] text-[#A4D73B]">
-              <ShieldCheck className="w-4 h-4 text-[#7CB800]" />
+              <FaShieldHalved className="w-4 h-4 text-[#7CB800]" />
               <span>WHO-GMP • ISO 9001:2015 • CTD Compliant</span>
             </div>
           </div>
@@ -130,7 +130,7 @@ export default function Footer() {
             </h4>
             <div className="flex flex-col gap-3 text-sm text-slate-400">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-sky-400 shrink-0 mt-1" />
+                <FaLocationDot className="w-4 h-4 text-sky-400 shrink-0 mt-1" />
                 <address className="not-italic leading-relaxed text-xs font-mono">
                   <strong className="text-slate-200 block text-xs font-heading font-bold">NEO LIFE SCIENCES PVT LTD</strong>
                   201-2nd Floor, Above ICICI Bank,<br />
@@ -141,7 +141,7 @@ export default function Footer() {
               </div>
 
               <div className="flex items-center gap-2.5 pt-2 border-t border-slate-800 text-xs">
-                <Phone className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                <FaPhoneVolume className="w-3.5 h-3.5 text-sky-400 shrink-0" />
                 <a href="tel:+914035247813" className="hover:text-sky-400 transition-colors">
                   040-35247813
                 </a>
@@ -152,7 +152,7 @@ export default function Footer() {
               </div>
 
               <div className="flex items-center gap-2.5 text-xs">
-                <Mail className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                <FaEnvelope className="w-3.5 h-3.5 text-sky-400 shrink-0" />
                 <a href="mailto:contact@neoayushveda.com" className="hover:text-sky-400 transition-colors">
                   contact@neoayushveda.com
                 </a>
@@ -165,14 +165,14 @@ export default function Footer() {
         {/* Regulatory Disclaimer Banner */}
         <div className="py-6 border-b border-slate-800 text-[11px] text-slate-400 leading-relaxed">
           <p>
-            <strong className="text-slate-300">Regulatory & B2B Trading Disclaimer:</strong> NEO LIFE SCIENCES PVT LTD is a specialist B2B pharmaceutical sourcing and international export company registered in Hyderabad, India. Products displayed on this portal are offered strictly for wholesale institutional procurement, licensed distributors, and international healthcare tenders. We do not engage in direct-to-consumer retail sales. All export transactions are accompanied by certified COAs, WHO-GMP credentials, and CTD dossiers compliant with destination Ministry of Health authorities.
+            <strong className="text-slate-300">REGULATORY & B2B TRADING DISCLAIMER:</strong> NEO LIFE SCIENCES PVT LTD is a specialist B2B pharmaceutical sourcing and international export company registered in Hyderabad, India. Products displayed on this portal are offered strictly for wholesale institutional procurement, licensed distributors, and international healthcare tenders. All export transactions are supported by certified CoAs, applicable manufacturer certifications, and CTD dossiers aligned with the requirements of the destination country’s Ministry of Health and relevant regulatory authorities.
           </p>
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            © {new Date().getFullYear()} NEO LIFE SCIENCES PVT LTD. All rights reserved. (Formerly Neo Ayushveda Pvt Ltd).
+            © 2026 NEO LIFE SCIENCES PVT LTD. All rights reserved. (Formerly Neo Ayushveda Pvt Ltd).
           </div>
           <div className="flex items-center gap-4 text-slate-400">
             <Link href="/privacy-policy" className="hover:text-slate-200 transition-colors">

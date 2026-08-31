@@ -3,22 +3,22 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import {
-  ShieldCheck,
-  Lock,
-  FileText,
-  Globe,
-  Database,
-  UserCheck,
-  Scale,
-  Mail,
-  Phone,
-  MapPin,
-  ChevronRight,
-  AlertCircle,
-  Eye,
-  Server,
-  Share2,
-} from "lucide-react";
+  FaShieldHalved,
+  FaLock,
+  FaFileLines,
+  FaGlobe,
+  FaDatabase,
+  FaUserCheck,
+  FaScaleBalanced,
+  FaEnvelope,
+  FaPhoneVolume,
+  FaLocationDot,
+  FaChevronRight,
+  FaTriangleExclamation,
+  FaEye,
+  FaServer,
+  FaShareNodes,
+} from "react-icons/fa6";
 import Header from "../../../components/layout/Header";
 import Footer from "../../../components/layout/Footer";
 
@@ -44,7 +44,7 @@ export default function PrivacyPolicyPage() {
   const sections = [
     {
       id: "introduction",
-      icon: ShieldCheck,
+      icon: FaShieldHalved,
       title: "1. Introduction & Scope",
       content: (
         <>
@@ -59,7 +59,7 @@ export default function PrivacyPolicyPage() {
     },
     {
       id: "information-collected",
-      icon: Database,
+      icon: FaDatabase,
       title: "2. Information We Collect",
       content: (
         <>
@@ -85,7 +85,7 @@ export default function PrivacyPolicyPage() {
     },
     {
       id: "confidentiality-dossiers",
-      icon: Lock,
+      icon: FaLock,
       title: "3. Commercial Confidentiality & Regulatory Dossiers",
       content: (
         <>
@@ -100,7 +100,7 @@ export default function PrivacyPolicyPage() {
     },
     {
       id: "legal-bases",
-      icon: Scale,
+      icon: FaScaleBalanced,
       title: "4. Legal Bases for Processing Data",
       content: (
         <>
@@ -124,7 +124,7 @@ export default function PrivacyPolicyPage() {
     },
     {
       id: "how-we-use",
-      icon: FileText,
+      icon: FaFileLines,
       title: "5. How We Use Your Information",
       content: (
         <>
@@ -141,7 +141,7 @@ export default function PrivacyPolicyPage() {
     },
     {
       id: "third-party-sharing",
-      icon: Share2,
+      icon: FaShareNodes,
       title: "6. Disclosure & Third-Party Sharing",
       content: (
         <>
@@ -167,7 +167,7 @@ export default function PrivacyPolicyPage() {
     },
     {
       id: "international-transfers",
-      icon: Globe,
+      icon: FaGlobe,
       title: "7. Cross-Border International Data Transfers",
       content: (
         <p>
@@ -177,7 +177,7 @@ export default function PrivacyPolicyPage() {
     },
     {
       id: "data-security",
-      icon: Server,
+      icon: FaServer,
       title: "8. Data Security & Retention Protocols",
       content: (
         <>
@@ -192,7 +192,7 @@ export default function PrivacyPolicyPage() {
     },
     {
       id: "cookies-tracking",
-      icon: Eye,
+      icon: FaEye,
       title: "9. Cookies & Analytical Technologies",
       content: (
         <p>
@@ -202,7 +202,7 @@ export default function PrivacyPolicyPage() {
     },
     {
       id: "user-rights",
-      icon: UserCheck,
+      icon: FaUserCheck,
       title: "10. Your Rights & Data Choices",
       content: (
         <>
@@ -225,7 +225,7 @@ export default function PrivacyPolicyPage() {
     },
     {
       id: "disclaimer",
-      icon: AlertCircle,
+      icon: FaTriangleExclamation,
       title: "11. Regulatory & Medical Disclaimer",
       content: (
         <p>
@@ -249,7 +249,7 @@ export default function PrivacyPolicyPage() {
               <Link href="/" className="text-slate-500 hover:text-sky-600 transition-colors">
                 Home
               </Link>
-              <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+              <FaChevronRight className="w-3 h-3 text-slate-400" />
               <span className="text-sky-600 font-bold">Privacy Policy</span>
             </nav>
 
@@ -359,7 +359,7 @@ export default function PrivacyPolicyPage() {
                 >
                   <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-slate-800">
                     <div className="w-10 h-10 rounded-lg bg-slate-800 text-sky-400 flex items-center justify-center shrink-0 border border-slate-700">
-                      <Mail size={20} />
+                      <FaEnvelope className="w-5 h-5" />
                     </div>
                     <h2 className="font-serif text-xl sm:text-2xl font-bold text-white">
                       12. Data Protection Officer & Inquiries
@@ -375,7 +375,7 @@ export default function PrivacyPolicyPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-800">
                     <div className="space-y-4">
                       <div className="flex items-start gap-3">
-                        <Mail className="w-4 h-4 text-sky-400 shrink-0 mt-1" />
+                        <FaEnvelope className="w-4 h-4 text-sky-400 shrink-0 mt-1" />
                         <div>
                           <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 block font-semibold">
                             Official Email
@@ -390,7 +390,7 @@ export default function PrivacyPolicyPage() {
                       </div>
 
                       <div className="flex items-start gap-3">
-                        <Phone className="w-4 h-4 text-sky-400 shrink-0 mt-1" />
+                        <FaPhoneVolume className="w-4 h-4 text-sky-400 shrink-0 mt-1" />
                         <div>
                           <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 block font-semibold">
                             Phone / Desk
@@ -412,7 +412,7 @@ export default function PrivacyPolicyPage() {
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <MapPin className="w-4 h-4 text-sky-400 shrink-0 mt-1" />
+                      <FaLocationDot className="w-4 h-4 text-sky-400 shrink-0 mt-1" />
                       <div>
                         <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 block font-semibold">
                           Registered Office

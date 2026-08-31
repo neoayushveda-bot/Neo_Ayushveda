@@ -4,23 +4,17 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Pill,
-  Stethoscope,
-  Leaf,
-  Globe,
-  ShieldCheck,
-  Users,
-  Target,
-  Award,
-  CheckCircle2,
-  ArrowRight,
-  ChevronRight,
-  Scale,
-  Building2,
-  MapPin,
-  Clock,
-  Sparkles
-} from "lucide-react";
+  FaShieldHalved,
+  FaScaleBalanced,
+  FaGlobe,
+  FaHandshake,
+  FaStethoscope,
+  FaFileContract,
+  FaCertificate,
+  FaPlaneDeparture,
+  FaArrowRight,
+  FaChevronRight
+} from "react-icons/fa6";
 import Header from "../../../components/layout/Header";
 import Footer from "../../../components/layout/Footer";
 
@@ -56,11 +50,11 @@ export default function AboutPage() {
               <Link href="/" className="text-slate-500 hover:text-sky-600 transition-colors">
                 Home
               </Link>
-              <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+              <FaChevronRight className="w-3 h-3 text-slate-400" />
               <span className="text-sky-600 font-bold">About Enterprise</span>
             </nav>
 
-            <div className="max-w-3xl">
+            <div className="max-w-4xl">
               <div className="inline-flex items-center gap-2 bg-sky-50 border border-sky-200/80 rounded-full px-3.5 py-1 mb-4 opacity-0 animate-fade-in-up">
                 <span className="w-2 h-2 rounded-full bg-[#7CB800] animate-pulse" />
                 <span className="text-sky-800 font-mono text-[11px] tracking-[0.16em] uppercase font-semibold">
@@ -69,12 +63,12 @@ export default function AboutPage() {
               </div>
 
               <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.12] text-slate-900 tracking-tight opacity-0 animate-fade-in-up animation-delay-100">
-                Pharmaceutical Excellence <br />
-                <span className="italic text-sky-600 font-normal">With Ayurvedic Roots.</span>
+                Connecting International Markets <br />
+                <span className="italic text-sky-600 font-normal">With High Quality & Reliable Pharmaceutical Solutions.</span>
               </h1>
 
-              <p className="text-slate-600 text-base sm:text-lg leading-relaxed mt-5 opacity-0 animate-fade-in-up animation-delay-200 max-w-2xl">
-                Neo Life Sciences is a specialist B2B pharmaceutical trading and global export partner based out of India&apos;s healthcare innovation hub, Hyderabad, Telangana.
+              <p className="text-slate-600 text-base sm:text-lg leading-relaxed mt-5 opacity-0 animate-fade-in-up animation-delay-200 max-w-3xl">
+                Neo Life Sciences Pvt Ltd is a Hyderabad, India -based pharmaceutical merchant exporter, sourcing and supplying APIs, Finished Pharmaceutical, Specialty & Complex Therapeutics, Injectables & Hospital Products, Vaccines & Biologics, Nutraceuticals & Dietary Supplements, Medical Devices & Diagnostics, Dermatology, Personal Care & Cosmeceuticals, from certified Indian manufacturers to global markets.
               </p>
             </div>
           </div>
@@ -89,85 +83,80 @@ export default function AboutPage() {
                 WHO WE ARE
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl font-bold leading-tight text-slate-900 mb-6">
-                Sourcing Catalyst For Regulated International Markets
+                Building Reliable Healthcare Supply Partnerships Worldwide
               </h2>
-              <div className="space-y-4 text-slate-600 text-base sm:text-lg leading-relaxed">
+              <div className="space-y-4 text-slate-600 text-base leading-relaxed">
                 <p>
-                  Rather than operating raw manufacturing assets, we act as a streamlined sourcing catalyst for regulated international markets. We collaborate strictly with certified manufacturing laboratories holding WHO-GMP, ISO 9001:2015, and ISO 13485 accreditations.
+                  Our Vision is to become a globally trusted pharmaceutical sourcing and export partner, improving access to quality healthcare across international markets.
                 </p>
                 <p>
-                  Every therapeutic batch, device shipment, and standardized extract is fully traceable back to its origin. Our technical strength lies in our dedicated regulatory affairs department.
+                  We collaborate strictly with certified manufacturing laboratories holding WHO-GMP, PICS, EU GMP, US FDA , Other SRAs, ISO 9001:2015, and ISO 13485 accreditations. Every therapeutic batch, device shipment, and standardised extract is fully traceable back to its origin.
                 </p>
                 <p>
-                  We coordinate import licensing, MOH permit approvals, and compile complete product registration dossiers in Common Technical Document (CTD) formats to secure market entries swiftly.
+                  Our technical strength lies in our dedicated regulatory affairs department. We coordinate import licensing, MOH permit approvals, and compile complete product registration dossiers in Common Technical Document (CTD) formats to secure market entries swiftly.
                 </p>
               </div>
             </div>
 
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Card 1 - Cleanroom Manufacturing */}
+              {/* Card 1 - Cold Chain Logistics */}
               <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-sky-500 hover:shadow-md transition-all duration-200 group reveal">
                 <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
                   <Image
-                    src="/images/pharma_cleanroom.jpg"
-                    alt="WHO-GMP Cleanroom Pharmaceutical Manufacturing"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2 py-0.5 rounded">
-                    WHO-GMP Sourcing
-                  </div>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-base font-bold text-slate-900 mb-1.5">Pharma Trading</h3>
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                    Sourcing WHO-GMP generic formulations, oncology products, and custom injectables from certified facilities.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 2 - Cold Chain Logistics */}
-              <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-sky-500 hover:shadow-md transition-all duration-200 group reveal delay-100">
-                <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
-                  <Image
                     src="/images/logistics_cold_chain.jpg"
-                    alt="Pharmaceutical Air Cargo Cold Chain Logistics"
+                    alt="International Pharmaceutical Cold Chain Air Freight Logistics"
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2 py-0.5 rounded">
-                    Active ULD Cargo
+                  <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded flex items-center gap-1.5">
+                    <FaPlaneDeparture className="w-3 h-3" />
+                    <span>Cold-Chain Freight</span>
                   </div>
                 </div>
                 <div className="p-5">
-                  <h3 className="text-base font-bold text-slate-900 mb-1.5">Global Exports</h3>
+                  <h3 className="text-base font-bold text-slate-900 mb-1.5">Global Air & Sea Logistics</h3>
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                    Cold-chain shipping logistics with full customs clearance and dossier registration support.
+                    Temperature-controlled containers and real-time data loggers ensuring cold-chain integrity across international shipping routes.
                   </p>
                 </div>
               </div>
 
-              {/* Card 3 - Analytical Laboratory */}
-              <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-sky-500 hover:shadow-md transition-all duration-200 group reveal delay-200">
-                <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
-                  <Image
-                    src="/images/pharma_qc_lab.jpg"
-                    alt="Analytical Chemistry Quality Testing for Dossiers"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2 py-0.5 rounded">
-                    QC & Assay Testing
+              {/* Card 2 - 100% Certified Sourcing */}
+              <div className="border border-slate-200 bg-white rounded-xl p-5 hover:border-sky-500 hover:shadow-md transition-all duration-200 group flex flex-col justify-between reveal delay-100">
+                <div>
+                  <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4 group-hover:bg-sky-600 group-hover:text-white transition-colors">
+                    <FaCertificate className="w-5 h-5" />
                   </div>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-base font-bold text-slate-900 mb-1.5">Quality Assurance</h3>
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-sky-600 font-semibold mb-1">
+                    100% CERTIFIED SOURCING
+                  </div>
+                  <h3 className="text-base font-bold text-slate-900 mb-1.5">Audited Partner Network</h3>
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                    HPLC batch assay verification, stability testing, and COA documentation for every exported lot.
+                    Contracting exclusively with globally audited manufacturers, implementing batch isolation and origin traceability.
                   </p>
+                </div>
+                <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-[11px] text-slate-500">
+                  WHO-GMP & PIC/S Certified
+                </div>
+              </div>
+
+              {/* Card 3 - CTD Regulatory Dossiers */}
+              <div className="border border-slate-200 bg-white rounded-xl p-5 hover:border-sky-500 hover:shadow-md transition-all duration-200 group flex flex-col justify-between reveal delay-200">
+                <div>
+                  <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4 group-hover:bg-sky-600 group-hover:text-white transition-colors">
+                    <FaFileContract className="w-5 h-5" />
+                  </div>
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-sky-600 font-semibold mb-1">
+                    REGULATORY AFFAIRS
+                  </div>
+                  <h3 className="text-base font-bold text-slate-900 mb-1.5">CTD / ACTD Dossiers</h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    Technical dossier compilation, MOH permit coordination, and COA/COO documentation for swift market entry.
+                  </p>
+                </div>
+                <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-[11px] text-slate-500">
+                  US FDA CTD & EU GMP Ready
                 </div>
               </div>
 
@@ -175,14 +164,14 @@ export default function AboutPage() {
               <div className="border border-slate-200 bg-white rounded-xl p-5 hover:border-sky-500 hover:shadow-md transition-all duration-200 group flex flex-col justify-between reveal delay-300">
                 <div>
                   <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4 group-hover:bg-sky-600 group-hover:text-white transition-colors">
-                    <Stethoscope size={20} />
+                    <FaStethoscope className="w-5 h-5" />
                   </div>
                   <div className="text-[10px] font-mono uppercase tracking-wider text-sky-600 font-semibold mb-1">
                     CE & ISO 13485
                   </div>
-                  <h3 className="text-base font-bold text-slate-900 mb-1.5">Medical Devices & AYUSH</h3>
+                  <h3 className="text-base font-bold text-slate-900 mb-1.5">Medical Devices & Diagnostics</h3>
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                    CE-compliant clinical diagnostics, surgical instruments, and standardized organic AYUSH extracts.
+                    CE and ISO 13485 certified surgical instruments, diagnostics, consumables, and healthcare disposables.
                   </p>
                 </div>
                 <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-[11px] text-slate-500">
@@ -268,34 +257,34 @@ export default function AboutPage() {
           <div className="max-w-[1280px] mx-auto px-6 md:px-12">
             <div className="text-center mb-16 reveal">
               <span className="text-sky-600 font-mono text-xs font-semibold tracking-[0.2em] uppercase block mb-3">
-                OUR CORE VALUES
+                WHAT WE STAND FOR
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-slate-900">
-                What Drives Us Forward
+                Building Reliable Healthcare Supply Partnerships Worldwide
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 {
-                  icon: ShieldCheck,
-                  title: "Quality Assurance",
-                  desc: "All products meet international standards with complete traceability from origin to destination.",
+                  icon: FaShieldHalved,
+                  title: "Quality",
+                  desc: "Connecting global healthcare markets with trusted Indian manufacturers and quality-assured products.",
                 },
                 {
-                  icon: Users,
-                  title: "Client Partnership",
-                  desc: "We treat every B2B relationship as a strategic partnership tailored to specific market needs.",
+                  icon: FaScaleBalanced,
+                  title: "Compliance",
+                  desc: "Supporting international market requirements through reliable sourcing and regulatory solutions.",
                 },
                 {
-                  icon: Target,
-                  title: "Regulatory Excellence",
-                  desc: "Our dedicated regulatory affairs team ensures seamless compliance across 50+ global markets.",
+                  icon: FaGlobe,
+                  title: "Access",
+                  desc: "Creating seamless access to a broad range of Indian pharmaceutical and healthcare capabilities.",
                 },
                 {
-                  icon: Award,
-                  title: "Integrity First",
-                  desc: "Transparent pricing, honest timelines, and strict confidentiality govern every transaction.",
+                  icon: FaHandshake,
+                  title: "Partnerships",
+                  desc: "Building lasting business relationships through integrity, reliability, and excellence.",
                 },
               ].map((value, idx) => (
                 <div
@@ -304,7 +293,7 @@ export default function AboutPage() {
                   style={{ transitionDelay: `${idx * 80}ms` }}
                 >
                   <div className="w-11 h-11 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center mb-5 group-hover:bg-sky-600 transition-colors text-sky-600 group-hover:text-white">
-                    <value.icon size={22} />
+                    <value.icon className="w-5 h-5" />
                   </div>
                   <h3 className="text-base font-bold text-slate-900 mb-2">
                     {value.title}
@@ -421,7 +410,7 @@ export default function AboutPage() {
                 className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white px-8 py-3.5 text-xs tracking-wider uppercase font-semibold transition-transform duration-150 ease-out active:scale-[0.96] shadow-md w-full sm:w-auto text-center rounded-md hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
               >
                 <span>Submit Sourcing Enquiry</span>
-                <ArrowRight size={14} />
+                <FaArrowRight className="w-3.5 h-3.5" />
               </Link>
               <Link
                 href="/"

@@ -25,22 +25,24 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NEO LIFE SCIENCES PVT LTD | International Pharmaceutical Traders & Exporters — India",
+  title: "NEO LIFE SCIENCES PVT LTD | International Pharmaceutical Exporters — India",
   description:
-    "B2B pharmaceutical trading and export company based in Hyderabad, India. WHO-GMP certified generics, medical devices, APIs, and Ayurvedic formulations to 50+ countries worldwide.",
+    "Hyderabad, India-based B2B pharmaceutical exporter sourcing WHO-GMP, EU-GMP, US-FDA, PIC/S, other SRAs certified APIs, Finished Pharmaceutical Formulations, Speciality Therapeutics, Injectables, Biologics, Nutraceuticals, and Medical Devices to 50+ countries worldwide.",
   keywords: [
     "pharmaceutical exporter India",
+    "international pharmaceutical exporters",
     "WHO-GMP generics exporter",
     "ayurvedic medicine exporter",
     "medical device exporter India",
     "bulk drug exporter Hyderabad",
     "API exporter India",
-    "pharmaceutical trading company India",
+    "pharmaceutical export company India",
     "B2B pharma export",
+    "CTD dossier pharmaceutical export",
   ],
   openGraph: {
     title: "NEO LIFE SCIENCES PVT LTD",
-    description: "International Pharmaceutical Traders & Exporters from India.",
+    description: "International Pharmaceutical Exporters from India.",
     type: "website",
     locale: "en_IN",
   },

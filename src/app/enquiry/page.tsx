@@ -4,18 +4,17 @@ import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
-  ShieldCheck,
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
-  MessageCircle,
-  ArrowRight,
-  ChevronRight,
-  Sparkles,
-  FileCheck2,
-  AlertCircle
-} from "lucide-react";
+  FaShieldHalved,
+  FaEnvelope,
+  FaPhoneVolume,
+  FaWhatsapp,
+  FaLocationDot,
+  FaClock,
+  FaArrowRight,
+  FaChevronRight,
+  FaCircleExclamation,
+  FaFlask
+} from "react-icons/fa6";
 import Header from "../../../components/layout/Header";
 import Footer from "../../../components/layout/Footer";
 
@@ -143,7 +142,7 @@ function EnquiryContent() {
             <Link href="/" className="text-slate-500 hover:text-sky-600 transition-colors">
               Home
             </Link>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+            <FaChevronRight className="w-3 h-3 text-slate-400" />
             <span className="text-sky-600 font-bold">B2B Sourcing Enquiry</span>
           </nav>
 
@@ -175,58 +174,79 @@ function EnquiryContent() {
             
             {/* Left Panel - Corporate Info (2 cols) */}
             <div className="lg:col-span-2">
-              <div className="bg-slate-900 text-slate-100 p-8 rounded-2xl shadow-xl space-y-6 border border-slate-800 sticky top-28">
-                <h3 className="text-base font-bold text-white uppercase tracking-wider font-mono mb-2">
-                  Corporate Headquarters
-                </h3>
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-white/95 via-sky-50/40 to-slate-50/90 backdrop-blur-xl border border-sky-200/80 p-6 sm:p-8 shadow-[0_16px_36px_rgba(2,132,199,0.06),0_1px_2px_rgba(0,0,0,0.04)] space-y-6 sticky top-28">
+                
+                {/* Subtle Ambient Decorative Light blooms */}
+                <div className="absolute -top-16 -right-16 w-48 h-48 bg-sky-400/15 rounded-full blur-2xl pointer-events-none" />
+                <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-[#7CB800]/15 rounded-full blur-2xl pointer-events-none" />
+                <div className="absolute inset-0 grid-texture opacity-40 pointer-events-none" />
 
-                <div className="space-y-5 text-sm">
-                  <div className="flex gap-3.5 items-start">
-                    <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <Mail size={16} />
+                <div className="relative z-10">
+                  <div className="inline-flex items-center gap-2 bg-sky-100/70 border border-sky-200 rounded-full px-3 py-1 mb-3">
+                    <span className="w-2 h-2 rounded-full bg-[#7CB800] animate-pulse" />
+                    <span className="text-[10px] font-mono tracking-[0.16em] uppercase text-sky-900 font-semibold">
+                      DIRECT SOURCING DESK
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold font-serif text-slate-900 leading-tight">
+                    Corporate Headquarters
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    Direct export & regulatory coordination from Hyderabad, India.
+                  </p>
+                </div>
+
+                <div className="space-y-3.5 relative z-10">
+                  <div className="flex gap-3.5 items-start p-3.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/80 hover:border-sky-400/60 hover:shadow-[0_4px_16px_rgba(2,132,199,0.08)] transition-all duration-200 group">
+                    <div className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 shrink-0 mt-0.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaEnvelope className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Email Sourcing</span>
-                      <a href="mailto:contact@neoayushveda.com" className="text-sm font-semibold text-white hover:text-sky-400 transition-colors">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Email Sourcing</span>
+                      <a href="mailto:contact@neoayushveda.com" className="text-sm font-semibold text-slate-900 hover:text-sky-600 transition-colors">
                         contact@neoayushveda.com
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex gap-3.5 items-start">
-                    <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <Phone size={16} />
+                  <div className="flex gap-3.5 items-start p-3.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/80 hover:border-sky-400/60 hover:shadow-[0_4px_16px_rgba(2,132,199,0.08)] transition-all duration-200 group">
+                    <div className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 shrink-0 mt-0.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaPhoneVolume className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Corporate Phone</span>
-                      <a href="tel:+914035247813" className="text-sm font-semibold text-white hover:text-sky-400 transition-colors">
-                        040-35247813
-                      </a>
-                      <a href="tel:+918712443610" className="text-sm font-semibold text-white hover:text-sky-400 transition-colors">
-                        +91 87124 43610
-                      </a>
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Corporate Phone</span>
+                      <div className="flex flex-wrap gap-x-2 text-sm font-semibold text-slate-900">
+                        <a href="tel:+914035247813" className="hover:text-sky-600 transition-colors">
+                          040-35247813
+                        </a>
+                        <span className="text-slate-400">/</span>
+                        <a href="tel:+918712443610" className="hover:text-sky-600 transition-colors">
+                          +91 87124 43610
+                        </a>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex gap-3.5 items-start">
-                    <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <MessageCircle size={16} />
+                  <div className="flex gap-3.5 items-start p-3.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/80 hover:border-sky-400/60 hover:shadow-[0_4px_16px_rgba(2,132,199,0.08)] transition-all duration-200 group">
+                    <div className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 shrink-0 mt-0.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaWhatsapp className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">WhatsApp Brokerage</span>
-                      <span className="text-sm font-semibold text-white">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">WhatsApp Brokerage</span>
+                      <span className="text-sm font-semibold text-slate-900">
                         Available on Request
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex gap-3.5 items-start">
-                    <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <MapPin size={16} />
+                  <div className="flex gap-3.5 items-start p-3.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/80 hover:border-sky-400/60 hover:shadow-[0_4px_16px_rgba(2,132,199,0.08)] transition-all duration-200 group">
+                    <div className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 shrink-0 mt-0.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaLocationDot className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Registered Office Address</span>
-                      <address className="text-xs text-slate-300 not-italic leading-relaxed">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Registered Office Address</span>
+                      <address className="text-xs text-slate-700 not-italic leading-relaxed font-mono">
+                        <strong className="text-slate-900 font-sans font-bold block text-xs">NEO LIFE SCIENCES PVT LTD</strong>
                         201-2nd Floor, Above ICICI Bank,<br />
                         Plot 13/A/B Lane 12, MLA Colony,<br />
                         Banjara Hills, Hyderabad – 500034,<br />
@@ -235,35 +255,34 @@ function EnquiryContent() {
                     </div>
                   </div>
 
-                  <div className="flex gap-3.5 items-start">
-                    <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <Clock size={16} />
+                  <div className="flex gap-3.5 items-start p-3.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/80 hover:border-sky-400/60 hover:shadow-[0_4px_16px_rgba(2,132,199,0.08)] transition-all duration-200 group">
+                    <div className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 shrink-0 mt-0.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaClock className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Business Hours</span>
-                      <span className="text-xs text-slate-300 font-mono">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Business Hours</span>
+                      <span className="text-xs text-slate-700 font-mono">
                         Monday – Saturday: 9:00 AM – 6:00 PM IST
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="border-t border-slate-800 pt-5 mt-5">
-                  <h4 className="text-[10px] font-mono tracking-[0.16em] uppercase text-sky-400 mb-2.5 font-semibold">
-                    REGULATORY COMPLIANCE STANDARDS
+                <div className="border-t border-slate-200/80 pt-5 mt-5 relative z-10">
+                  <h4 className="text-[10px] font-mono tracking-[0.16em] uppercase text-slate-500 mb-2.5 font-semibold">
+                    REGULATORY DOCUMENTATION SUPPORTED
                   </h4>
                   <div className="flex flex-wrap gap-1.5">
                     {[
-                      "WHO-GMP",
-                      "EU-GMP",
-                      "ISO 9001 & 13485",
-                      "AYUSH",
-                      "CE Certified",
-                      "US FDA CTD"
+                      "CTD Dossier",
+                      "GMP Certificate",
+                      "COA / COO",
+                      "Import Permits",
+                      "DMF Files"
                     ].map((doc, idx) => (
                       <span
                         key={idx}
-                        className="border border-slate-700 bg-slate-800 text-slate-300 font-mono text-[10px] uppercase px-2.5 py-1 font-semibold rounded"
+                        className="border border-sky-200/90 bg-white text-slate-800 font-mono text-[10px] uppercase px-2.5 py-1 font-semibold rounded-md shadow-2xs hover:border-sky-500 hover:text-sky-700 transition-colors"
                       >
                         {doc}
                       </span>
@@ -278,7 +297,7 @@ function EnquiryContent() {
               <div className="bg-white border border-slate-200 p-8 sm:p-10 rounded-2xl shadow-xl">
                 {formSubmitted && (
                   <div className="bg-sky-50 border border-sky-300 text-sky-900 p-5 rounded-lg mb-6 flex items-start gap-3 animate-fade-in text-sm">
-                    <ShieldCheck size={20} className="text-sky-600 shrink-0 mt-0.5" />
+                    <FaShieldHalved className="w-5 h-5 text-sky-600 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-bold uppercase tracking-wider text-sky-900 font-mono">ENQUIRY TRANSMITTED</h4>
                       <p className="text-xs text-slate-600 mt-1 leading-relaxed">
@@ -290,7 +309,7 @@ function EnquiryContent() {
 
                 {formError && (
                   <div className="bg-red-50 border border-red-200 text-red-700 p-5 rounded-lg mb-6 flex items-start gap-3 animate-fade-in text-xs leading-relaxed">
-                    <AlertCircle size={18} className="shrink-0 mt-0.5" />
+                    <FaCircleExclamation className="w-5 h-5 shrink-0 mt-0.5 text-red-600" />
                     <div>
                       <h4 className="font-bold uppercase tracking-wider text-red-800 font-mono">TRANSMISSION FAILED</h4>
                       <p className="mt-1">{formError}</p>
@@ -302,7 +321,7 @@ function EnquiryContent() {
                   {/* Pre-filled product badge */}
                   {productParam && (
                     <div className="p-3.5 bg-sky-50 border border-sky-200 rounded-xl mb-4 flex items-center gap-2.5">
-                      <Sparkles className="w-4 h-4 text-sky-600 shrink-0" />
+                      <FaFlask className="w-4 h-4 text-sky-600 shrink-0" />
                       <div className="text-xs">
                         <span className="text-slate-500 font-mono uppercase text-[10px] block">Selected Sourcing Segment</span>
                         <strong className="text-sky-900 font-bold">{productParam}</strong>
@@ -479,7 +498,8 @@ function EnquiryContent() {
                       disabled={formSubmitting}
                       className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white ps-8 pe-7 py-3.5 text-xs tracking-[0.16em] uppercase font-semibold rounded-md transition-transform duration-150 ease-out active:scale-[0.96] w-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5"
                     >
-                      {formSubmitting ? "TRANSMITTING..." : "SEND ENQUIRY"} {!formSubmitting && <ArrowRight size={15} />}
+                      <span>{formSubmitting ? "TRANSMITTING..." : "SEND ENQUIRY"}</span>
+                      {!formSubmitting && <FaArrowRight className="w-3.5 h-3.5" />}
                     </button>
                     <p className="text-xs text-slate-500 text-center mt-3">
                       We typically respond within 24–48 business hours. All enquiries are treated with strict commercial confidentiality.

@@ -4,90 +4,94 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Pill,
-  Stethoscope,
-  Leaf,
-  Globe,
-  ShieldCheck,
-  Scale,
-  Zap,
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
-  MessageCircle,
-  ArrowRight,
-  ChevronRight,
-  CheckCircle2,
-  Building2,
-  X,
-  FileCheck2,
-  FlaskConical,
-  Boxes,
-  Truck,
-  FileSpreadsheet
-} from "lucide-react";
+  FaShieldHalved,
+  FaScaleBalanced,
+  FaGlobe,
+  FaHandshake,
+  FaCircleCheck,
+  FaFileContract,
+  FaPlaneDeparture,
+  FaFlask,
+  FaPills,
+  FaSyringe,
+  FaStethoscope,
+  FaLeaf,
+  FaBoltLightning,
+  FaClock,
+  FaEnvelope,
+  FaPhoneVolume,
+  FaWhatsapp,
+  FaLocationDot,
+  FaArrowRight,
+  FaChevronRight,
+  FaBoxesPacking,
+  FaTruckFast,
+  FaCertificate,
+  FaAward,
+  FaCheck,
+  FaXmark
+} from "react-icons/fa6";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import { WorldMap } from "../../components/ui/world-map";
 
-// Global capital routes originating from Hyderabad HQ (17.3850° N, 78.4867° E)
+// Regional export pathways originating from Hyderabad HQ (17.3850° N, 78.4867° E)
 const heroMapDots = [
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: 51.5074, lng: -0.1278, label: "London" },
+    end: { lat: 51.5074, lng: -0.1278, label: "Western Europe" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: 40.7128, lng: -74.0060, label: "New York" },
+    end: { lat: 40.7128, lng: -74.0060, label: "North America" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: 35.6762, lng: 139.6503, label: "Tokyo" },
+    end: { lat: 35.6762, lng: 139.6503, label: "East Asia" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: 52.5200, lng: 13.4050, label: "Berlin" },
+    end: { lat: 52.5200, lng: 13.4050, label: "Central Europe" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: 25.2048, lng: 55.2708, label: "Dubai" },
+    end: { lat: 25.2048, lng: 55.2708, label: "Middle East & GCC" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: 1.3521, lng: 103.8198, label: "Singapore" },
+    end: { lat: 1.3521, lng: 103.8198, label: "Southeast Asia" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: -1.2921, lng: 36.8219, label: "Nairobi" },
+    end: { lat: -1.2921, lng: 36.8219, label: "East Africa" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: 30.0444, lng: 31.2357, label: "Cairo" },
+    end: { lat: 30.0444, lng: 31.2357, label: "North Africa" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: -15.7975, lng: -47.8919, label: "Brasília" },
+    end: { lat: -15.7975, lng: -47.8919, label: "Latin America" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: 24.7136, lng: 46.6753, label: "Riyadh" },
+    end: { lat: 24.7136, lng: 46.6753, label: "Middle East" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: 14.5995, lng: 120.9842, label: "Manila" },
+    end: { lat: 14.5995, lng: 120.9842, label: "Asia Pacific" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: -6.2088, lng: 106.8456, label: "Jakarta" },
+    end: { lat: 6.5244, lng: 3.3792, label: "West Africa" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: 48.8566, lng: 2.3522, label: "Paris" },
+    end: { lat: 41.2995, lng: 69.2401, label: "Central Asia & CIS" },
   },
   {
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
-    end: { lat: -35.2809, lng: 149.1300, label: "Canberra" },
+    end: { lat: -35.2809, lng: 149.1300, label: "Oceania" },
   },
 ];
 
@@ -275,7 +279,7 @@ export default function Home() {
               className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/95 backdrop-blur-sm shadow-md flex items-center justify-center text-slate-700 hover:bg-white hover:scale-105 transition-transform duration-150 ease-out active:scale-[0.96] border border-slate-200"
               aria-label="Close popup"
             >
-              <X size={16} strokeWidth={2} />
+              <FaXmark className="w-4 h-4" />
             </button>
 
             <Image
@@ -305,19 +309,19 @@ export default function Home() {
             <div className="inline-flex items-center gap-2 bg-sky-50 border border-sky-200/80 rounded-full px-3.5 py-1 mb-5 shadow-sm opacity-0 animate-fade-in-up">
               <span className="w-2 h-2 rounded-full bg-[#7CB800] animate-pulse" />
               <span className="text-sky-800 font-mono text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-semibold">
-                INTERNATIONAL PHARMACEUTICAL TRADERS & EXPORTERS
+                INTERNATIONAL PHARMACEUTICAL EXPORTERS
               </span>
             </div>
 
             {/* Editorial Headline */}
-            <h1 className="font-serif text-[34px] sm:text-[46px] md:text-[56px] lg:text-[62px] font-bold text-slate-900 leading-[1.12] tracking-tight opacity-0 animate-fade-in-up animation-delay-100">
-              Precision Pharma. <br />
+            <h1 className="font-serif text-[32px] sm:text-[44px] md:text-[52px] lg:text-[58px] font-bold text-slate-900 leading-[1.14] tracking-tight opacity-0 animate-fade-in-up animation-delay-100">
+              One Stop Solution For All Your Health Care Imports <br />
               <span className="italic text-sky-600 font-normal">From India To The World.</span>
             </h1>
 
             {/* Description */}
-            <p className="text-slate-600 text-[15px] sm:text-[17px] leading-relaxed mt-5 max-w-2xl mx-auto opacity-0 animate-fade-in-up animation-delay-200">
-              Hyderabad-based B2B pharmaceutical exporter sourcing WHO-GMP certified generics, therapeutics, medical devices, and herbal formulations across 50+ countries.
+            <p className="text-slate-600 text-[14px] sm:text-[16px] leading-relaxed mt-5 max-w-3xl mx-auto opacity-0 animate-fade-in-up animation-delay-200">
+              Hyderabad, India-based B2B pharmaceutical exporter sourcing WHO-GMP, EU-GMP, US-FDA, PIC/S, other SRAs certified APIs Finished Pharmaceutical Formulations, Speciality and Complex therapeutics, Injectables and Hospital Products, Vaccines and Biologics, Nutraceuticals and dietary supplements, Medical devices and Diagnostics, Dermatology, Personal care and Cosmeceuticals.
             </p>
 
             {/* Action Buttons */}
@@ -327,7 +331,7 @@ export default function Home() {
                 className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white ps-7 pe-6 py-3.5 text-xs tracking-[0.14em] uppercase font-semibold rounded-md shadow-md hover:shadow-lg transition-transform duration-150 ease-out active:scale-[0.96] flex items-center justify-center gap-2 hover:-translate-y-0.5 w-full sm:w-auto text-center"
               >
                 <span>Start Sourcing Enquiry</span>
-                <ArrowRight size={14} />
+                <FaArrowRight className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => scrollTo("products")}
@@ -338,7 +342,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Interactive World Map (Connecting World Capitals from Hyderabad HQ, India) */}
+          {/* Interactive World Map (Connecting Global Regional Corridors from Hyderabad HQ, India) */}
           <div className="relative w-full max-w-5xl mx-auto opacity-0 animate-fade-in-up animation-delay-400">
             <WorldMap
               dots={heroMapDots}
@@ -346,19 +350,44 @@ export default function Home() {
               className="w-full"
             />
 
-            {/* Verified Metrics Row Under Map */}
-            <div className="mt-6 bg-white border border-slate-200/90 rounded-xl p-5 sm:p-6 shadow-sm grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
-              <div className="sm:border-r border-slate-200 sm:pr-4">
-                <div className="font-mono text-2xl sm:text-3xl font-bold text-slate-900">50+</div>
-                <div className="text-xs font-mono tracking-wider uppercase text-slate-500 mt-1 font-semibold">Export Markets Worldwide</div>
+            {/* Regulatory Excellence & Global Coverage Bar Under Map */}
+            <div className="mt-6 bg-white border border-slate-200/90 rounded-xl p-5 sm:p-6 shadow-sm flex flex-col md:flex-row items-center justify-between gap-5 text-center md:text-left">
+              <div className="flex items-center gap-4 shrink-0 justify-center md:justify-start">
+                <div className="w-12 h-12 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 shrink-0 shadow-sm">
+                  <FaGlobe className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="font-mono text-2xl sm:text-3xl font-bold text-slate-900 leading-tight">50+</div>
+                  <div className="text-[11px] font-mono tracking-wider uppercase text-slate-500 font-semibold">Export Markets Worldwide</div>
+                </div>
               </div>
-              <div className="sm:border-r border-slate-200 sm:px-4">
-                <div className="font-mono text-2xl sm:text-3xl font-bold text-sky-600">WHO-GMP</div>
-                <div className="text-xs font-mono tracking-wider uppercase text-slate-500 mt-1 font-semibold">Certified Sourcing Partners</div>
-              </div>
-              <div className="sm:pl-4">
-                <div className="font-mono text-2xl sm:text-3xl font-bold text-slate-900">10</div>
-                <div className="text-xs font-mono tracking-wider uppercase text-slate-500 mt-1 font-semibold">Specialized Therapeutic Divisions</div>
+
+              <div className="w-full md:w-px h-px md:h-10 bg-slate-200" />
+
+              <div className="flex-1 w-full">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-semibold mb-2.5 text-center md:text-left">
+                  Certified Manufacturing network with regulatory excellence across:
+                </div>
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-1.5 font-mono text-[10px] sm:text-[11px]">
+                  {[
+                    "WHO-GMP",
+                    "EU-GMP",
+                    "US-FDA",
+                    "PIC/S",
+                    "HALAL & KOSHER",
+                    "MHRA",
+                    "OTHER SRAs",
+                    "ISO 9001:2015",
+                    "ISO 13485"
+                  ].map((body, bIdx) => (
+                    <span
+                      key={bIdx}
+                      className="bg-slate-100/90 border border-slate-200/90 text-slate-800 font-bold px-2.5 py-1 rounded shadow-xs"
+                    >
+                      {body}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -366,37 +395,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Trust Ticker (Marquee) ─── */}
+      {/* ─── Trust Ticker (Marquee - Portfolio & Therapeutic Categories) ─── */}
       <div className="w-full bg-slate-50 py-3.5 overflow-hidden border-b border-slate-200 relative z-10 font-mono">
         <div className="animate-marquee select-none flex items-center">
           {[...Array(3)].map((_, i) => (
             <span key={i} className="text-xs tracking-[0.16em] uppercase text-slate-600 font-semibold flex items-center">
-              PHARMACEUTICAL GENERICS
+              PHARMACEUTICAL GENERICS (RX)
               <span className="mx-4 text-[#7CB800]">◆</span>
-              MEDICAL DEVICES
+              ACTIVE PHARMACEUTICAL INGREDIENTS (APIS)
+              <span className="mx-4 text-[#7CB800]">◆</span>
+              SPECIALTY & COMPLEX THERAPEUTICS
+              <span className="mx-4 text-[#7CB800]">◆</span>
+              INJECTABLES & HOSPITAL PRODUCTS
+              <span className="mx-4 text-[#7CB800]">◆</span>
+              VACCINES & BIOLOGICS
+              <span className="mx-4 text-[#7CB800]">◆</span>
+              NUTRACEUTICALS & DIETARY SUPPLEMENTS
+              <span className="mx-4 text-[#7CB800]">◆</span>
+              MEDICAL DEVICES & DIAGNOSTICS
+              <span className="mx-4 text-[#7CB800]">◆</span>
+              DERMATOLOGY, PERSONAL CARE & COSMECEUTICALS
+              <span className="mx-4 text-[#7CB800]">◆</span>
+              CLASSICAL AYURVEDIC MEDICINES
               <span className="mx-4 text-[#7CB800]">◆</span>
               WHO-GMP CERTIFIED SOURCING
               <span className="mx-4 text-[#7CB800]">◆</span>
-              CE COMPLIANT
+              EU-GMP & US-FDA COMPLIANT
               <span className="mx-4 text-[#7CB800]">◆</span>
-              AYURVEDIC MEDICINES
+              PIC/S & SRAs SOURCING
               <span className="mx-4 text-[#7CB800]">◆</span>
-              HERBAL NUTRACEUTICALS
+              ISO 9001 & ISO 13485
               <span className="mx-4 text-[#7CB800]">◆</span>
-              COSMECEUTICALS
-              <span className="mx-4 text-[#7CB800]">◆</span>
-              GLOBAL EXPORTS (50+ COUNTRIES)
-              <span className="mx-4 text-[#7CB800]">◆</span>
-              PRIVATE LABEL & CONTRACT SOURCING
-              <span className="mx-4 text-[#7CB800]">◆</span>
-              US FDA CTD DOSSIER SUPPORT
+              GLOBAL EXPORTS (50+ MARKETS)
               <span className="mx-4 text-[#7CB800]">◆</span>
             </span>
           ))}
         </div>
       </div>
 
-      {/* ─── About Section (Featuring Real Pharma Cleanroom & Logistics Photos) ─── */}
+      {/* ─── About Section (Merchant Exporter & Sourcing Partnerships) ─── */}
       <section id="about" className="bg-white py-16 sm:py-24 lg:py-28 relative overflow-hidden font-sans border-b border-slate-100">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
           
@@ -406,35 +443,112 @@ export default function Home() {
                 ABOUT THE ENTERPRISE
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-slate-900 mb-5">
-                Pharmaceutical Excellence With Ayurvedic Roots
+                Connecting International markets with High Quality and reliable pharmaceutical solutions from India
               </h2>
               <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
                 <p>
-                  Neo Life Sciences is a specialist B2B pharmaceutical trading and global export partner based in Hyderabad. We act as a streamlined sourcing catalyst for regulated international markets, collaborating with certified manufacturing laboratories holding WHO-GMP, ISO 9001:2015, and ISO 13485 accreditations.
+                  Neo Life Sciences Pvt Ltd is a Hyderabad, India -based pharmaceutical merchant exporter, sourcing and supplying APIs, Finished Pharmaceutical, Specialty & Complex Therapeutics, Injectables & Hospital Products, Vaccines & Biologics, Nutraceuticals & Dietary Supplements, Medical Devices & Diagnostics, Dermatology, Personal Care & Cosmeceuticals, from certified Indian manufacturers to global markets.
                 </p>
                 <p>
-                  Every therapeutic batch, device shipment, and standardized extract is fully traceable to its origin. Our dedicated regulatory affairs department coordinates import licensing, MOH permit approvals, and compiles product registration dossiers in CTD formats for swift market entry.
+                  Our Vision is to become a globally trusted pharmaceutical sourcing and export partner, improving access to quality healthcare across international markets.
+                </p>
+                <p>
+                  We collaborate strictly with certified manufacturing laboratories holding WHO-GMP, PICS, EU GMP, US FDA , Other SRAs, ISO 9001:2015, and ISO 13485 accreditations. Every therapeutic batch, device shipment, and standardised extract is fully traceable back to its origin.
+                </p>
+                <p>
+                  Our technical strength lies in our dedicated regulatory affairs department. We coordinate import licensing, MOH permit approvals, and compile complete product registration dossiers in Common Technical Document (CTD) formats to secure market entries swiftly.
                 </p>
               </div>
             </div>
 
-            {/* Real Cleanroom Photography Showcase */}
+            {/* Merchant Exporter Sourcing Model & What We Stand For - 2x2 Bento Grid */}
             <div className="lg:col-span-6 reveal-right">
-              <div className="relative rounded-2xl overflow-hidden shadow-md border border-slate-200 aspect-[16/10] bg-slate-900 group">
-                <Image
-                  src="/images/pharma_cleanroom.jpg"
-                  alt="Modern WHO-GMP Pharmaceutical Cleanroom Manufacturing and Packaging"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105 outline outline-1 -outline-offset-1 outline-black/10"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent pointer-events-none" />
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <div className="text-[10px] font-mono font-semibold uppercase tracking-wider text-sky-400 mb-1">
-                    CERTIFIED MANUFACTURING COLLABORATION
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
+                {/* 1. Quality */}
+                <div className="bg-gradient-to-br from-white to-sky-50/40 border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-xs hover:border-sky-400 hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
+                  <div>
+                    <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 mb-3.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaShieldHalved className="w-5 h-5" />
+                    </div>
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-sky-700 font-semibold mb-1">
+                      Pillar 01
+                    </div>
+                    <h4 className="text-base font-bold text-slate-900 mb-1.5 group-hover:text-sky-600 transition-colors">
+                      Quality
+                    </h4>
+                    <p className="text-slate-600 text-xs leading-relaxed">
+                      Connecting global healthcare markets with trusted Indian manufacturers and quality-assured products.
+                    </p>
                   </div>
-                  <div className="text-xs sm:text-sm font-bold leading-snug">
-                    WHO-GMP Certified Blister Packaging & Cleanroom Facilities
+                  <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-[10px] text-slate-400 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#7CB800]" />
+                    <span>WHO-GMP & CoA Traceability</span>
+                  </div>
+                </div>
+
+                {/* 2. Compliance */}
+                <div className="bg-gradient-to-br from-white to-sky-50/40 border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-xs hover:border-sky-400 hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
+                  <div>
+                    <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 mb-3.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaScaleBalanced className="w-5 h-5" />
+                    </div>
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-sky-700 font-semibold mb-1">
+                      Pillar 02
+                    </div>
+                    <h4 className="text-base font-bold text-slate-900 mb-1.5 group-hover:text-sky-600 transition-colors">
+                      Compliance
+                    </h4>
+                    <p className="text-slate-600 text-xs leading-relaxed">
+                      Supporting international market requirements through reliable sourcing and regulatory solutions.
+                    </p>
+                  </div>
+                  <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-[10px] text-slate-400 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
+                    <span>CTD & ACTD Dossiers</span>
+                  </div>
+                </div>
+
+                {/* 3. Access */}
+                <div className="bg-gradient-to-br from-white to-sky-50/40 border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-xs hover:border-sky-400 hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
+                  <div>
+                    <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 mb-3.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaGlobe className="w-5 h-5" />
+                    </div>
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-sky-700 font-semibold mb-1">
+                      Pillar 03
+                    </div>
+                    <h4 className="text-base font-bold text-slate-900 mb-1.5 group-hover:text-sky-600 transition-colors">
+                      Access
+                    </h4>
+                    <p className="text-slate-600 text-xs leading-relaxed">
+                      Creating seamless access to a broad range of Indian pharmaceutical and healthcare capabilities.
+                    </p>
+                  </div>
+                  <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-[10px] text-slate-400 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                    <span>50+ Global Markets</span>
+                  </div>
+                </div>
+
+                {/* 4. Partnerships */}
+                <div className="bg-gradient-to-br from-white to-sky-50/40 border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-xs hover:border-sky-400 hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
+                  <div>
+                    <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 mb-3.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaHandshake className="w-5 h-5" />
+                    </div>
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-sky-700 font-semibold mb-1">
+                      Pillar 04
+                    </div>
+                    <h4 className="text-base font-bold text-slate-900 mb-1.5 group-hover:text-sky-600 transition-colors">
+                      Partnerships
+                    </h4>
+                    <p className="text-slate-600 text-xs leading-relaxed">
+                      Building lasting business relationships through integrity, reliability, and excellence.
+                    </p>
+                  </div>
+                  <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-[10px] text-slate-400 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#7CB800]" />
+                    <span>B2B Institutional Trade</span>
                   </div>
                 </div>
               </div>
@@ -454,8 +568,9 @@ export default function Home() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded">
-                  Cold-Chain Freight
+                <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded flex items-center gap-1.5">
+                  <FaPlaneDeparture className="w-3 h-3" />
+                  <span>Cold-Chain Freight</span>
                 </div>
               </div>
               <div className="p-5">
@@ -466,25 +581,23 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Card 2 - Analytical QC Testing */}
-            <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:shadow-md hover:border-sky-500 transition-all duration-200 group reveal delay-100">
-              <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
-                <Image
-                  src="/images/pharma_qc_lab.jpg"
-                  alt="Analytical QC Laboratory HPLC Chemical Assays for Dossier Verification"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded">
-                  Analytical QC
+            {/* Card 2 - 100% Certified Sourcing */}
+            <div className="border border-slate-200 bg-white rounded-xl p-5 sm:p-6 hover:shadow-md hover:border-sky-500 transition-all duration-200 group flex flex-col justify-between reveal delay-100">
+              <div>
+                <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
+                  <FaCertificate className="w-5 h-5" />
                 </div>
-              </div>
-              <div className="p-5">
-                <h3 className="text-base font-bold text-slate-900 mb-1.5">Analytical Laboratory Testing</h3>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-sky-600 font-semibold mb-1">
+                  100% CERTIFIED SOURCING
+                </div>
+                <h3 className="text-base font-bold text-slate-900 mb-1.5">Audited Partner Network</h3>
                 <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                  Rigorous HPLC, assay, and microbial purity testing for every consignment, backed by batch-specific Certificates of Analysis (COA).
+                  We contract exclusively with globally audited manufacturers holding WHO-GMP, PIC/S, and EU-GMP accreditations with complete batch traceability.
                 </p>
+              </div>
+              <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-xs text-slate-500 flex items-center gap-1.5">
+                <FaCircleCheck className="w-3.5 h-3.5 text-[#7CB800]" />
+                <span>Batch Isolation & CoA Verified</span>
               </div>
             </div>
 
@@ -492,7 +605,7 @@ export default function Home() {
             <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:shadow-md hover:border-sky-500 transition-all duration-200 group p-5 sm:p-6 flex flex-col justify-between reveal delay-200">
               <div>
                 <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
-                  <FileCheck2 size={22} />
+                  <FaFileContract className="w-5 h-5" />
                 </div>
                 <div className="text-[10px] font-mono uppercase tracking-wider text-sky-600 font-semibold mb-1">
                   REGULATORY AFFAIRS
@@ -503,7 +616,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-xs text-slate-500 flex items-center gap-1.5">
-                <ShieldCheck size={14} className="text-[#7CB800]" />
+                <FaShieldHalved className="w-3.5 h-3.5 text-[#7CB800]" />
                 <span>US FDA CTD & EU GMP Ready</span>
               </div>
             </div>
@@ -609,7 +722,8 @@ export default function Home() {
               href="/enquiry"
               className="text-xs font-mono font-semibold uppercase tracking-wider text-sky-600 hover:text-sky-700 flex items-center gap-1.5 transition-colors self-start sm:self-auto"
             >
-              Request Custom Batch RFQ <ArrowRight size={14} />
+              <span>Request Custom Batch RFQ</span>
+              <FaArrowRight className="w-3 h-3" />
             </Link>
           </div>
 
@@ -702,7 +816,7 @@ export default function Home() {
                 className="bg-white border border-slate-200 rounded-lg p-4 text-center flex flex-col items-center justify-center hover:bg-sky-50 hover:border-sky-300 transition-colors duration-200 reveal shadow-sm"
                 style={{ transitionDelay: `${(idx % 9) * 50}ms` }}
               >
-                <ShieldCheck size={20} className="text-[#7CB800] mb-1.5 mx-auto" />
+                <FaCertificate className="w-5 h-5 text-[#7CB800] mb-1.5 mx-auto" />
                 <span className="text-[11px] font-mono tracking-wider uppercase font-bold text-slate-800">
                   {cert}
                 </span>
@@ -750,7 +864,7 @@ export default function Home() {
                   <ul className="text-[11px] text-slate-500 space-y-1 font-mono">
                     {step.details.map((detail, dIdx) => (
                       <li key={dIdx} className="flex items-center gap-1.5">
-                        <CheckCircle2 size={12} className="text-[#7CB800] shrink-0" />
+                        <FaCircleCheck className="w-3 h-3 text-[#7CB800] shrink-0" />
                         <span>{detail}</span>
                       </li>
                     ))}
@@ -781,7 +895,7 @@ export default function Home() {
             {/* Card 1 */}
             <div className="border border-slate-200 bg-white p-6 rounded-xl hover:border-sky-500 hover:shadow-md transition-all duration-200 reveal delay-100">
               <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
-                <Scale size={20} />
+                <FaScaleBalanced className="w-5 h-5" />
               </div>
               <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1.5">Regulatory Precision</h3>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
@@ -792,7 +906,7 @@ export default function Home() {
             {/* Card 2 */}
             <div className="border border-slate-200 bg-white p-6 rounded-xl hover:border-sky-500 hover:shadow-md transition-all duration-200 reveal delay-200">
               <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
-                <ShieldCheck size={20} />
+                <FaShieldHalved className="w-5 h-5" />
               </div>
               <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1.5">100% Certified Sourcing</h3>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
@@ -803,7 +917,7 @@ export default function Home() {
             {/* Card 3 */}
             <div className="border border-slate-200 bg-white p-6 rounded-xl hover:border-sky-500 hover:shadow-md transition-all duration-200 reveal delay-300">
               <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
-                <Zap size={20} />
+                <FaBoltLightning className="w-5 h-5" />
               </div>
               <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1.5">Velocity & Transparency</h3>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
@@ -814,7 +928,7 @@ export default function Home() {
             {/* Card 4 */}
             <div className="border border-slate-200 bg-white p-6 rounded-xl hover:border-sky-500 hover:shadow-md transition-all duration-200 reveal delay-400">
               <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
-                <Clock size={20} />
+                <FaClock className="w-5 h-5" />
               </div>
               <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1.5">On-Time Delivery</h3>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
@@ -844,61 +958,81 @@ export default function Home() {
 
             {/* Left Panel - Corporate Info (2 cols) */}
             <div className="lg:col-span-2 reveal-left">
-              <div className="bg-slate-900 text-slate-100 p-6 sm:p-8 rounded-2xl shadow-xl relative overflow-hidden space-y-5 border border-slate-800">
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-white/95 via-sky-50/40 to-slate-50/90 backdrop-blur-xl border border-sky-200/80 p-6 sm:p-8 shadow-[0_16px_36px_rgba(2,132,199,0.06),0_1px_2px_rgba(0,0,0,0.04)] space-y-6">
+                
+                {/* Subtle Ambient Decorative Light blooms */}
+                <div className="absolute -top-16 -right-16 w-48 h-48 bg-sky-400/15 rounded-full blur-2xl pointer-events-none" />
+                <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-[#7CB800]/15 rounded-full blur-2xl pointer-events-none" />
+                <div className="absolute inset-0 grid-texture opacity-40 pointer-events-none" />
 
-                <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono mb-2">
-                  Corporate Headquarters
-                </h3>
+                <div className="relative z-10">
+                  <div className="inline-flex items-center gap-2 bg-sky-100/70 border border-sky-200 rounded-full px-3 py-1 mb-3">
+                    <span className="w-2 h-2 rounded-full bg-[#7CB800] animate-pulse" />
+                    <span className="text-[10px] font-mono tracking-[0.16em] uppercase text-sky-900 font-semibold">
+                      DIRECT SOURCING DESK
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold font-serif text-slate-900 leading-tight">
+                    Corporate Headquarters
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    Direct export & regulatory coordination from Hyderabad, India.
+                  </p>
+                </div>
 
-                {/* Contact Items */}
-                <div className="space-y-4">
+                {/* Contact Items in Clean Glass Cards */}
+                <div className="space-y-3 relative z-10">
 
-                  <div className="flex gap-3 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <Mail size={15} />
+                  <div className="flex gap-3.5 items-start p-3 sm:p-3.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/80 hover:border-sky-400/60 hover:shadow-[0_4px_16px_rgba(2,132,199,0.08)] transition-all duration-200 group">
+                    <div className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 shrink-0 mt-0.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaEnvelope className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Email Sourcing</span>
-                      <a href="mailto:contact@neoayushveda.com" className="text-xs sm:text-sm font-semibold text-white hover:text-sky-400 transition-colors">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Email Sourcing</span>
+                      <a href="mailto:contact@neoayushveda.com" className="text-xs sm:text-sm font-semibold text-slate-900 hover:text-sky-600 transition-colors">
                         contact@neoayushveda.com
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex gap-3 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <Phone size={15} />
+                  <div className="flex gap-3.5 items-start p-3 sm:p-3.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/80 hover:border-sky-400/60 hover:shadow-[0_4px_16px_rgba(2,132,199,0.08)] transition-all duration-200 group">
+                    <div className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 shrink-0 mt-0.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaPhoneVolume className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Corporate Phone</span>
-                      <a href="tel:+914035247813" className="text-xs sm:text-sm font-semibold text-white hover:text-sky-400 transition-colors">
-                        040-35247813
-                      </a>
-                      <a href="tel:+918712443610" className="text-xs sm:text-sm font-semibold text-white hover:text-sky-400 transition-colors">
-                        +91 87124 43610
-                      </a>
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Corporate Phone</span>
+                      <div className="flex flex-wrap gap-x-2 text-xs sm:text-sm font-semibold text-slate-900">
+                        <a href="tel:+914035247813" className="hover:text-sky-600 transition-colors">
+                          040-35247813
+                        </a>
+                        <span className="text-slate-400">/</span>
+                        <a href="tel:+918712443610" className="hover:text-sky-600 transition-colors">
+                          +91 87124 43610
+                        </a>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex gap-3 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <MessageCircle size={15} />
+                  <div className="flex gap-3.5 items-start p-3 sm:p-3.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/80 hover:border-sky-400/60 hover:shadow-[0_4px_16px_rgba(2,132,199,0.08)] transition-all duration-200 group">
+                    <div className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 shrink-0 mt-0.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaWhatsapp className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">WhatsApp Brokerage</span>
-                      <span className="text-xs sm:text-sm font-semibold text-white">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">WhatsApp Brokerage</span>
+                      <span className="text-xs sm:text-sm font-semibold text-slate-900">
                         Available on Request
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex gap-3 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <MapPin size={15} />
+                  <div className="flex gap-3.5 items-start p-3 sm:p-3.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/80 hover:border-sky-400/60 hover:shadow-[0_4px_16px_rgba(2,132,199,0.08)] transition-all duration-200 group">
+                    <div className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 shrink-0 mt-0.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaLocationDot className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Registered Office Address</span>
-                      <address className="text-xs text-slate-300 not-italic leading-relaxed font-mono">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Registered Office Address</span>
+                      <address className="text-xs text-slate-700 not-italic leading-relaxed font-mono">
+                        <strong className="text-slate-900 font-sans font-bold block text-xs">NEO LIFE SCIENCES PVT LTD</strong>
                         201-2nd Floor, Above ICICI Bank,<br />
                         Plot 13/A/B Lane 12, MLA Colony,<br />
                         Banjara Hills, Hyderabad – 500034,<br />
@@ -907,13 +1041,13 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="flex gap-3 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <Clock size={15} />
+                  <div className="flex gap-3.5 items-start p-3 sm:p-3.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/80 hover:border-sky-400/60 hover:shadow-[0_4px_16px_rgba(2,132,199,0.08)] transition-all duration-200 group">
+                    <div className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-200/80 flex items-center justify-center text-sky-600 shrink-0 mt-0.5 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 shadow-2xs">
+                      <FaClock className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-400 font-semibold mb-0.5">Business Hours</span>
-                      <span className="text-xs text-slate-300 font-mono">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Business Hours</span>
+                      <span className="text-xs text-slate-700 font-mono">
                         Monday – Saturday: 9:00 AM – 6:00 PM IST
                       </span>
                     </div>
@@ -922,8 +1056,8 @@ export default function Home() {
                 </div>
 
                 {/* Regulatory Tags */}
-                <div className="border-t border-slate-800 pt-4 mt-4">
-                  <h4 className="text-[10px] font-mono tracking-[0.16em] uppercase text-sky-400 mb-2 font-semibold">
+                <div className="border-t border-slate-200/80 pt-5 mt-5 relative z-10">
+                  <h4 className="text-[10px] font-mono tracking-[0.16em] uppercase text-slate-500 mb-2.5 font-semibold">
                     REGULATORY DOCUMENTATION SUPPORTED
                   </h4>
                   <div className="flex flex-wrap gap-1.5">
@@ -936,7 +1070,7 @@ export default function Home() {
                     ].map((doc, idx) => (
                       <span
                         key={idx}
-                        className="border border-slate-700 bg-slate-800 text-slate-300 font-mono text-[9px] uppercase px-2 py-0.5 font-semibold rounded"
+                        className="border border-sky-200/90 bg-white text-slate-800 font-mono text-[10px] uppercase px-2.5 py-1 font-semibold rounded-md shadow-2xs hover:border-sky-500 hover:text-sky-700 transition-colors"
                       >
                         {doc}
                       </span>
@@ -953,7 +1087,7 @@ export default function Home() {
 
                 {formSubmitted && (
                   <div className="bg-sky-50 border border-sky-300 text-sky-900 p-4 rounded-lg mb-5 flex items-start gap-3 animate-fade-in text-sm">
-                    <ShieldCheck size={20} className="text-sky-600 shrink-0 mt-0.5" />
+                    <FaShieldHalved className="w-5 h-5 text-sky-600 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-bold uppercase tracking-wider text-sky-900 font-mono text-xs">ENQUIRY TRANSMITTED</h4>
                       <p className="text-xs text-slate-600 mt-1 leading-relaxed">
@@ -1142,7 +1276,8 @@ export default function Home() {
                       disabled={formSubmitting}
                       className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white ps-8 pe-7 py-3.5 text-xs tracking-[0.16em] uppercase font-semibold rounded-md transition-transform duration-150 ease-out active:scale-[0.96] w-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5"
                     >
-                      {formSubmitting ? "TRANSMITTING..." : "SEND ENQUIRY"} {!formSubmitting && <ArrowRight size={15} />}
+                      <span>{formSubmitting ? "TRANSMITTING..." : "SEND ENQUIRY"}</span>
+                      {!formSubmitting && <FaArrowRight className="w-3.5 h-3.5" />}
                     </button>
                     <p className="text-[11px] text-slate-500 text-center mt-2.5">
                       We typically respond within 24–48 business hours. All enquiries are treated with strict commercial confidentiality.
@@ -1170,7 +1305,7 @@ const productsList = [
     category: "DMF Filed",
     title: "APIs",
     desc: "Active Pharmaceutical Ingredients (APIs) and intermediates sourced from US FDA-inspected and WHO-GMP certified plants with comprehensive DMF filings.",
-    tags: ["Active Ingredients", "DMF Files", "RSM", "Intermediates"],
+    tags: ["Active Ingredients", "DMF Files", "RSM Intermediates"],
     bgImage: "/images/prod_apis.png"
   },
   {
@@ -1202,7 +1337,7 @@ const productsList = [
     category: "AYUSH / Health",
     title: "Nutraceuticals & Ayush Supplements",
     desc: "Premium nutraceuticals, vitamins, minerals, herbal supplements, and AYUSH-certified Ayurvedic formulations for global wellness markets.",
-    tags: ["Vitamins", "Ayurvedic", "Herbal", "Supplements"],
+    tags: ["Vitamins", "Ayurvedic", "Herbal Supplements"],
     bgImage: "/images/prod_nutraceuticals.png"
   },
   {
@@ -1210,7 +1345,7 @@ const productsList = [
     category: "Class II & III",
     title: "Medical Devices",
     desc: "CE, ISO 13485, and FDA-ready surgical instruments, diagnostics, hospital consumables, and healthcare disposables.",
-    tags: ["Diagnostics", "Surgical", "Disposables", "Consumables"],
+    tags: ["Diagnostics", "Surgical Disposables", "Consumables"],
     bgImage: "/images/prod_devices.png"
   }
 ];

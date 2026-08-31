@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, Sparkles, ArrowRight, ShieldCheck } from "lucide-react";
+import { FaBars, FaXmark, FaChevronDown, FaArrowRight, FaShieldHalved } from "react-icons/fa6";
 import { PRODUCT_CATEGORIES } from "./productCategories";
 
 const NAV_ITEMS = [
@@ -172,8 +172,8 @@ export default function Header() {
                         }`}
                       >
                         {item.label}
-                        <ChevronDown 
-                          className={`w-3.5 h-3.5 transition-transform duration-150 ${
+                        <FaChevronDown 
+                          className={`w-3 h-3 transition-transform duration-150 ${
                             productsHovered ? "rotate-180 text-sky-600" : "text-slate-400"
                           }`} 
                         />
@@ -215,17 +215,18 @@ export default function Header() {
                                 <span className="text-[13px] font-medium text-slate-800 group-hover:text-sky-600 transition-colors leading-snug">
                                   {cat.name}
                                 </span>
-                                <ArrowRight className="w-3 h-3 text-slate-300 group-hover:text-sky-600 transition-colors shrink-0 ml-2" />
+                                <FaArrowRight className="w-3 h-3 text-slate-300 group-hover:text-sky-600 transition-colors shrink-0 ml-2" />
                               </div>
                             </Link>
                           ))}
                         </div>
                         <div className="mt-2 pt-2 border-t border-slate-100 px-3 py-1.5 bg-slate-50/80 rounded-lg flex items-center justify-between">
-                          <span className="text-[11px] text-slate-500 flex items-center gap-1">
-                            <ShieldCheck className="w-3.5 h-3.5 text-[#7CB800]" /> CTD Dossier Support
+                          <span className="text-[11px] text-slate-500 flex items-center gap-1.5">
+                            <FaShieldHalved className="w-3.5 h-3.5 text-[#7CB800]" /> CTD Dossier Support
                           </span>
-                          <Link href="/enquiry" className="text-[11px] font-semibold text-sky-600 hover:underline">
-                            Enquire →
+                          <Link href="/enquiry" className="text-[11px] font-semibold text-sky-600 hover:underline flex items-center gap-1">
+                            <span>Enquire</span>
+                            <FaArrowRight className="w-2.5 h-2.5" />
                           </Link>
                         </div>
                       </div>
@@ -258,10 +259,10 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-3">
             <button
               onClick={() => scrollTo("contact")}
-              className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white text-[12px] tracking-wider uppercase px-5 py-2.5 font-semibold rounded-md shadow-sm hover:shadow-md transition-transform duration-150 ease-out active:scale-[0.96] hover:-translate-y-0.5 flex items-center gap-1.5"
+              className="bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white text-[12px] tracking-wider uppercase px-5 py-2.5 font-semibold rounded-md shadow-sm hover:shadow-md transition-transform duration-150 ease-out active:scale-[0.96] hover:-translate-y-0.5 flex items-center gap-2"
             >
               <span>Enquire Now</span>
-              <ArrowRight size={13} />
+              <FaArrowRight className="w-3 h-3" />
             </button>
           </div>
 
@@ -271,7 +272,7 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Menu"
           >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileMenuOpen ? <FaXmark className="w-5 h-5" /> : <FaBars className="w-5 h-5" />}
           </button>
         </div>
       </header>
@@ -298,7 +299,7 @@ export default function Header() {
                       }`}
                     >
                       {item.label}
-                      <ChevronDown
+                      <FaChevronDown
                         className={`w-4 h-4 transition-transform duration-200 ${
                           productsMobileOpen ? "rotate-180 text-sky-600" : "text-slate-400"
                         }`}
@@ -353,7 +354,7 @@ export default function Header() {
             className="w-full bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white py-3.5 text-[13px] tracking-wider uppercase transition-transform duration-150 ease-out active:scale-[0.96] font-semibold shadow-md rounded-md flex items-center justify-center gap-2"
           >
             <span>Enquire Now</span>
-            <ArrowRight size={14} />
+            <FaArrowRight className="w-3.5 h-3.5" />
           </button>
           <div className="flex items-center justify-center gap-3 text-xs text-slate-500 font-mono mt-4">
             <span>040-35247813</span>

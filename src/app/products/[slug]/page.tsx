@@ -2,7 +2,14 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import { ArrowLeft, ChevronRight, Layers, GitBranch, ArrowRight, Send, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  FaArrowLeft,
+  FaChevronRight,
+  FaLayerGroup,
+  FaDiagramProject,
+  FaArrowRight,
+  FaShieldHalved
+} from "react-icons/fa6";
 import Header from "../../../../components/layout/Header";
 import Footer from "../../../../components/layout/Footer";
 import {
@@ -42,7 +49,7 @@ export default function ProductCategoryPage() {
     reveals.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, [slug]);
+  }, [category]);
 
   if (!category) {
     return (
@@ -58,8 +65,8 @@ export default function ProductCategoryPage() {
               href="/"
               className="inline-flex items-center gap-2 text-sky-600 hover:text-sky-700 font-semibold transition-colors uppercase tracking-wider text-xs font-mono"
             >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
+              <FaArrowLeft className="w-3.5 h-3.5" />
+              <span>Back to Home</span>
             </Link>
           </div>
         </main>
@@ -85,9 +92,9 @@ export default function ProductCategoryPage() {
               >
                 Home
               </Link>
-              <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+              <FaChevronRight className="w-3 h-3 text-slate-400" />
               <span className="text-slate-500">Products</span>
-              <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+              <FaChevronRight className="w-3 h-3 text-slate-400" />
               <span className="text-sky-600 font-bold">{category.name}</span>
             </nav>
 
@@ -113,7 +120,7 @@ export default function ProductCategoryPage() {
             {/* Stats bar */}
             <div className="flex flex-wrap items-center gap-6 mt-8 opacity-0 animate-fade-in-up animation-delay-400 font-mono">
               <div className="flex items-center gap-2">
-                <Layers className="w-4 h-4 text-sky-600" />
+                <FaLayerGroup className="w-3.5 h-3.5 text-sky-600" />
                 <span className="text-xs text-slate-600 tracking-wider uppercase font-semibold">
                   {category.subcategories.length}{" "}
                   {category.subcategories.length === 1 ? "Category" : "Categories"}
@@ -121,14 +128,14 @@ export default function ProductCategoryPage() {
               </div>
               <div className="w-px h-4 bg-slate-300 hidden sm:block" />
               <div className="flex items-center gap-2">
-                <GitBranch className="w-4 h-4 text-sky-600" />
+                <FaDiagramProject className="w-3.5 h-3.5 text-sky-600" />
                 <span className="text-xs text-slate-600 tracking-wider uppercase font-semibold">
                   {category.subcategories.reduce((acc, sc) => acc + sc.items.length, 0)} Segments
                 </span>
               </div>
               <div className="w-px h-4 bg-slate-300 hidden sm:block" />
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#7CB800]" />
+                <FaShieldHalved className="w-3.5 h-3.5 text-[#7CB800]" />
                 <span className="text-xs text-slate-600 tracking-wider uppercase font-semibold">
                   WHO-GMP & CTD Ready
                 </span>
@@ -176,7 +183,7 @@ export default function ProductCategoryPage() {
                             <div className="group relative p-5 rounded-xl border border-slate-200 bg-white hover:border-sky-500 hover:shadow-md transition-all duration-200">
                               <div className="flex items-center gap-3 mb-4">
                                 <div className="w-9 h-9 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-100">
-                                  <GitBranch className="w-4 h-4" />
+                                  <FaDiagramProject className="w-4 h-4" />
                                 </div>
                                 <div>
                                   <h3 className="text-sm font-bold text-slate-900 group-hover:text-sky-700 transition-colors">
@@ -199,7 +206,7 @@ export default function ProductCategoryPage() {
                                     <span className="text-xs text-slate-700 font-medium group-hover/child:text-sky-700 transition-colors flex-1">
                                       {child.name}
                                     </span>
-                                    <ArrowRight className="w-3 h-3 text-sky-600 opacity-0 group-hover/child:opacity-100 transition-opacity" />
+                                    <FaArrowRight className="w-2.5 h-2.5 text-sky-600 opacity-0 group-hover/child:opacity-100 transition-opacity" />
                                   </Link>
                                 ))}
                               </div>
@@ -224,7 +231,7 @@ export default function ProductCategoryPage() {
                             </h3>
                             <div className="flex items-center gap-1 text-sky-600 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
                               <span className="text-[10px] font-mono font-bold uppercase tracking-wider hidden sm:inline">Enquire</span>
-                              <ArrowRight className="w-3.5 h-3.5" />
+                              <FaArrowRight className="w-3 h-3" />
                             </div>
                           </Link>
                         </div>
@@ -271,9 +278,9 @@ export default function ProductCategoryPage() {
                     <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
                       {cat.shortDesc}
                     </p>
-                    <div className="mt-3 flex items-center gap-1 text-sky-400 text-xs font-mono font-semibold uppercase tracking-wider transition-all">
-                      View Details
-                      <ChevronRight className="w-3.5 h-3.5" />
+                    <div className="mt-3 flex items-center gap-1.5 text-sky-400 text-xs font-mono font-semibold uppercase tracking-wider transition-all">
+                      <span>View Details</span>
+                      <FaChevronRight className="w-2.5 h-2.5" />
                     </div>
                   </Link>
                 )
@@ -285,8 +292,8 @@ export default function ProductCategoryPage() {
                 href="/"
                 className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-semibold text-xs font-mono tracking-wider uppercase transition-colors"
               >
-                <ArrowLeft className="w-4 h-4" />
-                Back to Home
+                <FaArrowLeft className="w-3.5 h-3.5" />
+                <span>Back to Home</span>
               </Link>
             </div>
           </div>
