@@ -193,44 +193,54 @@ export function WorldMap({
             })}
           </g>
 
-          {/* Central Origin Node: Hyderabad, India */}
+          {/* Central Origin Node: Hyderabad, India with Company Logo */}
           <g key="origin-hyderabad-node">
             {/* Outward Radar Waves */}
             <circle
               cx={originPin.x}
               cy={originPin.y}
-              r="1.0"
+              r="2.0"
               fill="#7CB800"
               opacity="0.8"
             >
               <animate
                 attributeName="r"
-                from="1.0"
-                to="4.5"
-                dur="1.8s"
+                from="2.0"
+                to="6.0"
+                dur="2.2s"
                 repeatCount="indefinite"
               />
               <animate
                 attributeName="opacity"
                 from="0.8"
                 to="0"
-                dur="1.8s"
+                dur="2.2s"
                 repeatCount="indefinite"
               />
             </circle>
 
-            {/* Core Pin */}
+            {/* Core Circular Logo Capsule */}
             <circle
               cx={originPin.x}
               cy={originPin.y}
-              r="1.2"
-              fill="#003A95"
-              stroke="#7CB800"
-              strokeWidth="0.35"
+              r="3.2"
+              fill="#FFFFFF"
+              stroke="#003A95"
+              strokeWidth="0.5"
+            />
+
+            {/* Neo Life Sciences Logo */}
+            <image
+              href="/images/Logo.png"
+              x={originPin.x - 2.5}
+              y={originPin.y - 1.8}
+              width="5.0"
+              height="3.6"
+              preserveAspectRatio="xMidYMid meet"
             />
 
             {/* Prominent Badge */}
-            <g transform={`translate(${originPin.x}, ${originPin.y + 1.8})`}>
+            <g transform={`translate(${originPin.x}, ${originPin.y + 3.8})`}>
               <rect
                 x="-12"
                 y="0"
