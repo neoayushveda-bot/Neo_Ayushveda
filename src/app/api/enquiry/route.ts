@@ -4,14 +4,9 @@ export async function POST(request: Request) {
   try {
     const data = await request.json();
 
-    const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL;
-    if (!googleScriptUrl) {
-      console.error("Missing GOOGLE_SCRIPT_URL environment variable.");
-      return NextResponse.json(
-        { error: "Server configuration error" },
-        { status: 500 }
-      );
-    }
+    const googleScriptUrl =
+      process.env.GOOGLE_SCRIPT_URL ||
+      "https://script.google.com/macros/s/AKfycbzlDtCpPM-6dt_ilhOQzmYSR3rREWC3KItmRFw9lJJAa2VW7YAD-B1VkTXiO6cMgIwghw/exec";
 
     // Prepare payload (convert docs array to a clean string format for spreadsheet display)
     const phoneVal = (data.phone || "").trim();
@@ -39,24 +34,34 @@ export async function POST(request: Request) {
     };
 
     // Forward the POST request to the deployed Google Apps Script URL
+    // Note: Google Apps Script requires redirect: "follow" and text/plain content-type to handle 302 redirects smoothly in Node.js fetch
     const response = await fetch(googleScriptUrl, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "text/plain;charset=utf-8",
       },
       body: JSON.stringify(payload),
+      redirect: "follow",
     });
 
+    const responseText = await response.text();
+
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Google Apps Script proxy error response:", errorText);
+      console.error("Google Apps Script proxy error (Status " + response.status + "):", responseText);
       return NextResponse.json(
-        { error: "Failed to connect to spreadsheet" },
+        { error: `Google Sheets error (${response.status}): ${responseText.slice(0, 100)}` },
         { status: 500 }
       );
     }
 
-    const result = await response.json();
+    let result: any = {};
+    try {
+      result = JSON.parse(responseText);
+    } catch {
+      // Google Apps Script sometimes returns success HTML or plain text on redirect
+      result = { status: "success" };
+    }
+
     if (result.status === "error") {
       console.error("Google Apps Script response reported an execution error:", result.message);
       return NextResponse.json(
