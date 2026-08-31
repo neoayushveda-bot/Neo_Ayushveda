@@ -17,7 +17,15 @@ export async function POST(request: Request) {
     const phoneVal = (data.phone || "").trim();
     const formattedPhone = phoneVal.startsWith("+") ? `'${phoneVal}` : phoneVal;
 
+    let selectedProductStr = "";
+    if (data.productContext && data.productContext.product) {
+      selectedProductStr = data.productContext.group
+        ? `${data.productContext.product} (${data.productContext.group})`
+        : data.productContext.product;
+    }
+
     const payload = {
+      sourcePage: data.sourcePage || "Website Form",
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
@@ -25,6 +33,7 @@ export async function POST(request: Request) {
       company: data.company,
       country: data.country,
       category: data.category,
+      selectedProduct: selectedProductStr,
       selectedDocs: Array.isArray(data.selectedDocs) ? data.selectedDocs.join(", ") : "",
       message: data.message,
     };
