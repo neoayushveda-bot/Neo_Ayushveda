@@ -204,8 +204,8 @@ function EnquiryContent() {
                     </div>
                     <div className="flex flex-col">
                       <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Email Sourcing</span>
-                      <a href="mailto:contact@neoayushveda.com" className="text-sm font-semibold text-slate-900 hover:text-sky-600 transition-colors">
-                        contact@neoayushveda.com
+                      <a href="mailto:contact@neolspharma.com" className="text-sm font-semibold text-slate-900 hover:text-sky-600 transition-colors">
+                        contact@neolspharma.com
                       </a>
                     </div>
                   </div>

@@ -52,7 +52,7 @@ export default function PrivacyPolicyPage() {
             NEO LIFE SCIENCES PVT LTD (&ldquo;Neo Life Sciences&rdquo;, &ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) is a specialist B2B pharmaceutical trading and international export enterprise registered in Hyderabad, Telangana, India. We are dedicated to respecting and protecting the privacy, commercial confidentiality, and personal data of our corporate clients, healthcare distributors, authorized importers, and website visitors.
           </p>
           <p className="mt-3">
-            This Privacy Policy sets out the principles and practices governing our collection, storage, processing, transfer, and disclosure of information obtained through our official website (<span className="text-sky-600 font-semibold font-mono">neoayushveda.com</span>), electronic correspondence, procurement forms, and associated B2B communication channels.
+            This Privacy Policy sets out the principles and practices governing our collection, storage, processing, transfer, and disclosure of information obtained through our official website (<span className="text-sky-600 font-semibold font-mono">neolspharma.com</span>), electronic correspondence, procurement forms, and associated B2B communication channels.
           </p>
         </>
       ),
@@ -216,8 +216,8 @@ export default function PrivacyPolicyPage() {
           </ul>
           <p className="mt-3">
             To exercise any of these rights, please contact our Data Privacy Desk at{" "}
-            <a href="mailto:contact@neoayushveda.com" className="text-sky-600 font-semibold hover:underline font-mono">
-              contact@neoayushveda.com
+            <a href="mailto:contact@neolspharma.com" className="text-sky-600 font-semibold hover:underline font-mono">
+              contact@neolspharma.com
             </a>.
           </p>
         </>
@@ -381,10 +381,10 @@ export default function PrivacyPolicyPage() {
                             Official Email
                           </span>
                           <a
-                            href="mailto:contact@neoayushveda.com"
+                            href="mailto:contact@neolspharma.com"
                             className="text-sm text-white hover:text-sky-400 transition-colors font-medium"
                           >
-                            contact@neoayushveda.com
+                            contact@neolspharma.com
                           </a>
                         </div>
                       </div>

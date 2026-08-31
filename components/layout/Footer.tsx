@@ -24,10 +24,10 @@ export default function Footer() {
   return (
     <footer className="bg-slate-900 border-t border-slate-800 text-slate-300 font-sans">
       <div className="max-w-[1280px] mx-auto px-6 md:px-12 py-16 lg:py-20">
-        
+
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-slate-800">
-          
+
           {/* Column 1 - Brand & Identity (4 cols) */}
           <div className="lg:col-span-4 flex flex-col gap-5">
             <div className="flex items-center">
@@ -40,12 +40,8 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-              NEO LIFE SCIENCES PVT LTD is an international pharmaceutical trading and B2B export enterprise sourcing WHO-GMP( PIC/S, EU GMP, US FDA and other SRAs) certified generics, medical devices, APIs, and standardized herbal formulations from India to 50+ regulated markets worldwide.
+              NEO LIFE SCIENCES PVT LTD is an international pharmaceutical trading and B2B export enterprise sourcing WHO-GMP, PIC/S, EU GMP, US FDA and other SRAs certified generics, medical devices, APIs, and standardized herbal formulations from India to 50+ regulated markets worldwide.
             </p>
-            <div className="flex items-center gap-2 pt-1 font-mono text-[11px] text-[#A4D73B]">
-              <FaShieldHalved className="w-4 h-4 text-[#7CB800]" />
-              <span>WHO-GMP • ISO 9001:2015 • CTD Compliant</span>
-            </div>
           </div>
 
           {/* Column 2 - Products (3 cols) */}
@@ -153,8 +149,8 @@ export default function Footer() {
 
               <div className="flex items-center gap-2.5 text-xs">
                 <FaEnvelope className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-                <a href="mailto:contact@neoayushveda.com" className="hover:text-sky-400 transition-colors">
-                  contact@neoayushveda.com
+                <a href="mailto:contact@neolspharma.com" className="hover:text-sky-400 transition-colors">
+                  contact@neolspharma.com
                 </a>
               </div>
             </div>

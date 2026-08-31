@@ -845,9 +845,9 @@ export default function Home() {
           </div>
 
           {/* Step list */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 relative z-10">
             {workflowSteps.map((step, idx) => (
-              <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md hover:bg-white transition-all flex flex-col justify-between group relative reveal" style={{ transitionDelay: `${idx * 80}ms` }}>
+              <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md hover:bg-white transition-all flex flex-col justify-between group relative reveal" style={{ transitionDelay: `${idx * 80}ms` }}>
                 <div>
                   <div className="w-9 h-9 rounded-lg bg-sky-50 text-sky-600 font-mono font-bold flex items-center justify-center text-xs border border-sky-100 group-hover:bg-sky-600 group-hover:text-white transition-colors mb-3">
                     {step.num}
@@ -862,11 +862,11 @@ export default function Home() {
                 </div>
 
                 <div className="border-t border-slate-200 pt-3">
-                  <ul className="text-[11px] text-slate-500 space-y-1 font-mono">
+                  <ul className="text-[11px] text-slate-500 space-y-1.5 font-mono">
                     {step.details.map((detail, dIdx) => (
-                      <li key={dIdx} className="flex items-center gap-1.5">
-                        <FaCircleCheck className="w-3 h-3 text-[#7CB800] shrink-0" />
-                        <span>{detail}</span>
+                      <li key={dIdx} className="flex items-start gap-1.5">
+                        <FaCircleCheck className="w-3 h-3 text-[#7CB800] shrink-0 mt-0.5" />
+                        <span className="leading-snug">{detail}</span>
                       </li>
                     ))}
                   </ul>
@@ -990,8 +990,8 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col">
                       <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Email Sourcing</span>
-                      <a href="mailto:contact@neoayushveda.com" className="text-xs sm:text-sm font-semibold text-slate-900 hover:text-sky-600 transition-colors">
-                        contact@neoayushveda.com
+                      <a href="mailto:contact@neolspharma.com" className="text-xs sm:text-sm font-semibold text-slate-900 hover:text-sky-600 transition-colors">
+                        contact@neolspharma.com
                       </a>
                     </div>
                   </div>

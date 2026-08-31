@@ -169,6 +169,6 @@ npm run start
 Plot 13/A/B Lane 12, MLA Colony, Banjara Hills,  
 Hyderabad – 500034, Telangana, India  
 
-- **Email**: `contact@neoayushveda.com`
+- **Email**: `contact@neolspharma.com`
 - **Corporate Phones**: `040-35247813` / `+91 87124 43610`
-- **Website**: `neoayushveda.com`
+- **Website**: [neolspharma.com](https://www.neolspharma.com/)
