@@ -123,40 +123,62 @@ export default function AboutPage() {
               </div>
 
               {/* Card 2 - 100% Certified Sourcing */}
-              <div className="border border-slate-200 bg-white rounded-xl p-5 hover:border-sky-500 hover:shadow-md transition-all duration-200 group flex flex-col justify-between reveal delay-100">
+              <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-sky-500 hover:shadow-md transition-all duration-200 group flex flex-col justify-between reveal delay-100">
                 <div>
-                  <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4 group-hover:bg-sky-600 group-hover:text-white transition-colors">
-                    <FaCertificate className="w-5 h-5" />
+                  <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
+                    <Image
+                      src="/images/audited_partner_facility.jpg"
+                      alt="WHO-GMP Audited Cleanroom Pharmaceutical Manufacturing Facility"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded flex items-center gap-1.5">
+                      <FaCertificate className="w-3 h-3" />
+                      <span>100% Certified Sourcing</span>
+                    </div>
                   </div>
-                  <div className="text-[10px] font-mono uppercase tracking-wider text-sky-600 font-semibold mb-1">
-                    100% CERTIFIED SOURCING
+                  <div className="p-5">
+                    <h3 className="text-base font-bold text-slate-900 mb-1.5">Audited Partner Network</h3>
+                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                      Contracting exclusively with globally audited manufacturers, implementing batch isolation and origin traceability.
+                    </p>
                   </div>
-                  <h3 className="text-base font-bold text-slate-900 mb-1.5">Audited Partner Network</h3>
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                    Contracting exclusively with globally audited manufacturers, implementing batch isolation and origin traceability.
-                  </p>
                 </div>
-                <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-[11px] text-slate-500">
-                  WHO-GMP & PIC/S Certified
+                <div className="p-5 pt-0">
+                  <div className="pt-3 border-t border-slate-100 font-mono text-[11px] text-slate-500">
+                    WHO-GMP & PIC/S Certified
+                  </div>
                 </div>
               </div>
 
               {/* Card 3 - CTD Regulatory Dossiers */}
-              <div className="border border-slate-200 bg-white rounded-xl p-5 hover:border-sky-500 hover:shadow-md transition-all duration-200 group flex flex-col justify-between reveal delay-200">
+              <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-sky-500 hover:shadow-md transition-all duration-200 group flex flex-col justify-between reveal delay-200">
                 <div>
-                  <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4 group-hover:bg-sky-600 group-hover:text-white transition-colors">
-                    <FaFileContract className="w-5 h-5" />
+                  <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
+                    <Image
+                      src="/images/regulatory_dossier_lab.jpg"
+                      alt="Pharmaceutical CTD Dossier and Regulatory Affairs Compliance Lab"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded flex items-center gap-1.5">
+                      <FaFileContract className="w-3 h-3" />
+                      <span>Regulatory Affairs</span>
+                    </div>
                   </div>
-                  <div className="text-[10px] font-mono uppercase tracking-wider text-sky-600 font-semibold mb-1">
-                    REGULATORY AFFAIRS
+                  <div className="p-5">
+                    <h3 className="text-base font-bold text-slate-900 mb-1.5">CTD / ACTD Dossiers</h3>
+                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                      Technical dossier compilation, MOH permit coordination, and COA/COO documentation for swift market entry.
+                    </p>
                   </div>
-                  <h3 className="text-base font-bold text-slate-900 mb-1.5">CTD / ACTD Dossiers</h3>
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                    Technical dossier compilation, MOH permit coordination, and COA/COO documentation for swift market entry.
-                  </p>
                 </div>
-                <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-[11px] text-slate-500">
-                  US FDA CTD & EU GMP Ready
+                <div className="p-5 pt-0">
+                  <div className="pt-3 border-t border-slate-100 font-mono text-[11px] text-slate-500">
+                    US FDA CTD & EU GMP Ready
+                  </div>
                 </div>
               </div>
 

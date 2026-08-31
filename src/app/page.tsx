@@ -560,65 +560,95 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
             
             {/* Card 1 - Cold Chain Logistics */}
-            <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:shadow-md hover:border-sky-500 transition-all duration-200 group reveal">
-              <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
-                <Image
-                  src="/images/logistics_cold_chain.jpg"
-                  alt="International Pharmaceutical Cold Chain Air Freight Logistics"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded flex items-center gap-1.5">
-                  <FaPlaneDeparture className="w-3 h-3" />
-                  <span>Cold-Chain Freight</span>
+            <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:shadow-md hover:border-sky-500 transition-all duration-200 group reveal flex flex-col justify-between">
+              <div>
+                <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
+                  <Image
+                    src="/images/logistics_cold_chain.jpg"
+                    alt="International Pharmaceutical Cold Chain Air Freight Logistics"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded flex items-center gap-1.5">
+                    <FaPlaneDeparture className="w-3 h-3" />
+                    <span>Cold-Chain Freight</span>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-base font-bold text-slate-900 mb-1.5">Global Air & Sea Logistics</h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    Temperature-controlled containers and real-time data loggers ensuring cold-chain integrity across international shipping routes.
+                  </p>
                 </div>
               </div>
-              <div className="p-5">
-                <h3 className="text-base font-bold text-slate-900 mb-1.5">Global Air & Sea Logistics</h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                  Temperature-controlled containers and real-time data loggers ensuring cold-chain integrity across international shipping routes.
-                </p>
+              <div className="p-5 pt-0">
+                <div className="pt-3 border-t border-slate-100 font-mono text-xs text-slate-500 flex items-center gap-1.5">
+                  <FaCircleCheck className="w-3.5 h-3.5 text-[#7CB800]" />
+                  <span>Real-Time Temperature Monitored</span>
+                </div>
               </div>
             </div>
 
             {/* Card 2 - 100% Certified Sourcing */}
-            <div className="border border-slate-200 bg-white rounded-xl p-5 sm:p-6 hover:shadow-md hover:border-sky-500 transition-all duration-200 group flex flex-col justify-between reveal delay-100">
+            <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:shadow-md hover:border-sky-500 transition-all duration-200 group reveal delay-100 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
-                  <FaCertificate className="w-5 h-5" />
+                <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
+                  <Image
+                    src="/images/audited_partner_facility.jpg"
+                    alt="WHO-GMP Audited Cleanroom Pharmaceutical Manufacturing Facility"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded flex items-center gap-1.5">
+                    <FaCertificate className="w-3 h-3" />
+                    <span>100% Certified Sourcing</span>
+                  </div>
                 </div>
-                <div className="text-[10px] font-mono uppercase tracking-wider text-sky-600 font-semibold mb-1">
-                  100% CERTIFIED SOURCING
+                <div className="p-5">
+                  <h3 className="text-base font-bold text-slate-900 mb-1.5">Audited Partner Network</h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    We contract exclusively with globally audited manufacturers holding WHO-GMP, PIC/S, and EU-GMP accreditations with complete batch traceability.
+                  </p>
                 </div>
-                <h3 className="text-base font-bold text-slate-900 mb-1.5">Audited Partner Network</h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                  We contract exclusively with globally audited manufacturers holding WHO-GMP, PIC/S, and EU-GMP accreditations with complete batch traceability.
-                </p>
               </div>
-              <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-xs text-slate-500 flex items-center gap-1.5">
-                <FaCircleCheck className="w-3.5 h-3.5 text-[#7CB800]" />
-                <span>Batch Isolation & CoA Verified</span>
+              <div className="p-5 pt-0">
+                <div className="pt-3 border-t border-slate-100 font-mono text-xs text-slate-500 flex items-center gap-1.5">
+                  <FaCircleCheck className="w-3.5 h-3.5 text-[#7CB800]" />
+                  <span>Batch Isolation & CoA Verified</span>
+                </div>
               </div>
             </div>
 
             {/* Card 3 - CTD Regulatory Dossiers */}
-            <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:shadow-md hover:border-sky-500 transition-all duration-200 group p-5 sm:p-6 flex flex-col justify-between reveal delay-200">
+            <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:shadow-md hover:border-sky-500 transition-all duration-200 group reveal delay-200 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4">
-                  <FaFileContract className="w-5 h-5" />
+                <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
+                  <Image
+                    src="/images/regulatory_dossier_lab.jpg"
+                    alt="Pharmaceutical CTD Dossier and Regulatory Affairs Compliance Lab"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm text-sky-400 font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded flex items-center gap-1.5">
+                    <FaFileContract className="w-3 h-3" />
+                    <span>Regulatory Affairs</span>
+                  </div>
                 </div>
-                <div className="text-[10px] font-mono uppercase tracking-wider text-sky-600 font-semibold mb-1">
-                  REGULATORY AFFAIRS
+                <div className="p-5">
+                  <h3 className="text-base font-bold text-slate-900 mb-1.5">CTD / ACTD Dossier Compilation</h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    Technical dossier filing, stability documentation, and MOH permit coordination to accelerate international market registration.
+                  </p>
                 </div>
-                <h3 className="text-base font-bold text-slate-900 mb-1.5">CTD / ACTD Dossier Compilation</h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                  Technical dossier filing, stability documentation, and MOH permit coordination to accelerate international market registration.
-                </p>
               </div>
-              <div className="pt-3 mt-3 border-t border-slate-100 font-mono text-xs text-slate-500 flex items-center gap-1.5">
-                <FaShieldHalved className="w-3.5 h-3.5 text-[#7CB800]" />
-                <span>US FDA CTD & EU GMP Ready</span>
+              <div className="p-5 pt-0">
+                <div className="pt-3 border-t border-slate-100 font-mono text-xs text-slate-500 flex items-center gap-1.5">
+                  <FaShieldHalved className="w-3.5 h-3.5 text-[#7CB800]" />
+                  <span>US FDA CTD & EU GMP Ready</span>
+                </div>
               </div>
             </div>
 
