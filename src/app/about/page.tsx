@@ -177,7 +177,7 @@ export default function AboutPage() {
                 </div>
                 <div className="p-5 pt-0">
                   <div className="pt-3 border-t border-slate-100 font-mono text-[11px] text-slate-500">
-                    US FDA CTD & EU GMP Ready
+                    US FDA & EU GMP Ready
                   </div>
                 </div>
               </div>
@@ -341,7 +341,7 @@ export default function AboutPage() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6">
               {[
                 {
                   num: "01",
@@ -371,18 +371,20 @@ export default function AboutPage() {
               ].map((step, idx) => (
                 <div
                   key={idx}
-                  className="bg-white border border-slate-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 reveal"
+                  className="bg-white border border-slate-200 hover:border-sky-400 p-6 sm:p-7 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgba(2,132,199,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group reveal"
                   style={{ transitionDelay: `${idx * 80}ms` }}
                 >
-                  <span className="font-mono text-2xl font-bold text-sky-600 block leading-none mb-3">
-                    {step.num}
-                  </span>
-                  <h3 className="text-base font-bold text-slate-900 mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                    {step.desc}
-                  </p>
+                  <div>
+                    <span className="font-mono text-2xl sm:text-3xl font-bold text-sky-600 block leading-none mb-3.5 group-hover:text-sky-700 transition-colors">
+                      {step.num}
+                    </span>
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2 leading-snug group-hover:text-sky-600 transition-colors min-h-[3rem] flex items-start">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed min-h-[4.5rem]">
+                      {step.desc}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>

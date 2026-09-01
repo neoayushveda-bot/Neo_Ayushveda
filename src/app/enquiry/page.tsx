@@ -233,10 +233,15 @@ function EnquiryContent() {
                       <FaWhatsapp className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">WhatsApp Brokerage</span>
-                      <span className="text-sm font-semibold text-slate-900">
-                        Available on Request
-                      </span>
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Connect on WhatsApp</span>
+                      <a
+                        href="https://wa.me/918712443607"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-semibold text-slate-900 hover:text-sky-600 transition-colors"
+                      >
+                        +91 87124 43607
+                      </a>
                     </div>
                   </div>
 

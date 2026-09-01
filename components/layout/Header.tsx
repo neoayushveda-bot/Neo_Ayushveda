@@ -193,14 +193,6 @@ export default function Header() {
                             : "opacity-0 scale-95 -translate-y-1 pointer-events-none"
                         }`}
                       >
-                        <div className="px-3 py-2 border-b border-slate-100 mb-1 flex items-center justify-between">
-                          <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-400">
-                            Therapeutic Categories
-                          </span>
-                          <span className="text-[10px] font-mono text-sky-600 bg-sky-50 px-2 py-0.5 rounded">
-                            WHO-GMP
-                          </span>
-                        </div>
                         <div className="flex flex-col gap-0.5">
                           {PRODUCT_CATEGORIES.map((cat) => (
                             <Link

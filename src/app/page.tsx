@@ -302,10 +302,10 @@ export default function Home() {
         <div className="absolute inset-0 grid-texture opacity-40 pointer-events-none" />
 
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
-          
+
           {/* Top Hero Text */}
           <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-10 lg:mb-12">
-            
+
             {/* Eyebrow badge */}
             <div className="inline-flex items-center gap-2 bg-sky-50 border border-sky-200/80 rounded-full px-3.5 py-1 mb-5 shadow-sm opacity-0 animate-fade-in-up">
               <span className="w-2 h-2 rounded-full bg-[#7CB800] animate-pulse" />
@@ -322,7 +322,7 @@ export default function Home() {
 
             {/* Description */}
             <p className="text-slate-600 text-[14px] sm:text-[16px] leading-relaxed mt-5 max-w-3xl mx-auto opacity-0 animate-fade-in-up animation-delay-200">
-              Hyderabad, India-based B2B pharmaceutical exporter sourcing WHO-GMP, EU-GMP, US-FDA, PIC/S, other SRAs certified APIs Finished Pharmaceutical Formulations, Speciality and Complex therapeutics, Injectables and Hospital Products, Vaccines and Biologics, Nutraceuticals and dietary supplements, Medical devices and Diagnostics, Dermatology, Personal care and Cosmeceuticals.
+              Hyderabad, India-based B2B pharmaceutical exporter sourcing WHO-GMP, EU-GMP, US-FDA, PIC/S, other SRAs certified APIs, Finished Pharmaceutical Formulations, Speciality and Complex therapeutics, Injectables and Hospital Products, Vaccines and Biologics, Nutraceuticals and dietary supplements, Medical devices and Diagnostics, Dermatology, Personal care and Cosmeceuticals.
             </p>
 
             {/* Action Buttons */}
@@ -399,8 +399,8 @@ export default function Home() {
       {/* ─── Trust Ticker (Marquee - Portfolio & Therapeutic Categories) ─── */}
       <div className="w-full bg-slate-50 py-3.5 overflow-hidden border-b border-slate-200 relative z-10 font-mono">
         <div className="animate-marquee select-none flex items-center">
-          {[...Array(3)].map((_, i) => (
-            <span key={i} className="text-xs tracking-[0.16em] uppercase text-slate-600 font-semibold flex items-center">
+          {[...Array(2)].map((_, i) => (
+            <span key={i} className="text-xs tracking-[0.16em] uppercase text-slate-600 font-semibold flex items-center shrink-0">
               PHARMACEUTICAL GENERICS (RX)
               <span className="mx-4 text-[#7CB800]">◆</span>
               ACTIVE PHARMACEUTICAL INGREDIENTS (APIS)
@@ -437,7 +437,7 @@ export default function Home() {
       {/* ─── About Section (Merchant Exporter & Sourcing Partnerships) ─── */}
       <section id="about" className="bg-white py-16 sm:py-24 lg:py-28 relative overflow-hidden font-sans border-b border-slate-100">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-14">
             <div className="lg:col-span-6 reveal">
               <span className="text-sky-600 font-mono text-xs font-semibold tracking-[0.2em] uppercase block mb-3">
@@ -558,7 +558,7 @@ export default function Home() {
 
           {/* 3 Real Life-Sciences Capability Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
-            
+
             {/* Card 1 - Cold Chain Logistics */}
             <div className="border border-slate-200 bg-white rounded-xl overflow-hidden hover:shadow-md hover:border-sky-500 transition-all duration-200 group reveal flex flex-col justify-between">
               <div>
@@ -647,7 +647,7 @@ export default function Home() {
               <div className="p-5 pt-0">
                 <div className="pt-3 border-t border-slate-100 font-mono text-xs text-slate-500 flex items-center gap-1.5">
                   <FaShieldHalved className="w-3.5 h-3.5 text-[#7CB800]" />
-                  <span>US FDA CTD & EU GMP Ready</span>
+                  <span>US FDA & EU GMP Ready</span>
                 </div>
               </div>
             </div>
@@ -840,7 +840,7 @@ export default function Home() {
               "FOOD LICENCE",
               "CE CERTIFIED",
               "HALAL & KOSHER",
-              "US FDA CTD"
+              "US FDA"
             ].map((cert, idx) => (
               <div
                 key={idx}
@@ -859,44 +859,48 @@ export default function Home() {
       </section>
 
       {/* ─── Sourcing Process Workflow ─── */}
-      <section className="bg-white py-16 sm:py-24 relative overflow-hidden font-sans border-b border-slate-200">
+      <section className="bg-slate-50/60 py-20 sm:py-28 relative overflow-hidden font-sans border-b border-slate-200">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
 
-          <div className="mb-12 text-center max-w-2xl mx-auto reveal">
-            <span className="text-sky-600 font-mono text-xs font-semibold tracking-[0.2em] uppercase block mb-2">
+          <div className="mb-14 text-center max-w-3xl mx-auto reveal">
+            <span className="text-sky-600 font-mono text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase block mb-2.5">
               HOW WE WORK
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-slate-900">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-slate-900">
               From Enquiry to Delivery
             </h2>
-            <p className="text-slate-600 mt-2 text-xs sm:text-sm">
+            <p className="text-slate-600 mt-3 text-sm sm:text-base leading-relaxed">
               We guide pharmaceutical procurement cycles with complete accountability at every milestone.
             </p>
           </div>
 
           {/* Step list */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6 relative z-10 items-stretch">
             {workflowSteps.map((step, idx) => (
-              <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md hover:bg-white transition-all flex flex-col justify-between group relative reveal" style={{ transitionDelay: `${idx * 80}ms` }}>
+              <div
+                key={idx}
+                className="bg-white border border-slate-200 hover:border-sky-400 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgba(2,132,199,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group relative reveal h-full"
+                style={{ transitionDelay: `${idx * 80}ms` }}
+              >
                 <div>
-                  <div className="w-9 h-9 rounded-lg bg-sky-50 text-sky-600 font-mono font-bold flex items-center justify-center text-xs border border-sky-100 group-hover:bg-sky-600 group-hover:text-white transition-colors mb-3">
+                  <div className="w-11 h-11 rounded-xl bg-sky-50 text-sky-600 font-mono font-bold flex items-center justify-center text-sm border border-sky-200/80 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-200 mb-4 shadow-2xs">
                     {step.num}
                   </div>
 
-                  <h3 className="text-sm font-bold text-slate-900 mb-1.5">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2 leading-snug group-hover:text-sky-600 transition-colors min-h-[3rem] flex items-start">
                     {step.title}
                   </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed mb-3">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4 min-h-[5.5rem] flex items-start">
                     {step.desc}
                   </p>
                 </div>
 
-                <div className="border-t border-slate-200 pt-3">
-                  <ul className="text-[11px] text-slate-500 space-y-1.5 font-mono">
+                <div className="border-t border-slate-100 pt-4 mt-auto">
+                  <ul className="text-xs sm:text-[13px] text-slate-700 space-y-2.5 font-sans font-medium">
                     {step.details.map((detail, dIdx) => (
-                      <li key={dIdx} className="flex items-start gap-1.5">
-                        <FaCircleCheck className="w-3 h-3 text-[#7CB800] shrink-0 mt-0.5" />
-                        <span className="leading-snug">{detail}</span>
+                      <li key={dIdx} className="flex items-start gap-2 min-h-[2.25rem]">
+                        <FaCircleCheck className="w-3.5 h-3.5 text-[#7CB800] shrink-0 mt-0.5" />
+                        <span className="leading-snug text-slate-700">{detail}</span>
                       </li>
                     ))}
                   </ul>
@@ -990,7 +994,7 @@ export default function Home() {
             {/* Left Panel - Corporate Info (2 cols) */}
             <div className="lg:col-span-2 reveal-left">
               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-white/95 via-sky-50/40 to-slate-50/90 backdrop-blur-xl border border-sky-200/80 p-6 sm:p-8 shadow-[0_16px_36px_rgba(2,132,199,0.06),0_1px_2px_rgba(0,0,0,0.04)] space-y-6">
-                
+
                 {/* Subtle Ambient Decorative Light blooms */}
                 <div className="absolute -top-16 -right-16 w-48 h-48 bg-sky-400/15 rounded-full blur-2xl pointer-events-none" />
                 <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-[#7CB800]/15 rounded-full blur-2xl pointer-events-none" />
@@ -1049,10 +1053,15 @@ export default function Home() {
                       <FaWhatsapp className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">WhatsApp Brokerage</span>
-                      <span className="text-xs sm:text-sm font-semibold text-slate-900">
-                        Available on Request
-                      </span>
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Connect on WhatsApp</span>
+                      <a
+                        href="https://wa.me/918712443607"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs sm:text-sm font-semibold text-slate-900 hover:text-sky-600 transition-colors"
+                      >
+                        +91 87124 43607
+                      </a>
                     </div>
                   </div>
 
@@ -1273,11 +1282,10 @@ export default function Home() {
                             key={idx}
                             type="button"
                             onClick={() => handleDocToggle(doc)}
-                            className={`px-3 py-1.5 text-[11px] font-semibold tracking-wide uppercase rounded transition-transform duration-150 ease-out active:scale-[0.96] border ${
-                              isSelected
-                                ? "bg-sky-600 text-white border-sky-600 shadow-sm"
-                                : "border-slate-300 bg-white text-slate-700 hover:border-sky-500 hover:text-sky-600 hover:bg-sky-50/50"
-                            }`}
+                            className={`px-3 py-1.5 text-[11px] font-semibold tracking-wide uppercase rounded transition-transform duration-150 ease-out active:scale-[0.96] border ${isSelected
+                              ? "bg-sky-600 text-white border-sky-600 shadow-sm"
+                              : "border-slate-300 bg-white text-slate-700 hover:border-sky-500 hover:text-sky-600 hover:bg-sky-50/50"
+                              }`}
                           >
                             {doc}
                           </button>

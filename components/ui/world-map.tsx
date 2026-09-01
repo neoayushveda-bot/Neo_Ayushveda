@@ -108,6 +108,9 @@ export function WorldMap({
               <stop offset="60%" stopColor="#003A95" stopOpacity="0.90" />
               <stop offset="100%" stopColor="#7CB800" stopOpacity="0.6" />
             </linearGradient>
+            <clipPath id="neo-logo-circle-clip">
+              <circle cx={originPin.x} cy={originPin.y} r="1.6" />
+            </clipPath>
           </defs>
 
           {/* Dotted Map Base Layer */}
@@ -193,44 +196,66 @@ export function WorldMap({
             })}
           </g>
 
-          {/* Central Origin Node: Hyderabad, India */}
+          {/* Central Origin Node: Hyderabad, India with Neo Logo Circle */}
           <g key="origin-hyderabad-node">
             {/* Outward Radar Waves */}
             <circle
               cx={originPin.x}
               cy={originPin.y}
-              r="1.0"
+              r="1.4"
               fill="#7CB800"
-              opacity="0.8"
+              opacity="0.6"
             >
               <animate
                 attributeName="r"
-                from="1.0"
-                to="4.5"
-                dur="1.8s"
+                from="1.4"
+                to="4.8"
+                dur="2.2s"
                 repeatCount="indefinite"
               />
               <animate
                 attributeName="opacity"
-                from="0.8"
+                from="0.6"
                 to="0"
-                dur="1.8s"
+                dur="2.2s"
                 repeatCount="indefinite"
               />
             </circle>
 
-            {/* Core Pin */}
+            {/* Circular White Badge with Blue Border */}
             <circle
               cx={originPin.x}
               cy={originPin.y}
-              r="1.2"
-              fill="#003A95"
+              r="1.6"
+              fill="#ffffff"
+              stroke="#003A95"
+              strokeWidth="0.3"
+            />
+
+            {/* Embedded Neo Logo clipped to circle */}
+            <image
+              href="/images/neo-logo.png"
+              x={originPin.x - 1.3}
+              y={originPin.y - 0.9}
+              width="2.6"
+              height="1.8"
+              preserveAspectRatio="xMidYMid meet"
+              clipPath="url(#neo-logo-circle-clip)"
+            />
+
+            {/* Subtle Outer Green Ring */}
+            <circle
+              cx={originPin.x}
+              cy={originPin.y}
+              r="1.6"
+              fill="none"
               stroke="#7CB800"
-              strokeWidth="0.35"
+              strokeWidth="0.15"
+              strokeDasharray="0.6 0.3"
             />
 
             {/* Prominent Badge */}
-            <g transform={`translate(${originPin.x}, ${originPin.y + 1.8})`}>
+            <g transform={`translate(${originPin.x}, ${originPin.y + 2.3})`}>
               <rect
                 x="-12"
                 y="0"
