@@ -647,7 +647,7 @@ export default function Home() {
               <div className="p-5 pt-0">
                 <div className="pt-3 border-t border-slate-100 font-mono text-xs text-slate-500 flex items-center gap-1.5">
                   <FaShieldHalved className="w-3.5 h-3.5 text-[#7CB800]" />
-                  <span>US FDA & EU GMP Ready</span>
+                  <span>Regulatory Documentation Support</span>
                 </div>
               </div>
             </div>

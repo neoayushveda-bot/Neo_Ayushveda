@@ -177,7 +177,7 @@ export default function AboutPage() {
                 </div>
                 <div className="p-5 pt-0">
                   <div className="pt-3 border-t border-slate-100 font-mono text-[11px] text-slate-500">
-                    US FDA & EU GMP Ready
+                    Regulatory Documentation Support
                   </div>
                 </div>
               </div>
