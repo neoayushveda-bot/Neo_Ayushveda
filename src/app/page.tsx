@@ -832,6 +832,7 @@ export default function Home() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2.5">
             {[
+              "US FDA",
               "WHO-GMP",
               "EU-GMP",
               "ISO 9001 & 13485",
@@ -839,8 +840,7 @@ export default function Home() {
               "DRUG LICENCE",
               "FOOD LICENCE",
               "CE CERTIFIED",
-              "HALAL & KOSHER",
-              "US FDA"
+              "HALAL & KOSHER"
             ].map((cert, idx) => (
               <div
                 key={idx}
