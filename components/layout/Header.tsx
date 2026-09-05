@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaBars, FaXmark, FaChevronDown, FaArrowRight, FaShieldHalved } from "react-icons/fa6";
+import { FaBars, FaXmark, FaChevronDown, FaArrowRight } from "react-icons/fa6";
 import { PRODUCT_CATEGORIES } from "./productCategories";
 
 const NAV_ITEMS = [
@@ -211,15 +211,6 @@ export default function Header() {
                               </div>
                             </Link>
                           ))}
-                        </div>
-                        <div className="mt-2 pt-2 border-t border-slate-100 px-3 py-1.5 bg-slate-50/80 rounded-lg flex items-center justify-between">
-                          <span className="text-[11px] text-slate-500 flex items-center gap-1.5">
-                            <FaShieldHalved className="w-3.5 h-3.5 text-[#7CB800]" /> CTD Dossier Support
-                          </span>
-                          <Link href="/enquiry" className="text-[11px] font-semibold text-sky-600 hover:underline flex items-center gap-1">
-                            <span>Enquire</span>
-                            <FaArrowRight className="w-2.5 h-2.5" />
-                          </Link>
                         </div>
                       </div>
                     </li>

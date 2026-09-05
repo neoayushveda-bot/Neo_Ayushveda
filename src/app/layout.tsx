@@ -27,7 +27,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "NEO LIFE SCIENCES PVT LTD | International Pharmaceutical Exporters — India",
   description:
-    "Hyderabad, India-based B2B pharmaceutical exporter sourcing WHO-GMP, EU-GMP, US-FDA, PIC/S, other SRAs certified APIs, Finished Pharmaceutical Formulations, Speciality Therapeutics, Injectables, Biologics, Nutraceuticals, and Medical Devices to 50+ countries worldwide.",
+    "Neo Life Sciences is a Hyderabad, India-based B2B pharmaceutical exporter sourcing WHO-GMP, EU-GMP, US-FDA, PIC/S, other SRAs certified APIs, Finished Pharmaceutical Formulations, Speciality Therapeutics, Injectables, Biologics, Nutraceuticals, and Medical Devices to 50+ countries worldwide.",
   keywords: [
     "pharmaceutical exporter India",
     "international pharmaceutical exporters",

@@ -2,10 +2,19 @@
 
 import React from "react";
 import Link from "next/link";
-import { FaEnvelope, FaPhoneVolume, FaLocationDot, FaShieldHalved } from "react-icons/fa6";
+import { usePathname } from "next/navigation";
+import { FaEnvelope, FaPhoneVolume, FaLocationDot } from "react-icons/fa6";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+
   const scrollTo = (id: string) => {
+    if (!isHomePage) {
+      window.location.href = `/#${id}`;
+      return;
+    }
+
     const element = document.getElementById(id);
     if (element) {
       const offset = 80;
@@ -51,13 +60,11 @@ export default function Footer() {
             </h4>
             <ul className="flex flex-col gap-2.5 text-sm">
               {[
+                { label: "Finished Pharmaceutical & Healthcare Products", href: "/products/finished-pharmaceutical-healthcare-products" },
                 { label: "Pharmaceutical Generics (Rx)", href: "/products/finished-pharmaceutical-healthcare-products" },
                 { label: "Specialty Therapeutics", href: "/products/finished-pharmaceutical-healthcare-products" },
-                { label: "Active Ingredients (APIs)", href: "/products/active-pharmaceutical-ingredients" },
+                { label: "Active Pharmaceutical Ingredients (APIs)", href: "/products/active-pharmaceutical-ingredients" },
                 { label: "Medical Devices & Diagnostics", href: "/products/medical-devices-diagnostics" },
-                { label: "Classical Ayurvedic Medicines", href: "/products/finished-pharmaceutical-healthcare-products" },
-                { label: "Herbal Nutraceuticals", href: "/products/finished-pharmaceutical-healthcare-products" },
-                { label: "Clinical Cosmeceuticals", href: "/products/finished-pharmaceutical-healthcare-products" },
               ].map((link, idx) => (
                 <li key={idx}>
                   <Link
@@ -85,7 +92,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => scrollTo("leadership")}
-                  className="text-slate-400 hover:text-sky-400 text-left transition-colors"
+                  className="text-slate-400 hover:text-sky-400 text-left transition-colors cursor-pointer"
                 >
                   Executive Leadership
                 </button>
@@ -93,7 +100,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => scrollTo("exports")}
-                  className="text-slate-400 hover:text-sky-400 text-left transition-colors"
+                  className="text-slate-400 hover:text-sky-400 text-left transition-colors cursor-pointer"
                 >
                   Global Trade Routes
                 </button>
@@ -101,7 +108,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => scrollTo("certifications")}
-                  className="text-slate-400 hover:text-sky-400 text-left transition-colors"
+                  className="text-slate-400 hover:text-sky-400 text-left transition-colors cursor-pointer"
                 >
                   Accreditation Matrix
                 </button>
@@ -136,15 +143,17 @@ export default function Footer() {
                 </address>
               </div>
 
-              <div className="flex items-center gap-2.5 pt-2 border-t border-slate-800 text-xs">
+              <div className="flex items-center gap-2.5 pt-2 border-t border-slate-800 text-xs whitespace-nowrap">
                 <FaPhoneVolume className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-                <a href="tel:+914035247813" className="hover:text-sky-400 transition-colors">
-                  040-35247813
-                </a>
-                <span>/</span>
-                <a href="tel:+918712443610" className="hover:text-sky-400 transition-colors">
-                  +91 87124 43610
-                </a>
+                <div className="flex items-center gap-1.5 whitespace-nowrap">
+                  <a href="tel:+914035247813" className="hover:text-sky-400 transition-colors whitespace-nowrap">
+                    040-35247813
+                  </a>
+                  <span className="text-slate-500">/</span>
+                  <a href="tel:+918712443610" className="hover:text-sky-400 transition-colors whitespace-nowrap">
+                    +91 87124 43610
+                  </a>
+                </div>
               </div>
 
               <div className="flex items-center gap-2.5 text-xs">

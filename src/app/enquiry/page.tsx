@@ -216,14 +216,16 @@ function EnquiryContent() {
                     </div>
                     <div className="flex flex-col">
                       <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Corporate Phone</span>
-                      <div className="flex flex-wrap gap-x-2 text-sm font-semibold text-slate-900">
-                        <a href="tel:+914035247813" className="hover:text-sky-600 transition-colors">
-                          040-35247813
-                        </a>
-                        <span className="text-slate-400">/</span>
-                        <a href="tel:+918712443610" className="hover:text-sky-600 transition-colors">
-                          +91 87124 43610
-                        </a>
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-semibold text-slate-900">
+                        <div className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
+                          <a href="tel:+914035247813" className="hover:text-sky-600 transition-colors whitespace-nowrap">
+                            040-35247813
+                          </a>
+                          <span className="text-slate-400">/</span>
+                          <a href="tel:+918712443610" className="hover:text-sky-600 transition-colors whitespace-nowrap">
+                            +91 87124 43610
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>

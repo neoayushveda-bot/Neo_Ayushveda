@@ -117,6 +117,25 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  // Smooth scroll to anchor on initial mount or hash change
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const id = window.location.hash.replace("#", "");
+      const timer = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          const offset = 80;
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = el.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+          window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+        }
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   // iPHEX 2026 Popup State
   const [showIphexPopup, setShowIphexPopup] = useState(false);
 
@@ -322,7 +341,7 @@ export default function Home() {
 
             {/* Description */}
             <p className="text-slate-600 text-[14px] sm:text-[16px] leading-relaxed mt-5 max-w-3xl mx-auto opacity-0 animate-fade-in-up animation-delay-200">
-              Hyderabad, India-based B2B pharmaceutical exporter sourcing WHO-GMP, EU-GMP, US-FDA, PIC/S, other SRAs certified APIs, Finished Pharmaceutical Formulations, Speciality and Complex therapeutics, Injectables and Hospital Products, Vaccines and Biologics, Nutraceuticals and dietary supplements, Medical devices and Diagnostics, Dermatology, Personal care and Cosmeceuticals.
+              Neo Life Sciences is a Hyderabad, India-based B2B pharmaceutical exporter sourcing WHO-GMP, EU-GMP, US-FDA, PIC/S, other SRAs certified APIs, Finished Pharmaceutical Formulations, Speciality and Complex therapeutics, Injectables and Hospital Products, Vaccines and Biologics, Nutraceuticals and dietary supplements, Medical devices and Diagnostics, Dermatology, Personal care and Cosmeceuticals.
             </p>
 
             {/* Action Buttons */}
@@ -344,7 +363,7 @@ export default function Home() {
           </div>
 
           {/* Interactive World Map (Connecting Global Regional Corridors from Hyderabad HQ, India) */}
-          <div className="relative w-full max-w-5xl mx-auto opacity-0 animate-fade-in-up animation-delay-400">
+          <div id="exports" className="relative w-full max-w-5xl mx-auto opacity-0 animate-fade-in-up animation-delay-400 scroll-mt-24">
             <WorldMap
               dots={heroMapDots}
               lineColor="#003A95"
@@ -818,7 +837,7 @@ export default function Home() {
       </section>
 
       {/* ─── Certification Badges Section ─── */}
-      <section id="certifications" className="bg-slate-50 py-8 sm:py-10 border-b border-slate-200 font-sans">
+      <section id="certifications" className="bg-slate-50 py-8 sm:py-10 border-b border-slate-200 font-sans scroll-mt-20">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
 
           <div className="text-center mb-6 reveal">
@@ -1036,14 +1055,16 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col">
                       <span className="text-[10px] font-mono tracking-wider uppercase text-sky-700 font-semibold mb-0.5">Corporate Phone</span>
-                      <div className="flex flex-wrap gap-x-2 text-xs sm:text-sm font-semibold text-slate-900">
-                        <a href="tel:+914035247813" className="hover:text-sky-600 transition-colors">
-                          040-35247813
-                        </a>
-                        <span className="text-slate-400">/</span>
-                        <a href="tel:+918712443610" className="hover:text-sky-600 transition-colors">
-                          +91 87124 43610
-                        </a>
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-semibold text-slate-900">
+                        <div className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
+                          <a href="tel:+914035247813" className="hover:text-sky-600 transition-colors whitespace-nowrap">
+                            040-35247813
+                          </a>
+                          <span className="text-slate-400">/</span>
+                          <a href="tel:+918712443610" className="hover:text-sky-600 transition-colors whitespace-nowrap">
+                            +91 87124 43610
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
