@@ -61,8 +61,6 @@ export default function Footer() {
             <ul className="flex flex-col gap-2.5 text-sm">
               {[
                 { label: "Finished Pharmaceutical & Healthcare Products", href: "/products/finished-pharmaceutical-healthcare-products" },
-                { label: "Pharmaceutical Generics (Rx)", href: "/products/finished-pharmaceutical-healthcare-products" },
-                { label: "Specialty Therapeutics", href: "/products/finished-pharmaceutical-healthcare-products" },
                 { label: "Active Pharmaceutical Ingredients (APIs)", href: "/products/active-pharmaceutical-ingredients" },
                 { label: "Medical Devices & Diagnostics", href: "/products/medical-devices-diagnostics" },
               ].map((link, idx) => (

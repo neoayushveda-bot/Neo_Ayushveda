@@ -93,6 +93,10 @@ const heroMapDots = [
     start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
     end: { lat: -35.2809, lng: 149.1300, label: "Oceania" },
   },
+  {
+    start: { lat: 17.3850, lng: 78.4867, label: "Hyderabad, India" },
+    end: { lat: -39.0000, lng: 162.0000, label: "New Zealand" },
+  },
 ];
 
 export default function Home() {

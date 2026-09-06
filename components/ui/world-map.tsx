@@ -48,8 +48,8 @@ export function WorldMap({
       const pin = map.getPin({ lat: d.end.lat, lng: d.end.lng });
       if (pin) {
         destinations.push({
-          x: pin.x,
-          y: pin.y,
+          x: Math.min(Math.max(pin.x, 3), svgWidth - 3),
+          y: Math.min(Math.max(pin.y, 3), svgHeight - 3),
           label: d.end.label,
         });
       }
