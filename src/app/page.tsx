@@ -140,27 +140,7 @@ export default function Home() {
     }
   }, []);
 
-  // iPHEX 2026 Popup State
-  const [showIphexPopup, setShowIphexPopup] = useState(false);
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && !sessionStorage.getItem("iphex_popup_shown")) {
-      const timer = setTimeout(() => {
-        setShowIphexPopup(true);
-        sessionStorage.setItem("iphex_popup_shown", "true");
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (showIphexPopup) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => { document.body.style.overflow = ""; };
-  }, [showIphexPopup]);
 
   // Form State
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -285,40 +265,6 @@ export default function Home() {
     <>
       <Header />
 
-      {/* iPHEX 2026 Exhibition Popup Modal */}
-      {showIphexPopup && (
-        <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6"
-          onClick={() => setShowIphexPopup(false)}
-        >
-          <div className="absolute inset-0 bg-slate-950/65 backdrop-blur-sm animate-fade-in-up" style={{ animationDuration: '0.25s' }} />
-
-          <div
-            className="relative z-10 max-w-[440px] w-full max-h-[90vh] overflow-y-auto rounded-2xl shadow-[0_25px_80px_rgba(15,23,42,0.4)] animate-fade-in-up bg-white p-2.5 border border-slate-200"
-            style={{ animationDuration: '0.35s', animationDelay: '0.05s' }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setShowIphexPopup(false)}
-              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/95 backdrop-blur-sm shadow-md flex items-center justify-center text-slate-700 hover:bg-white hover:scale-105 transition-transform duration-150 ease-out active:scale-[0.96] border border-slate-200"
-              aria-label="Close popup"
-            >
-              <FaXmark className="w-4 h-4" />
-            </button>
-
-            <Image
-              src="/images/iphex_2026_poster.png"
-              alt="iPHEX 2026 Exhibition Invitation — Neo Life Sciences Pvt. Ltd."
-              width={420}
-              height={630}
-              style={{ width: "100%", height: "auto" }}
-              className="w-full h-auto rounded-xl outline outline-1 -outline-offset-1 outline-black/10"
-              priority
-              unoptimized
-            />
-          </div>
-        </div>
-      )}
 
       {/* ─── Hero Section (Dr. Reddy's Inspired Clean Layout + Interactive Hyderabad Globe) ─── */}
       <section id="hero" className="relative pt-24 pb-14 sm:pb-18 lg:pt-32 lg:pb-24 bg-gradient-to-b from-slate-50/80 via-white to-white overflow-hidden font-sans border-b border-slate-200/80">
