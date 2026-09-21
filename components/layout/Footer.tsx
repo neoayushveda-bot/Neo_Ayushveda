@@ -112,6 +112,14 @@ export default function Footer() {
                 </button>
               </li>
               <li>
+                <button
+                  onClick={() => scrollTo("events")}
+                  className="text-slate-400 hover:text-sky-400 text-left transition-colors cursor-pointer"
+                >
+                  Event & Media (iPHEX 2026)
+                </button>
+              </li>
+              <li>
                 <Link href="/enquiry" className="text-slate-400 hover:text-sky-400 transition-colors">
                   Procurement Desk
                 </Link>
@@ -156,8 +164,8 @@ export default function Footer() {
 
               <div className="flex items-center gap-2.5 text-xs">
                 <FaEnvelope className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-                <a href="mailto:contact@neolspharma.com" className="hover:text-sky-400 transition-colors">
-                  contact@neolspharma.com
+                <a href="mailto:info@neolspharma.com" className="hover:text-sky-400 transition-colors">
+                  info@neolspharma.com
                 </a>
               </div>
             </div>

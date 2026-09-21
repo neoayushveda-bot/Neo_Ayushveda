@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { label: "Products", id: "products" },
   { label: "Exports", id: "exports" },
   { label: "Why Us", id: "whyus" },
+  { label: "Event/Media", id: "events" },
   { label: "Contact", id: "contact" },
 ];
 

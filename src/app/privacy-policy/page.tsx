@@ -216,8 +216,8 @@ export default function PrivacyPolicyPage() {
           </ul>
           <p className="mt-3">
             To exercise any of these rights, please contact our Data Privacy Desk at{" "}
-            <a href="mailto:contact@neolspharma.com" className="text-sky-600 font-semibold hover:underline font-mono">
-              contact@neolspharma.com
+            <a href="mailto:info@neolspharma.com" className="text-sky-600 font-semibold hover:underline font-mono">
+              info@neolspharma.com
             </a>.
           </p>
         </>
@@ -381,10 +381,10 @@ export default function PrivacyPolicyPage() {
                             Official Email
                           </span>
                           <a
-                            href="mailto:contact@neolspharma.com"
+                            href="mailto:info@neolspharma.com"
                             className="text-sm text-white hover:text-sky-400 transition-colors font-medium"
                           >
-                            contact@neolspharma.com
+                            info@neolspharma.com
                           </a>
                         </div>
                       </div>
