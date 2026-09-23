@@ -112,12 +112,12 @@ export default function Footer() {
                 </button>
               </li>
               <li>
-                <button
-                  onClick={() => scrollTo("events")}
+                <Link
+                  href="/media"
                   className="text-slate-400 hover:text-sky-400 text-left transition-colors cursor-pointer"
                 >
                   Event & Media (iPHEX 2026)
-                </button>
+                </Link>
               </li>
               <li>
                 <Link href="/enquiry" className="text-slate-400 hover:text-sky-400 transition-colors">

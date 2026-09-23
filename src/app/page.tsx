@@ -34,7 +34,6 @@ import {
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import { WorldMap } from "../../components/ui/world-map";
-import EventMediaSection from "../../components/sections/EventMediaSection";
 
 // Regional export pathways originating from Hyderabad HQ (17.3850° N, 78.4867° E)
 const heroMapDots = [
@@ -945,9 +944,6 @@ export default function Home() {
 
         </div>
       </section>
-
-      {/* ─── Event / Media Section (iPHEX 2026) ─── */}
-      <EventMediaSection />
 
       {/* ─── B2B Sourcing Desk & Contact Section ─── */}
       <section id="contact" className="bg-white py-16 sm:py-24 relative overflow-hidden font-sans">

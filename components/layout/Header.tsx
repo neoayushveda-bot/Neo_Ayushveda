@@ -7,13 +7,13 @@ import { FaBars, FaXmark, FaChevronDown, FaArrowRight } from "react-icons/fa6";
 import { PRODUCT_CATEGORIES } from "./productCategories";
 
 const NAV_ITEMS = [
-  { label: "About", id: "about" },
-  { label: "Leadership", id: "leadership" },
-  { label: "Products", id: "products" },
-  { label: "Exports", id: "exports" },
-  { label: "Why Us", id: "whyus" },
-  { label: "Event/Media", id: "events" },
-  { label: "Contact", id: "contact" },
+  { label: "Home", id: "hero", href: "/" },
+  { label: "Leadership", id: "leadership", href: "/#leadership" },
+  { label: "Products", id: "products", href: "/#products" },
+  { label: "Exports", id: "exports", href: "/#exports" },
+  { label: "Why Us", id: "whyus", href: "/#whyus" },
+  { label: "Event/Media", id: "events", href: "/media" },
+  { label: "Contact", id: "contact", href: "/#contact" },
 ];
 
 export default function Header() {
@@ -30,19 +30,27 @@ export default function Header() {
   const productsButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
+    if (pathname && pathname.startsWith("/media")) {
+      setActiveSection("events");
+      return;
+    }
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
       
       // Scroll spy logic
-      const scrollPosition = window.scrollY + 100;
-      for (const item of NAV_ITEMS) {
-        const el = document.getElementById(item.id);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(item.id);
-            break;
+      if (isHomePage) {
+        const scrollPosition = window.scrollY + 100;
+        for (const item of NAV_ITEMS) {
+          if (item.id === "events") continue;
+          const el = document.getElementById(item.id);
+          if (el) {
+            const top = el.offsetTop;
+            const height = el.offsetHeight;
+            if (scrollPosition >= top && scrollPosition < top + height) {
+              setActiveSection(item.id);
+              break;
+            }
           }
         }
       }
@@ -51,7 +59,7 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage, pathname]);
 
   // Keyboard navigation listener (Escape key to close mega menu)
   useEffect(() => {
@@ -82,12 +90,25 @@ export default function Header() {
     }, 180);
   };
 
-  const scrollTo = (id: string) => {
+  const scrollTo = (id: string, href?: string) => {
     setMobileMenuOpen(false);
     setProductsHovered(false);
 
+    if (id === "events" || href === "/media") {
+      window.location.href = "/media";
+      return;
+    }
+
     if (!isHomePage) {
-      window.location.href = `/#${id}`;
+      window.location.href = href || (id === "hero" ? "/" : `/#${id}`);
+      return;
+    }
+
+    if (id === "hero") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
       return;
     }
 
@@ -221,8 +242,8 @@ export default function Header() {
                 return (
                   <li key={item.id}>
                     <button
-                      onClick={() => scrollTo(item.id)}
-                      className={`text-[13px] font-medium tracking-wide transition-colors duration-150 relative py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 rounded-sm ${
+                      onClick={() => scrollTo(item.id, item.href)}
+                      className={`text-[13px] font-medium tracking-wide transition-colors duration-150 relative py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 rounded-sm cursor-pointer ${
                         activeSection === item.id
                           ? "text-sky-600 font-semibold"
                           : "text-slate-700 hover:text-sky-600"
@@ -319,8 +340,8 @@ export default function Header() {
               return (
                 <li key={item.id}>
                   <button
-                    onClick={() => scrollTo(item.id)}
-                    className={`text-[16px] font-medium text-slate-800 hover:text-sky-600 transition-colors py-2 block w-full active:scale-[0.96] ${
+                    onClick={() => scrollTo(item.id, item.href)}
+                    className={`text-[16px] font-medium text-slate-800 hover:text-sky-600 transition-colors py-2 block w-full active:scale-[0.96] cursor-pointer ${
                       activeSection === item.id ? "text-sky-600 font-semibold" : ""
                     }`}
                   >
