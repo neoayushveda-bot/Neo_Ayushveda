@@ -34,6 +34,7 @@ import {
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import { WorldMap } from "../../components/ui/world-map";
+import CorporateVideoPlayer from "../../components/ui/CorporateVideoPlayer";
 
 // Regional export pathways originating from Hyderabad HQ (17.3850° N, 78.4867° E)
 const heroMapDots = [
@@ -361,6 +362,12 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          {/* ─── Corporate Video Presentation (YouTube Iframe Style) ─── */}
+          <CorporateVideoPlayer
+            videoSrc="/intro.mp4"
+            title="Neo Life Sciences Pvt Ltd — Corporate Film & Global Sourcing Excellence"
+          />
 
         </div>
       </section>
