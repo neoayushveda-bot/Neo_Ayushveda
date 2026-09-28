@@ -7,13 +7,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Aptos', 'Segoe UI', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['var(--font-ibm-plex-sans)', 'Aptos', 'Segoe UI', 'system-ui', '-apple-system', 'sans-serif'],
         heading: ['var(--font-ibm-plex-sans)', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['var(--font-ibm-plex-mono)', 'SFMono-Regular', 'Menlo', 'monospace'],
-        serif: ['var(--font-ibm-plex-sans)', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['var(--font-ibm-plex-serif)', 'Georgia', 'serif'],
         aptos: ['Aptos', 'Segoe UI', 'system-ui', '-apple-system', 'sans-serif'],
         jakarta: ['Aptos', 'Segoe UI', 'system-ui', 'sans-serif'],
-        playfair: ['var(--font-ibm-plex-sans)', 'system-ui', 'sans-serif'],
+        playfair: ['var(--font-ibm-plex-serif)', 'serif'],
       },
       colors: {
         brand: {

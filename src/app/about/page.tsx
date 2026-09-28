@@ -226,7 +226,7 @@ export default function AboutPage() {
                     fill
                     sizes="(max-width: 1024px) 100vw, 33vw"
                     className="object-cover object-top outline outline-1 -outline-offset-1 outline-white/10"
-                    priority
+                    loading="lazy"
                   />
                   <div className="absolute top-4 left-4 bg-sky-600 text-white font-mono text-[10px] font-bold tracking-[0.16em] uppercase px-3 py-1.5 rounded shadow-md z-10">
                     Managing Director

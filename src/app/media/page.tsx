@@ -90,8 +90,8 @@ export default function MediaPage() {
 
   // Specific story lookups for photo distribution
   const story1 = MEDIA_STORIES[0]; // Inauguration lamp lighting
-  const story2 = MEDIA_STORIES[1]; // Global healthcare dialogue
-  const story3 = MEDIA_STORIES[2]; // MoS Jitin Prasada address
+  const story2 = MEDIA_STORIES[1]; // MoS Jitin Prasada address
+  const story3 = MEDIA_STORIES[2]; // Global healthcare dialogue
   const story4 = MEDIA_STORIES[3]; // International Buyer Engagement
   const story5 = MEDIA_STORIES[4]; // International Business Connections
   const story6 = MEDIA_STORIES[5]; // Connecting Across Markets
@@ -318,7 +318,7 @@ export default function MediaPage() {
                 {/* Right Column: Photos 2 & 3 Stacked */}
                 <div className="md:col-span-5 flex flex-col gap-4">
                   
-                  {/* Photo 2: Global Healthcare Dialogue */}
+                  {/* Photo 2: MoS Jitin Prasada Address */}
                   <div
                     onClick={() => openPhotoById(2)}
                     className="group relative flex-1 min-h-[180px] rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer ring-1 ring-black/5"
@@ -328,7 +328,7 @@ export default function MediaPage() {
                       alt={story2.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 380px"
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent p-4 flex flex-col justify-end text-white">
                       <span className="text-[10px] font-mono text-sky-300 font-semibold uppercase">
@@ -343,7 +343,7 @@ export default function MediaPage() {
                     </div>
                   </div>
 
-                  {/* Photo 3: MoS Jitin Prasada Address */}
+                  {/* Photo 3: Global Healthcare Dialogue */}
                   <div
                     onClick={() => openPhotoById(3)}
                     className="group relative flex-1 min-h-[180px] rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer ring-1 ring-black/5"
@@ -353,7 +353,7 @@ export default function MediaPage() {
                       alt={story3.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 380px"
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent p-4 flex flex-col justify-end text-white">
                       <span className="text-[10px] font-mono text-sky-300 font-semibold uppercase">
@@ -385,7 +385,7 @@ export default function MediaPage() {
                   <span className="float-left text-5xl font-serif font-bold text-sky-700 leading-none pr-3 pt-1">
                     N
                   </span>
-                  eo Life Sciences Pvt. Ltd. (formerly known as Neo Ayushveda) marked an impactful presence at the prestigious 10th edition of <strong>iPHEX 2026</strong>, organized by the Pharmaceuticals Export Promotion Council of India (Pharmexcil) under the Ministry of Commerce & Industry, Government of India.
+                  eo Life Sciences Pvt. Ltd. (formerly known as Neo Ayushveda) marked an impactful presence at the prestigious 12th edition of <strong>iPHEX 2026</strong>, organized by the Pharmaceuticals Export Promotion Council of India (Pharmexcil) under the Ministry of Commerce & Industry, Government of India.
                 </p>
                 <p>
                   Convened at the state-of-the-art Bharat Mandapam convention complex in Pragati Maidan, New Delhi, the 3-day international summit brought together over 10,000 healthcare leaders, government delegates, institutional buyers, and pharmaceutical innovators from across 120 nations. The summit serves as the primary bridge connecting Indian formulation excellence with the escalating healthcare requirements of emerging and regulated markets globally.
@@ -424,11 +424,12 @@ export default function MediaPage() {
                 </p>
 
                 {/* Quote Box 2: Jitin Prasada */}
-                <div className="relative rounded-2xl bg-slate-50 border-l-4 border-emerald-600 p-5 sm:p-6 shadow-2xs">
-                  <p className="text-slate-800 text-sm sm:text-base italic font-serif leading-relaxed">
+                <div className="relative rounded-2xl bg-gradient-to-r from-emerald-50/50 via-slate-50 to-white border-l-4 border-emerald-600 p-6 sm:p-7 shadow-2xs">
+                  <FaQuoteLeft className="w-8 h-8 text-emerald-200 absolute top-4 right-6 pointer-events-none" />
+                  <p className="text-slate-800 text-base sm:text-lg italic font-serif leading-relaxed relative z-10">
                     “Greater global collaboration in pharmaceuticals and healthcare will fortify healthcare systems across borders. India stands steadfast as the trusted Pharmacy of the World.”
                   </p>
-                  <div className="mt-2.5 pt-2.5 border-t border-slate-200/80 flex items-center justify-between text-xs">
+                  <div className="mt-3 pt-3 border-t border-emerald-100 flex items-center justify-between text-xs">
                     <span className="font-bold text-slate-900">Mr. Jitin Prasada</span>
                     <span className="text-slate-500 font-mono">Minister of State for Commerce & Industry</span>
                   </div>
@@ -510,7 +511,7 @@ export default function MediaPage() {
                 </div>
 
                 <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                  International delegates placed particular emphasis on regulatory documentation and dossier support. Neo Life Sciences demonstrated our comprehensive capability in delivering ready-to-file <strong>Common Technical Document (CTD)</strong> and <strong>ACTD dossiers</strong>, facilitating rapid market registrations in emerging healthcare jurisdictions where regulatory frameworks are progressively harmonizing with international standards.
+                  International delegates placed particular emphasis on regulatory documentation and dossier support. Neo Life Sciences demonstrated comprehensive capability in delivering ready-to-file <strong>Common Technical Document (CTD)</strong> and <strong>ACTD dossiers</strong>, facilitating rapid market registrations in emerging healthcare jurisdictions where regulatory frameworks are progressively harmonizing with international standards.
                 </p>
 
                 {/* ─── PHOTOS EVENLY DISTRIBUTED: Pair 2 (Photos 6 & 7) ─── */}
@@ -905,7 +906,6 @@ export default function MediaPage() {
                 src={MEDIA_STORIES[activePhotoIndex].image}
                 alt={MEDIA_STORIES[activePhotoIndex].title}
                 fill
-                priority
                 className="object-contain"
                 sizes="(max-width: 1280px) 100vw, 1280px"
               />

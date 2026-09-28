@@ -1,17 +1,19 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FaEnvelope, FaPhoneVolume, FaLocationDot } from "react-icons/fa6";
 
 export default function Footer() {
   const pathname = usePathname();
+  const router = useRouter();
   const isHomePage = pathname === "/";
 
   const scrollTo = (id: string) => {
     if (!isHomePage) {
-      window.location.href = `/#${id}`;
+      router.push(`/#${id}`);
       return;
     }
 
@@ -41,9 +43,12 @@ export default function Footer() {
           <div className="lg:col-span-4 flex flex-col gap-5">
             <div className="flex items-center">
               <div className="bg-white px-3 py-1.5 rounded-lg shadow-sm inline-flex items-center">
-                <img
+                <Image
                   src="/images/Logo.png"
                   alt="Neo Life Sciences Logo"
+                  width={150}
+                  height={44}
+                  loading="lazy"
                   className="h-11 w-auto object-contain"
                 />
               </div>

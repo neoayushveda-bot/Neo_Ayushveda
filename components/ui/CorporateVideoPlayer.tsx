@@ -24,6 +24,7 @@ interface CorporateVideoPlayerProps {
 
 export default function CorporateVideoPlayer({
   videoSrc = "/intro.mp4",
+  posterSrc = "/images/video-poster.jpg",
   title = "Neo Life Sciences Pvt Ltd — Corporate Overview & Global Sourcing Excellence",
   className = "",
 }: CorporateVideoPlayerProps) {
@@ -113,11 +114,15 @@ export default function CorporateVideoPlayer({
         <video
           ref={videoRef}
           src={videoSrc}
+          poster={posterSrc}
           className="w-full h-full object-cover bg-black"
           playsInline
-          preload="metadata"
+          preload="none"
           controls={hasStarted}
-          onPlay={() => setIsPlaying(true)}
+          onPlay={() => {
+            setIsPlaying(true);
+            setHasStarted(true);
+          }}
           onPause={() => setIsPlaying(false)}
           onEnded={handleVideoEnded}
         />

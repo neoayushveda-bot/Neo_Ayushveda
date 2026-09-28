@@ -31,9 +31,9 @@ export function WorldMap({
   const svgHeight = 80;
 
   // Initialize DottedMap with high-density diagonal grid
-  const { mapPoints, originPin, destPins } = useMemo(() => {
+  // Initialize DottedMap pin coordinates
+  const { originPin, destPins } = useMemo(() => {
     const map = new DottedMap({ height: 80, grid: "diagonal" });
-    const rawPoints = map.getPoints();
 
     const originRaw = dots[0]
       ? map.getPin({ lat: dots[0].start.lat, lng: dots[0].start.lng })
@@ -56,7 +56,6 @@ export function WorldMap({
     }
 
     return {
-      mapPoints: rawPoints,
       originPin: origin,
       destPins: destinations,
     };
@@ -113,18 +112,15 @@ export function WorldMap({
             </clipPath>
           </defs>
 
-          {/* Dotted Map Base Layer */}
-          <g className="map-dots-layer">
-            {mapPoints.map((point, index) => (
-              <circle
-                key={`dot-${index}`}
-                cx={point.x}
-                cy={point.y}
-                r="0.26"
-                className="fill-slate-300/80"
-              />
-            ))}
-          </g>
+          {/* Dotted Map Base Layer (GPU Hardware Accelerated - 0 React DOM overhead) */}
+          <image
+            href="/images/world-map-dots.svg"
+            x="0"
+            y="0"
+            width={svgWidth}
+            height={svgHeight}
+            className="opacity-80"
+          />
 
           {/* Animated Connecting Bezier Arcs from Hyderabad */}
           <g className="routes-layer">

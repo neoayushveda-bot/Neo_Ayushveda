@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FaBars, FaXmark, FaChevronDown, FaArrowRight } from "react-icons/fa6";
 import { PRODUCT_CATEGORIES } from "./productCategories";
 
@@ -18,6 +19,7 @@ const NAV_ITEMS = [
 
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const isHomePage = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -95,12 +97,12 @@ export default function Header() {
     setProductsHovered(false);
 
     if (id === "events" || href === "/media") {
-      window.location.href = "/media";
+      router.push("/media");
       return;
     }
 
     if (!isHomePage) {
-      window.location.href = href || (id === "hero" ? "/" : `/#${id}`);
+      router.push(href || (id === "hero" ? "/" : `/#${id}`));
       return;
     }
 
@@ -154,10 +156,13 @@ export default function Header() {
             href="/"
             className="flex items-center shrink-0 cursor-pointer hover:opacity-95 transition-opacity"
           >
-            <img 
+            <Image 
               src="/images/neo-logo.png" 
               alt="Neo Life Sciences Logo" 
-              className="h-14 md:h-16 w-auto object-contain"
+              width={200}
+              height={56}
+              priority
+              className="h-12 sm:h-14 md:h-16 w-auto object-contain"
             />
           </Link>
 

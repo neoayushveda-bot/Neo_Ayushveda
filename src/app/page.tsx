@@ -31,10 +31,23 @@ import {
   FaCheck,
   FaXmark
 } from "react-icons/fa6";
+import dynamic from "next/dynamic";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
-import { WorldMap } from "../../components/ui/world-map";
 import CorporateVideoPlayer from "../../components/ui/CorporateVideoPlayer";
+
+const WorldMap = dynamic(
+  () => import("../../components/ui/world-map").then((mod) => mod.WorldMap),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full aspect-[158/80] bg-slate-50 rounded-2xl border border-slate-200/90 flex flex-col items-center justify-center gap-2 text-slate-400 p-4">
+        <div className="w-6 h-6 border-2 border-sky-600 border-t-transparent rounded-full animate-spin" />
+        <span className="font-mono text-[11px] text-slate-500">Loading Global Corridors...</span>
+      </div>
+    ),
+  }
+);
 
 // Regional export pathways originating from Hyderabad HQ (17.3850° N, 78.4867° E)
 const heroMapDots = [
@@ -657,7 +670,7 @@ export default function Home() {
                   fill
                   sizes="(max-width: 1024px) 100vw, 33vw"
                   className="object-cover object-top outline outline-1 -outline-offset-1 outline-white/10"
-                  priority
+                  loading="lazy"
                 />
 
                 <div className="absolute top-3.5 left-3.5 bg-sky-600 text-white font-mono text-[9px] font-bold tracking-[0.16em] uppercase px-3 py-1 rounded shadow-md z-10">

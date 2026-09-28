@@ -85,14 +85,14 @@ export const MEDIA_STORIES: MediaStory[] = [
   },
   {
     id: 2,
-    slug: "global-healthcare-dialogue",
+    slug: "keynote-address-mos-commerce-industry",
     image: "/images/events/2.jpeg",
-    category: "POLICY & INDUSTRY",
-    title: "Global Healthcare Dialogue",
+    category: "KEY NOTE ADDRESS",
+    title: "By Minister of State for Commerce and Industry – Mr. Jitin Prasada",
     description:
-      "Hon’ble Minister - Emphasized trust, innovation, partnership, and equitable global access as Core Pillars. Urged the industry to push R&D, patent indigenous products, and focus on biosimilars and biotech.",
+      "Highlighting greater global collaboration in pharmaceuticals and healthcare, labeling iPHEX the \"Mother of All Exhibitions.\" Reaffirmed India's status as the trusted \"Pharmacy of the World\".",
     badge: "iPHEX-2026",
-    filterCategories: ["Inauguration & Ministerial"],
+    filterCategories: ["Highlights", "Inauguration & Ministerial"],
     meta: {
       event: "iPHEX-2026",
       schedule: "B2B Summit",
@@ -102,14 +102,14 @@ export const MEDIA_STORIES: MediaStory[] = [
   },
   {
     id: 3,
-    slug: "keynote-address-mos-commerce-industry",
+    slug: "global-healthcare-dialogue",
     image: "/images/events/3.jpeg",
-    category: "KEY NOTE ADDRESS",
-    title: "By Minister of State for Commerce and Industry – Mr. Jitin Prasada",
+    category: "POLICY & INDUSTRY",
+    title: "Global Healthcare Dialogue",
     description:
-      "highlighting greater global collaboration in pharmaceuticals and healthcare, labeling iPHEX the \"Mother of All Exhibitions.\" Reaffirmed India's status as the trusted \"Pharmacy of the World”.",
+      "Hon’ble Union Minister Mr. Piyush Goyal emphasized trust, innovation, partnership, and equitable global access as Core Pillars. Urged the industry to push R&D, patent indigenous products, and focus on biosimilars and biotech.",
     badge: "iPHEX-2026",
-    filterCategories: ["Highlights", "Inauguration & Ministerial"],
+    filterCategories: ["Inauguration & Ministerial"],
     meta: {
       event: "iPHEX-2026",
       schedule: "B2B Summit",
