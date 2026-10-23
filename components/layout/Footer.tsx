@@ -4,7 +4,50 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FaEnvelope, FaPhoneVolume, FaLocationDot } from "react-icons/fa6";
+import {
+  FaEnvelope,
+  FaPhoneVolume,
+  FaLocationDot,
+  FaWhatsapp,
+  FaXTwitter,
+  FaLinkedinIn,
+  FaFacebookF,
+} from "react-icons/fa6";
+
+const SOCIAL_LINKS = [
+  {
+    name: "WhatsApp",
+    fullName: "WhatsApp Instant Enquiry",
+    href: "https://wa.me/8712443607?text=Hi,%20I%20would%20like%20to%20enquire%20about%20",
+    icon: FaWhatsapp,
+    hoverBg: "hover:bg-[#25D366] hover:border-[#25D366]",
+    ariaLabel: "Enquire with Neo Life Sciences on WhatsApp",
+  },
+  {
+    name: "X",
+    fullName: "X (formerly Twitter)",
+    href: "https://x.com/NeoLifeSciences",
+    icon: FaXTwitter,
+    hoverBg: "hover:bg-black hover:border-slate-500",
+    ariaLabel: "Follow Neo Life Sciences on X",
+  },
+  {
+    name: "LinkedIn",
+    fullName: "LinkedIn",
+    href: "https://www.linkedin.com/company/neo-life-sciences/?viewAsMember=true",
+    icon: FaLinkedinIn,
+    hoverBg: "hover:bg-[#0A66C2] hover:border-[#0A66C2]",
+    ariaLabel: "Connect with Neo Life Sciences on LinkedIn",
+  },
+  {
+    name: "Facebook",
+    fullName: "Facebook",
+    href: "https://www.facebook.com/NeoLifeSciencesPL",
+    icon: FaFacebookF,
+    hoverBg: "hover:bg-[#1877F2] hover:border-[#1877F2]",
+    ariaLabel: "Follow Neo Life Sciences on Facebook",
+  },
+];
 
 export default function Footer() {
   const pathname = usePathname();
@@ -56,6 +99,32 @@ export default function Footer() {
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
               NEO LIFE SCIENCES PVT LTD is an international pharmaceutical trading and B2B export enterprise sourcing WHO-GMP, PIC/S, EU GMP, US FDA and other SRAs certified generics, medical devices, APIs, and standardized herbal formulations from India to 50+ regulated markets worldwide.
             </p>
+
+            {/* Social Media Presence */}
+            <div className="pt-2">
+              <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-200 mb-3">
+                Connect With Us
+              </h4>
+              <div className="flex items-center gap-2.5 flex-wrap">
+                {SOCIAL_LINKS.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={item.ariaLabel}
+                      title={item.fullName}
+                      className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800/90 border border-slate-700/80 text-slate-300 hover:text-white ${item.hoverBg} transition-all duration-200 text-xs font-medium group shadow-sm hover:scale-105 active:scale-95`}
+                    >
+                      <Icon className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
+                      <span>{item.name}</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           {/* Column 2 - Products (3 cols) */}
@@ -186,10 +255,34 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
             © 2026 NEO LIFE SCIENCES PVT LTD. All rights reserved. (Formerly Neo Ayushveda Pvt Ltd).
           </div>
+
+          {/* Bottom Bar Social Media Links */}
+          <div className="flex items-center gap-2.5">
+            <span className="text-slate-500 text-[11px] font-mono uppercase tracking-wider hidden lg:inline">
+              Follow:
+            </span>
+            {SOCIAL_LINKS.map((item) => {
+              const Icon = item.icon;
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={item.ariaLabel}
+                  title={item.fullName}
+                  className="w-8 h-8 rounded-lg bg-slate-800/80 border border-slate-700/60 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-500 transition-all duration-200 hover:scale-110 active:scale-95"
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                </a>
+              );
+            })}
+          </div>
+
           <div className="flex items-center gap-4 text-slate-400">
             <Link href="/privacy-policy" className="hover:text-slate-200 transition-colors">
               Privacy Policy

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Serif, IBM_Plex_Mono } from "next/font/google";
+import WhatsAppButton from "../../components/ui/WhatsAppButton";
 import "./globals.css";
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -63,6 +64,7 @@ export default function RootLayout({
     >
       <body className="bg-white text-slate-900 font-sans antialiased selection:bg-[#003A95]/15 selection:text-[#003A95]">
         {children}
+        <WhatsAppButton />
       </body>
     </html>
   );
