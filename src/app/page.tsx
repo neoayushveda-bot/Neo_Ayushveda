@@ -1317,12 +1317,12 @@ export default function Home() {
 
                 </form>
               </div>
+
+              {/* Social Channels / Connect With Us */}
+              <SocialConnect />
             </div>
 
           </div>
-
-          {/* Social Channels / Connect With Us */}
-          <SocialConnect />
 
         </div>
       </section>

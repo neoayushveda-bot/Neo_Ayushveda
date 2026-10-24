@@ -516,11 +516,12 @@ function EnquiryContent() {
                   </div>
                 </form>
               </div>
+
+              {/* Social Channels / Connect With Us */}
+              <SocialConnect />
             </div>
 
           </div>
-          {/* Social Channels / Connect With Us */}
-          <SocialConnect />
         </div>
       </section>
     </main>
