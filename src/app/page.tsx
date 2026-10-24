@@ -35,6 +35,7 @@ import dynamic from "next/dynamic";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import CorporateVideoPlayer from "../../components/ui/CorporateVideoPlayer";
+import SocialConnect from "../../components/sections/SocialConnect";
 
 const WorldMap = dynamic(
   () => import("../../components/ui/world-map").then((mod) => mod.WorldMap),
@@ -1319,6 +1320,9 @@ export default function Home() {
             </div>
 
           </div>
+
+          {/* Social Channels / Connect With Us */}
+          <SocialConnect />
 
         </div>
       </section>

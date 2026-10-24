@@ -8,21 +8,13 @@ import {
   FaEnvelope,
   FaPhoneVolume,
   FaLocationDot,
-  FaWhatsapp,
   FaXTwitter,
   FaLinkedinIn,
+  FaInstagram,
   FaFacebookF,
 } from "react-icons/fa6";
 
 const SOCIAL_LINKS = [
-  {
-    name: "WhatsApp",
-    fullName: "WhatsApp Instant Enquiry",
-    href: "https://wa.me/8712443607?text=Hi,%20I%20would%20like%20to%20enquire%20about%20",
-    icon: FaWhatsapp,
-    hoverBg: "hover:bg-[#25D366] hover:border-[#25D366]",
-    ariaLabel: "Enquire with Neo Life Sciences on WhatsApp",
-  },
   {
     name: "X",
     fullName: "X (formerly Twitter)",
@@ -38,6 +30,14 @@ const SOCIAL_LINKS = [
     icon: FaLinkedinIn,
     hoverBg: "hover:bg-[#0A66C2] hover:border-[#0A66C2]",
     ariaLabel: "Connect with Neo Life Sciences on LinkedIn",
+  },
+  {
+    name: "Instagram",
+    fullName: "Instagram",
+    href: "https://www.instagram.com/neolifesciencepvt.ltd?dlrf=MXVqZ2F6dDlhcXEyNQ==",
+    icon: FaInstagram,
+    hoverBg: "hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:border-pink-500",
+    ariaLabel: "Follow Neo Life Sciences on Instagram",
   },
   {
     name: "Facebook",
@@ -100,31 +100,6 @@ export default function Footer() {
               NEO LIFE SCIENCES PVT LTD is an international pharmaceutical trading and B2B export enterprise sourcing WHO-GMP, PIC/S, EU GMP, US FDA and other SRAs certified generics, medical devices, APIs, and standardized herbal formulations from India to 50+ regulated markets worldwide.
             </p>
 
-            {/* Social Media Presence */}
-            <div className="pt-2">
-              <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-200 mb-3">
-                Connect With Us
-              </h4>
-              <div className="flex items-center gap-2.5 flex-wrap">
-                {SOCIAL_LINKS.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={item.ariaLabel}
-                      title={item.fullName}
-                      className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800/90 border border-slate-700/80 text-slate-300 hover:text-white ${item.hoverBg} transition-all duration-200 text-xs font-medium group shadow-sm hover:scale-105 active:scale-95`}
-                    >
-                      <Icon className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
-                      <span>{item.name}</span>
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
           </div>
 
           {/* Column 2 - Products (3 cols) */}
@@ -275,7 +250,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={item.ariaLabel}
                   title={item.fullName}
-                  className="w-8 h-8 rounded-lg bg-slate-800/80 border border-slate-700/60 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-500 transition-all duration-200 hover:scale-110 active:scale-95"
+                  className={`w-8 h-8 rounded-lg bg-slate-800/80 border border-slate-700/60 flex items-center justify-center text-slate-400 hover:text-white ${item.hoverBg} transition-all duration-200 hover:scale-110 active:scale-95`}
                 >
                   <Icon className="w-3.5 h-3.5" />
                 </a>

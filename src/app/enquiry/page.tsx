@@ -17,6 +17,7 @@ import {
 } from "react-icons/fa6";
 import Header from "../../../components/layout/Header";
 import Footer from "../../../components/layout/Footer";
+import SocialConnect from "../../../components/sections/SocialConnect";
 
 function EnquiryContent() {
   const searchParams = useSearchParams();
@@ -518,6 +519,8 @@ function EnquiryContent() {
             </div>
 
           </div>
+          {/* Social Channels / Connect With Us */}
+          <SocialConnect />
         </div>
       </section>
     </main>
