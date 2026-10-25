@@ -4,7 +4,7 @@ import React from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 
 const WHATSAPP_URL =
-  "https://wa.me/8712443607?text=Hi,%20I%20would%20like%20to%20enquire%20about%20";
+  "https://wa.me/918712443607?text=Hi,%20I%20would%20like%20to%20enquire%20about%20";
 
 export default function WhatsAppButton() {
   return (
